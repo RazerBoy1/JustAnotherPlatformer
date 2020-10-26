@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="260" height="20" tilewidth="8" tileheight="8" infinite="0" nextlayerid="12" nextobjectid="85">
+ <tileset firstgid="1" source="world_tileset.tsx"/>
+ <objectgroup id="6" name="ground" visible="0">
+  <object id="25" x="160" y="112">
+   <polygon points="0,0 88,0 88,32 104,32 104,-8 160,-8 160,32 192,32 192,24 232,24 232,16 240,16 240,8 248,8 248,0 256,0 256,-8 384,-8 384,32 1920,32 1920,48 0,48"/>
+  </object>
+  <object id="26" x="568" y="96" width="32" height="8"/>
+  <object id="27" x="624" y="88" width="32" height="8"/>
+  <object id="28" x="688" y="120" width="32" height="8"/>
+  <object id="29" x="728" y="96" width="32" height="8"/>
+  <object id="30" x="792" y="96" width="32" height="8"/>
+ </objectgroup>
+ <objectgroup id="7" name="coins" visible="0">
+  <object id="35" x="248" y="72" width="8" height="8"/>
+  <object id="36" x="344" y="80" width="8" height="8"/>
+  <object id="37" x="472" y="72" width="8" height="8"/>
+  <object id="38" x="608" y="64" width="8" height="8"/>
+  <object id="39" x="696" y="80" width="8" height="8"/>
+  <object id="40" x="768" y="64" width="8" height="8"/>
+ </objectgroup>
+ <objectgroup id="9" name="doors" visible="0">
+  <object id="41" x="280" y="88" width="8" height="16"/>
+  <object id="42" x="456" y="88" width="8" height="16"/>
+ </objectgroup>
+ <objectgroup id="11" name="moss" visible="0">
+  <object id="45" x="184" y="80" width="8" height="8"/>
+  <object id="46" x="192" y="80" width="8" height="8"/>
+  <object id="47" x="200" y="80" width="8" height="8"/>
+  <object id="48" x="208" y="80" width="8" height="8"/>
+  <object id="49" x="216" y="80" width="8" height="8"/>
+  <object id="50" x="520" y="64" width="8" height="8"/>
+  <object id="51" x="520" y="72" width="8" height="8"/>
+  <object id="52" x="512" y="72" width="8" height="8"/>
+  <object id="53" x="504" y="72" width="8" height="8"/>
+  <object id="54" x="496" y="72" width="8" height="8"/>
+ </objectgroup>
+ <layer id="5" name="sky" width="260" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt2MkRwyAMQFGnhJTkolKBq0mFvmZyYxiEFhYz9j+8SyYsEiBIjm3bjoKv8Pnfx/H990vup2YPzGu2leayMmkt76R0Jq7Sui+19tEzPWPuknOhtdXOQ5rf2tiWmLR8eups6bOWvEZyk+dHa6P1twt9RnLZK2ZpzUeMn4818mxbePeT5fve8+vNQb5+0pxm51aLu5a73nttr/RtqXctdUaKxdunpTblfUptamNHYpX2Vm0dPeN43nCR+3JEbYueNy0vve+8lvyk6zLjDSqNUct1Oncpd9b9Zd0nT/jNMZo3h57zVrsDSlruMo9RbzxPbqzviRHzKsWfzueK2ufdC5G6n8cdube1Pi2xnMr41n57tgPuaHQtu/q3dGQupZxY3wF525X+EwUAAAAAAAAAAAAAAAAAAAAAAAAAAM/xA7M8ZTg=
+  </data>
+ </layer>
+ <layer id="8" name="graphics_decorations" width="260" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt2M9NwzAchmH7wJ+0FEYAFdrCGohluLAHN+ZgAw4MQbmVERASFXDnZzkWluVEbuqUtHkf6VOjpHFy+RwnSgEAAAAAAAAAAAAAAGCTZrrb4wHbatNdoHvA7uhanwvJTHJdcV9du19gmzy01J+m4x4Gv+u6kfs4L8crIscHkqmy/xkxl6AHviL7lso+Yx8lE2U7EetLCjPOuNw2vbtQdlzHjDuUHMm+kfrrpnnODyMdXEjeItd58rafG94rsOvc2tnvs+tnYboq+QzOeanJquYN81rGZzr/LflReTrvzyH3keO33vZdhusB/62u21Vdf6/JKj4yJHQs89fJGmt3t0YB+qiu21VdzzEf5JgLYvPBpcwFV7zLA43s6fSknBMy3xfM94aJtu8k5lvDvs6Tg4y999f+sXcDoA9OdXpSzgmd6XYDIJ+2+0oIaS/MB4QQl1/cF6zF
+  </data>
+ </layer>
+ <layer id="1" name="graphics_ground" width="260" height="20" opacity="0.69">
+  <data encoding="base64" compression="zlib">
+   eJzt1kEKgkAYBlC9lFkEHSFadI8OUdCmU7TomjkUpGakzchAvAcfuJgZx8X/YVEAAAAAAAAAABCrzH0BIKuyF2Be/Zkzd8A/qprUz6wy3wWY37F4zfw+wXnfOkTHwGMOFgP5ZSbCWcsRqQdyjfkI4M22yWlEzq096w9nbSa+u5q4vu8SuR/oOoxcd2s9p+iD2C4IUvaBf3/I0wcpuiDwfwBpzd0HYfZ3vaSiDwAAoOsOI+gZTg==
+  </data>
+ </layer>
+</map>
