@@ -13,9 +13,9 @@ import com.badlogic.gdx.physics.box2d.*;
 public class MapBodyBuilder {
     private static float ppt = 0;
 
-    public static void buildShapes(Map map, World world, float pixels, int layer) {
+    public static void buildShapes(Map map, World world, float pixels, int layerID) {
         ppt = pixels;
-        MapObjects objects = map.getLayers().get(layer).getObjects();
+        MapObjects objects = map.getLayers().get(layerID).getObjects();
         //Array<Body> bodies = new Array<>();
 
         for (MapObject object : objects) {

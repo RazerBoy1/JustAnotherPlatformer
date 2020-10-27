@@ -50,8 +50,8 @@ public class GameScreen implements Screen {
     }
 
     public void createMapBodies() {
-        for (int i = 0; i < 4; i++)
-            MapBodyBuilder.buildShapes(map, world, JustAnotherPlatformer.PPT, i);
+        for (int layerID = 0; layerID < 4; layerID++)
+            MapBodyBuilder.buildShapes(map, world, JustAnotherPlatformer.PPT, layerID);
     }
 
     @Override

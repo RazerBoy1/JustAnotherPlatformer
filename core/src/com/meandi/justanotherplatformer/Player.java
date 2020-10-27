@@ -21,7 +21,7 @@ public class Player extends Sprite {
         bodyDef.position.set(170 / JustAnotherPlatformer.PPT, 90 / JustAnotherPlatformer.PPT);
         body = world.createBody(bodyDef);
 
-        circleShape.setRadius(5 / JustAnotherPlatformer.PPT);
+        circleShape.setRadius(3 / JustAnotherPlatformer.PPT);
         fixDef.shape = circleShape;
 
         body.createFixture(fixDef);
