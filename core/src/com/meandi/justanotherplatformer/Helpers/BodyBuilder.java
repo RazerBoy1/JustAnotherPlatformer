@@ -1,19 +1,25 @@
-package com.meandi.justanotherplatformer;
+package com.meandi.justanotherplatformer.Helpers;
 
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.*;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 
-public class MapBodyBuilder {
+public class BodyBuilder {
     private static float ppt = 0;
 
-    public static void buildShapes(Map map, World world, float pixels, int layerID) {
+    public BodyBuilder(World world, TiledMap map, int layerID) {
+        buildShapes(map, world, JustAnotherPlatformer.PPT, layerID);
+    }
+
+    public void buildShapes(Map map, World world, float pixels, int layerID) {
         ppt = pixels;
         MapObjects objects = map.getLayers().get(layerID).getObjects();
         //Array<Body> bodies = new Array<>();
@@ -55,6 +61,20 @@ public class MapBodyBuilder {
         return polygon;
     }
 
+    private static PolygonShape getPolygon(PolygonMapObject polygonObject) {
+        PolygonShape polygon = new PolygonShape();
+
+        float[] vertices = polygonObject.getPolygon().getTransformedVertices();
+        float[] worldVertices = new float[vertices.length];
+
+        for (int i = 0; i < vertices.length; ++i)
+            worldVertices[i] = vertices[i] / ppt;
+
+        polygon.set(worldVertices);
+
+        return polygon;
+    }
+
     private static CircleShape getCircle(CircleMapObject circleObject) {
         Circle circle = circleObject.getCircle();
 
@@ -64,44 +84,6 @@ public class MapBodyBuilder {
 
         return circleShape;
     }
-
-    private static PolygonShape getPolygon(PolygonMapObject polygonObject) {
-        PolygonShape polygon = new PolygonShape();
-
-        float[] vertices = polygonObject.getPolygon().getTransformedVertices();
-        float[] worldVertices = new float[vertices.length];
-
-        for (int i = 0; i < vertices.length; ++i) {
-            //System.out.println(vertices[i]);
-            worldVertices[i] = vertices[i] / ppt;
-        }
-
-        for (float p : worldVertices)
-            System.out.println(p);
-
-        polygon.set(worldVertices);
-
-        return polygon;
-    }
-
-    /*private static PolygonShape getPolygon(PolygonMapObject polygonObject) {
-        Polygon polygon = polygonObject.getPolygon();
-        PolygonShape polygonShape = new PolygonShape();
-        float[] vertices = polygon.getVertices();
-
-        for (int i = 0; i < vertices.length; i += 2) {
-            vertices[i]   = (polygon.getX() + vertices[i]) / ppt;
-            vertices[i+1] = (polygon.getY() + vertices[i+1]) * ppt;
-        }
-
-        polygonShape.set(vertices);
-
-        for (float p : vertices) {
-            System.out.println(p);
-        }
-
-        return polygonShape;
-    }*/
 
     private static ChainShape getPolyline(PolylineMapObject polylineObject) {
         float[] vertices = polylineObject.getPolyline().getTransformedVertices();

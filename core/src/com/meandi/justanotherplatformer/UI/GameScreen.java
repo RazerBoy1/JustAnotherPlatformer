@@ -1,7 +1,6 @@
-package com.meandi.justanotherplatformer;
+package com.meandi.justanotherplatformer.UI;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -13,6 +12,10 @@ import com.badlogic.gdx.physics.box2d.*;
 
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.meandi.justanotherplatformer.*;
+import com.meandi.justanotherplatformer.Helpers.MyInputProcessor;
+import com.meandi.justanotherplatformer.Helpers.WorldBuilder;
+import com.meandi.justanotherplatformer.Interactables.Player;
 
 public class GameScreen implements Screen {
     private final JustAnotherPlatformer jap;
@@ -21,14 +24,13 @@ public class GameScreen implements Screen {
     private final Viewport port;
     private final Hud hud;
 
-    private final TmxMapLoader mapLoader;
     private final TiledMap map;
     private final OrthogonalTiledMapRenderer renderer;
 
     private final World world;
     private final Box2DDebugRenderer boxDebugger;
 
-    private final Player player;
+    private final com.meandi.justanotherplatformer.Interactables.Player player;
 
     public GameScreen(JustAnotherPlatformer jap) {
         this.jap = jap;
@@ -36,22 +38,19 @@ public class GameScreen implements Screen {
         port = new StretchViewport(JustAnotherPlatformer.WIDTH / JustAnotherPlatformer.PPT, JustAnotherPlatformer.HEIGHT / JustAnotherPlatformer.PPT, cam);
         hud = new Hud(jap.batch);
 
-        mapLoader = new TmxMapLoader();
-        map = mapLoader.load("world/level1.tmx");
+        map = new TmxMapLoader().load("world/test_level.tmx");
+
         renderer = new OrthogonalTiledMapRenderer(map, 1 / JustAnotherPlatformer.PPT);
 
         cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
 
         world = new World(new Vector2(0, -10), true);
         boxDebugger = new Box2DDebugRenderer();
-        createMapBodies();
+        new WorldBuilder(world, map);
 
         player = new Player(world);
-    }
 
-    public void createMapBodies() {
-        for (int layerID = 0; layerID < 4; layerID++)
-            MapBodyBuilder.buildShapes(map, world, JustAnotherPlatformer.PPT, layerID);
+        Gdx.input.setInputProcessor(new MyInputProcessor(player));
     }
 
     @Override
@@ -72,23 +71,13 @@ public class GameScreen implements Screen {
     }
 
     public void update() {
-        handleInput();
+        player.updateMotion();
 
         world.step(1 / 60f, 6, 6);
         cam.position.x = player.body.getPosition().x;
 
         cam.update();
         renderer.setView(cam);
-    }
-
-    public void handleInput() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) // Če dam tega DOWN tut ne prime !?
-            player.body.applyLinearImpulse(new Vector2(0, 5f), player.body.getWorldCenter(), true);
-
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.body.getLinearVelocity().x <= 1)
-            player.body.applyLinearImpulse(new Vector2(0.1f, 0), player.body.getWorldCenter(), true);
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) && player.body.getLinearVelocity().x >= -1)
-            player.body.applyLinearImpulse(new Vector2(-0.1f, 0), player.body.getWorldCenter(), true);
     }
 
     public void clearScreen() {
