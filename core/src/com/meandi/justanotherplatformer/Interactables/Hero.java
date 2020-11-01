@@ -98,6 +98,9 @@ public class Hero extends Sprite {
             case ATTACKING:
                 region = heroAttack.getKeyFrame(stateTimer);
                 break;
+            case HIT:
+                region = heroHit.getKeyFrame(stateTimer);
+                break;
             case IDLING:
             default:
                 region = heroIdle.getKeyFrame(stateTimer, true);
