@@ -11,7 +11,7 @@ public class MyInputProcessor implements InputProcessor {
         this.hero = hero;
     }
 
-    public boolean keyDown (int keycode) {
+    public boolean keyDown(int keycode) {
         System.out.println("------------------------------------------------");
         System.out.println("LEFT: " + Keys.LEFT);
         System.out.println("RIGHT: " + Keys.RIGHT);
@@ -45,7 +45,7 @@ public class MyInputProcessor implements InputProcessor {
         return false;
     }
 
-    public boolean keyUp (int keycode) {
+    public boolean keyUp(int keycode) {
         switch (keycode) {
             case 19:
                 hero.setLeftMove(false);
@@ -72,35 +72,27 @@ public class MyInputProcessor implements InputProcessor {
         return false;
     }
 
-    public boolean keyTyped (char character) {
-        /*switch (character) {
-            case 'UP':
-                player.setJump(false);
-        }*/
-        System.out.println("????????????????????????????????????????????????");
-        System.out.println("CHARACTER: " + character);
-        System.out.println("????????????????????????????????????????????????");
-
+    public boolean keyTyped(char character) {
         return false;
     }
 
-    public boolean touchDown (int x, int y, int pointer, int button) {
+    public boolean touchDown(int x, int y, int pointer, int button) {
         return false;
     }
 
-    public boolean touchUp (int x, int y, int pointer, int button) {
+    public boolean touchUp(int x, int y, int pointer, int button) {
         return false;
     }
 
-    public boolean touchDragged (int x, int y, int pointer) {
+    public boolean touchDragged(int x, int y, int pointer) {
         return false;
     }
 
-    public boolean mouseMoved (int x, int y) {
+    public boolean mouseMoved(int x, int y) {
         return false;
     }
 
-    public boolean scrolled (int amount) {
+    public boolean scrolled(int amount) {
         return false;
     }
 }

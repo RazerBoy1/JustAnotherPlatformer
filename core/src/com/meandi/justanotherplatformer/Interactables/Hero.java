@@ -17,16 +17,17 @@ public class Hero extends Sprite {
     private boolean moveRight;
     private boolean jump;
 
-    private enum State {FALLING, JUMPING, IDLE, RUNNING}
+    private enum State {IDLING, DYING, RUNNING, JUMPING, DOUBLE_JUMPING, FALLING, PUSHING, ATTACKING, HIT}
+
     private State currentState, previousState;
-    private Animation<TextureRegion> heroIdle, heroRun, heroJump;
+    private Animation<TextureRegion> heroIdle, heroDeath, heroRun, heroJump, heroDoubleJump, heroFall, heroPush, heroAttack, heroHit;
     private boolean runningRight;
     private float stateTimer;
 
     public Hero(World world, Assets assets) {
         super(assets.manager.get(Assets.HERO_ATLAS).findRegion("herochar_idle_anim_strip"));
-        currentState = State.IDLE;
-        previousState = State.IDLE;
+        currentState = State.IDLING;
+        previousState = State.IDLING;
         stateTimer = 0;
         runningRight = true;
 
@@ -44,37 +45,30 @@ public class Hero extends Sprite {
     public void createAnimations() {
         Array<TextureRegion> frames = new Array<>();
 
-        createIdleAnimation(frames);
-        createRunAnimation(frames);
-        createJumpAnimation(frames);
-    }
+        heroIdle = createAnimation(frames, 36, 40);
+        heroDeath = createAnimation(frames, 0, 8);
+        heroRun = createAnimation(frames, 18, 24);
+        heroJump = createAnimation(frames, 53, 56);
+        heroDoubleJump = createAnimation(frames, 47, 50);
+        heroFall = createAnimation(frames, 50, 54);
+        heroPush = createAnimation(frames, 16, 22);
+        heroAttack = createAnimation(frames, 8, 10);
+        heroHit = createAnimation(frames, 44, 47);
 
-    private void createIdleAnimation(Array<TextureRegion> frames) {
-        for (int i = 36; i < 40; i++)
-            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 16));
-
-        heroIdle = new Animation<>(0.1f, frames);
         frames.clear();
     }
 
-    private void createRunAnimation(Array<TextureRegion> frames) {
-        for (int i = 18; i < 24; i++)
+    private Animation<TextureRegion> createAnimation(Array<TextureRegion> frames, int startFrame, int endFrame) {
+        frames.clear();
+
+        for (int i = startFrame; i < endFrame; i++)
             frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 16));
 
-        heroRun = new Animation<>(0.1f, frames);
-        frames.clear();
-    }
-
-    private void createJumpAnimation(Array<TextureRegion> frames) {
-        for (int i = 53; i < 56; i++)
-            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 16));
-
-        heroJump = new Animation<>(0.1f, frames);
-        frames.clear();
+        return new Animation<>(0.1f, frames);
     }
 
     public void updateSpritePosition(float delta) {
-        setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
+        setPosition((0.35f / JustAnotherPlatformer.PPT) + body.getPosition().x - getWidth() / 2, (2 / JustAnotherPlatformer.PPT) + body.getPosition().y - getHeight() / 2);
         setRegion(getFrame(delta));
     }
 
@@ -83,14 +77,28 @@ public class Hero extends Sprite {
 
         currentState = getState();
         switch (currentState) {
-            case JUMPING:
-                region = heroJump.getKeyFrame(stateTimer);
-                break;
             case RUNNING:
                 region = heroRun.getKeyFrame(stateTimer, true);
                 break;
+            case DYING:
+                region = heroDeath.getKeyFrame(stateTimer);
+                break;
+            case JUMPING:
+                region = heroJump.getKeyFrame(stateTimer);
+                break;
+            case DOUBLE_JUMPING:
+                region = heroDoubleJump.getKeyFrame(stateTimer);
+                break;
             case FALLING:
-            case IDLE:
+                region = heroFall.getKeyFrame(stateTimer);
+                break;
+            case PUSHING:
+                region = heroPush.getKeyFrame(stateTimer);
+                break;
+            case ATTACKING:
+                region = heroAttack.getKeyFrame(stateTimer);
+                break;
+            case IDLING:
             default:
                 region = heroIdle.getKeyFrame(stateTimer, true);
                 break;
@@ -111,14 +119,14 @@ public class Hero extends Sprite {
     }
 
     public State getState() {
-        if (body.getLinearVelocity().y > 0 || (body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
+        if (body.getLinearVelocity().y > 0)
             return State.JUMPING;
         else if (body.getLinearVelocity().y < 0)
             return State.FALLING;
         else if (body.getLinearVelocity().x != 0)
             return State.RUNNING;
         else
-            return State.IDLE;
+            return State.IDLING;
     }
 
     public void updateMotion() {
