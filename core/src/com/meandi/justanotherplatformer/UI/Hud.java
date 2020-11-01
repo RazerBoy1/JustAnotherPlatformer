@@ -3,6 +3,7 @@ package com.meandi.justanotherplatformer.UI;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.meandi.justanotherplatformer.Helpers.Assets;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 
 public class Hud implements Disposable {
@@ -23,14 +25,14 @@ public class Hud implements Disposable {
     Label countdownLabel;
     Texture hearth;
 
-    public Hud(SpriteBatch sb) {
+    public Hud(SpriteBatch sb, Assets assets) {
         viewport = new StretchViewport(JustAnotherPlatformer.WIDTH, JustAnotherPlatformer.HEIGHT);
         stage = new Stage(viewport, sb);
 
         worldTimer = 0;
         score = 0;
         countdownLabel = new Label(String.format("%d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        hearth = new Texture("world/hearts.png");
+        hearth = assets.manager.get(Assets.HEARTS);
         Image heartImage1 = new Image(hearth);
         Image heartImage2 = new Image(hearth);
         Image heartImage3 = new Image(hearth);

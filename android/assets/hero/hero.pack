@@ -1,0 +1,96 @@
+
+hero.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+herochar_death_anim_strip
+  rotate: false
+  xy: 0, 0
+  size: 128, 16
+  orig: 128, 16
+  offset: 0, 0
+  index: 8
+herochar_sword_attack_anim_strip
+  rotate: false
+  xy: 128, 0
+  size: 128, 16
+  orig: 128, 16
+  offset: 0, 0
+  index: 4
+herochar_pushing_foward_anim_strip
+  rotate: false
+  xy: 256, 0
+  size: 96, 16
+  orig: 96, 16
+  offset: 0, 0
+  index: 6
+herochar_run_anim_strip
+  rotate: false
+  xy: 352, 0
+  size: 96, 16
+  orig: 96, 16
+  offset: 0, 0
+  index: 6
+herochar_after_jump_dust_anim_strip
+  rotate: false
+  xy: 448, 0
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: 4
+herochar_before_jump_dust_anim_strip
+  rotate: false
+  xy: 512, 0
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: 4
+herochar_idle_anim_strip
+  rotate: false
+  xy: 576, 0
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: 4
+hit_sparkle_anim_strip
+  rotate: false
+  xy: 640, 0
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: 4
+herochar_hit_anim_strip
+  rotate: false
+  xy: 704, 0
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 3
+herochar_jump_double_anim_strip
+  rotate: false
+  xy: 752, 0
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 3
+herochar_jump_down_anim_strip
+  rotate: false
+  xy: 800, 0
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 3
+herochar_jump_up_anim_strip
+  rotate: false
+  xy: 848, 0
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 3
+herochar_before_or_after_jump_srip
+  rotate: false
+  xy: 896, 0
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 2
