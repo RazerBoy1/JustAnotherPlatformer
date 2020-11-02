@@ -39,7 +39,7 @@ public class Hero extends Sprite {
         jump = false;
 
         createPlayer();
-        setBounds(0, 0, 16 / JustAnotherPlatformer.PPT, 16 / JustAnotherPlatformer.PPT);
+        setBounds(0, 0, JustAnotherPlatformer.TILE_SIZE / JustAnotherPlatformer.PPT, JustAnotherPlatformer.TILE_SIZE / JustAnotherPlatformer.PPT);
     }
 
     public void createAnimations() {
@@ -54,15 +54,14 @@ public class Hero extends Sprite {
         heroPush = createAnimation(frames, 16, 22);
         heroAttack = createAnimation(frames, 8, 10);
         heroHit = createAnimation(frames, 44, 47);
-
-        frames.clear();
     }
 
     private Animation<TextureRegion> createAnimation(Array<TextureRegion> frames, int startFrame, int endFrame) {
-        frames.clear();
+        if (frames.notEmpty())
+            frames.clear();
 
         for (int i = startFrame; i < endFrame; i++)
-            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 16));
+            frames.add(new TextureRegion(getTexture(), i * JustAnotherPlatformer.TILE_SIZE, 0, JustAnotherPlatformer.TILE_SIZE, JustAnotherPlatformer.TILE_SIZE));
 
         return new Animation<>(0.1f, frames);
     }
@@ -171,7 +170,16 @@ public class Hero extends Sprite {
 
         circleShape.setRadius(6 / JustAnotherPlatformer.PPT);
         fixDef.shape = circleShape;
+        fixDef.filter.categoryBits = JustAnotherPlatformer.HERO_BIT;
+        fixDef.filter.maskBits = JustAnotherPlatformer.DEFAULT_BIT | JustAnotherPlatformer.COIN_BIT | JustAnotherPlatformer.DOOR_BIT | JustAnotherPlatformer.MOSS_BIT;
 
-        body.createFixture(fixDef);
+        body.createFixture(fixDef).setUserData("body");
+
+        EdgeShape head = new EdgeShape();
+        head.set(new Vector2(-3 / JustAnotherPlatformer.PPT, 6.5f / JustAnotherPlatformer.PPT), new Vector2(3 / JustAnotherPlatformer.PPT, 6.5f / JustAnotherPlatformer.PPT));
+        fixDef.shape = head;
+        fixDef.isSensor = true;
+
+        body.createFixture(fixDef).setUserData("head");
     }
 }

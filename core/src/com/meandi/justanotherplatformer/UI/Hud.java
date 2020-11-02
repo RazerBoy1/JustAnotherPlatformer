@@ -20,7 +20,6 @@ public class Hud implements Disposable {
     private Integer score;
 
     Label countdownLabel;
-    Texture hearth;
 
     public Hud(SpriteBatch sb, Assets assets) {
         stage = new Stage(new StretchViewport(JustAnotherPlatformer.WIDTH, JustAnotherPlatformer.HEIGHT), sb);
@@ -28,12 +27,14 @@ public class Hud implements Disposable {
         worldTimer = 0;
         score = 0;
         countdownLabel = new Label(String.format("%d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        hearth = assets.manager.get(Assets.HEARTS);
+
+        Texture hearth = assets.manager.get(Assets.HEARTS);
         Image heartImage1 = new Image(hearth);
         Image heartImage2 = new Image(hearth);
         Image heartImage3 = new Image(hearth);
 
         Table t1 = new Table();
+
         t1.top().left();
         t1.setFillParent(true);
 
@@ -42,8 +43,10 @@ public class Hud implements Disposable {
         t1.add(heartImage3).padTop(3).padLeft(3);
 
         Table t2 = new Table();
+
         t2.top();
         t2.setFillParent(true);
+
         t2.add(countdownLabel).padTop(3).center();
 
         stage.addActor(t1);

@@ -12,35 +12,36 @@ public class MyInputProcessor implements InputProcessor {
     }
 
     public boolean keyDown(int keycode) {
-        System.out.println("------------------------------------------------");
-        System.out.println("LEFT: " + Keys.LEFT);
-        System.out.println("RIGHT: " + Keys.RIGHT);
-        System.out.println("UP: " + Keys.UP);
-        System.out.println("DOWN: " + Keys.DOWN);
-        System.out.println("------------------------------------------------");
-        System.out.println();
-        System.out.println("------------------------------------------------");
+        //System.out.println("------------------------------------------------");
+        //System.out.println("LEFT: " + Keys.LEFT);
+        //System.out.println("RIGHT: " + Keys.RIGHT);
+        //System.out.println("UP: " + Keys.UP);
+        //System.out.println("DOWN: " + Keys.DOWN);
+        //System.out.println("------------------------------------------------");
+        //System.out.println();
+        //System.out.println("------------------------------------------------");
 
         switch (keycode) {
             case 19:
                 hero.setLeftMove(true);
-                System.out.println("LEFT: " + 19);
+                //System.out.println("LEFT: " + 19);
                 break;
             case 20:
                 hero.setRightMove(true);
-                System.out.println("RIGHT: " + 20);
+                //System.out.println("RIGHT: " + 20);
                 break;
             case 21:
-                System.out.println("DOWN: " + 21);
+                //System.out.println("DOWN: " + 21);
+                break;
             case 22:
                 hero.setJump(true);
-                System.out.println("UP: " + 22);
+                //System.out.println("UP: " + 22);
                 break;
             default:
-                System.out.println("KEYCODE - KEYDOWN: " + keycode);
+                //System.out.println("KEYCODE - KEYDOWN: " + keycode);
                 break;
         }
-        System.out.println("------------------------------------------------");
+        //System.out.println("------------------------------------------------");
 
         return false;
     }
@@ -49,25 +50,26 @@ public class MyInputProcessor implements InputProcessor {
         switch (keycode) {
             case 19:
                 hero.setLeftMove(false);
-                System.out.println("LEFT: " + 19);
+                //System.out.println("LEFT: " + 19);
                 break;
             case 20:
                 hero.setRightMove(false);
-                System.out.println("RIGHT: " + 20);
+                //System.out.println("RIGHT: " + 20);
                 break;
             case 21:
-                System.out.println("DOWN: " + 21);
+                //System.out.println("DOWN: " + 21);
+                break;
             case 22:
-                System.out.println("UP: " + 22);
+                //System.out.println("UP: " + 22);
                 break;
             default:
-                System.out.println("KEYCODE - KEYDOWN: " + keycode);
+                //System.out.println("KEYCODE - KEYDOWN: " + keycode);
                 break;
         }
 
-        System.out.println("************************************************");
-        System.out.println("KEYCODE - KEYUP: " + keycode);
-        System.out.println("************************************************");
+        //System.out.println("************************************************");
+        //System.out.println("KEYCODE - KEYUP: " + keycode);
+        //System.out.println("************************************************");
 
         return false;
     }

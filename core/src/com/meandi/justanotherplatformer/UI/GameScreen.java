@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -17,6 +16,7 @@ import com.meandi.justanotherplatformer.*;
 import com.meandi.justanotherplatformer.Helpers.Assets;
 import com.meandi.justanotherplatformer.Helpers.MyInputProcessor;
 import com.meandi.justanotherplatformer.Helpers.WorldBuilder;
+import com.meandi.justanotherplatformer.Helpers.WorldContactListener;
 import com.meandi.justanotherplatformer.Interactables.Hero;
 
 public class GameScreen implements Screen {
@@ -52,13 +52,15 @@ public class GameScreen implements Screen {
 
         cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
 
-        world = new World(new Vector2(0, -10), true);
+        world = new World(new Vector2(0, JustAnotherPlatformer.GRAVITY), true);
         boxDebugger = new Box2DDebugRenderer();
         new WorldBuilder(world, map);
 
         hero = new Hero(world, assets);
 
         Gdx.input.setInputProcessor(new MyInputProcessor(hero));
+
+        world.setContactListener(new WorldContactListener());
     }
 
     @Override

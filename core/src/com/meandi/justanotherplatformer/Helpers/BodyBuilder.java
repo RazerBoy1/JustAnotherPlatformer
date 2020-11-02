@@ -10,19 +10,16 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 
 public class BodyBuilder {
     private static float ppt = 0;
 
-    public BodyBuilder(World world, TiledMap map, int layerID) {
-        buildShapes(map, world, JustAnotherPlatformer.PPT, layerID);
-    }
-
-    public void buildShapes(Map map, World world, float pixels, int layerID) {
+    public Array<Fixture> buildShapes(Map map, World world, float pixels, int layerID) {
         ppt = pixels;
         MapObjects objects = map.getLayers().get(layerID).getObjects();
-        //Array<Body> bodies = new Array<>();
+        Array<Fixture> fixtures = new Array<>();
 
         for (MapObject object : objects) {
             if (object instanceof TextureMapObject)
@@ -44,11 +41,13 @@ public class BodyBuilder {
             BodyDef bd = new BodyDef();
             bd.type = BodyDef.BodyType.StaticBody;
             Body body = world.createBody(bd);
-            body.createFixture(shape, 1);
+            Fixture fixture = body.createFixture(shape, 1);
 
-            //bodies.add(body);
+            fixtures.add(fixture);
             shape.dispose();
         }
+
+        return fixtures;
     }
 
     private static PolygonShape getRectangle(RectangleMapObject rectangleObject) {

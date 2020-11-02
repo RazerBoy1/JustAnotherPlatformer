@@ -6,18 +6,14 @@ import com.meandi.justanotherplatformer.Interactables.Coin;
 import com.meandi.justanotherplatformer.Interactables.Door;
 import com.meandi.justanotherplatformer.Interactables.Ground;
 import com.meandi.justanotherplatformer.Interactables.Moss;
+import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 
-/*
-    layerID 0 = ground
-    layerID 1 = coin
-    layerID 2 = door
-    layerID 3 = moss
-*/
 public class WorldBuilder {
     public WorldBuilder(World world, TiledMap map) {
-        new Ground(world, map, 0);
-        new Coin(world, map, 1);
-        new Door(world, map, 2);
-        new Moss(world, map, 3);
+        new Ground(world, map, JustAnotherPlatformer.GROUND_LAYER);
+
+        new Coin(world, map, JustAnotherPlatformer.COIN_LAYER);
+        new Door(world, map, JustAnotherPlatformer.DOOR_LAYER);
+        new Moss(world, map, JustAnotherPlatformer.MOSS_LAYER);
     }
 }
