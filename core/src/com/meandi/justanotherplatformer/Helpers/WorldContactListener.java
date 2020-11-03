@@ -15,15 +15,17 @@ public class WorldContactListener implements ContactListener {
             Fixture head = a.getUserData() == "head" ? a : b;
             Fixture object = head == a ? b : a;
 
-            if (object.getUserData() != null) {
-                if (Coin.class.isAssignableFrom(object.getUserData().getClass()))
-                    ((Coin) object.getUserData()).onHeadHit();
-                if (Moss.class.isAssignableFrom(object.getUserData().getClass()))
-                    ((Moss) object.getUserData()).onHeadHit();
-            }
+            if (object.getUserData() != null && Moss.class.isAssignableFrom(object.getUserData().getClass()))
+                ((Moss) object.getUserData()).onHeadHit();
         }
 
+        if (a.getUserData() == "body" || b.getUserData() == "body") {
+            Fixture body = a.getUserData() == "body" ? a : b;
+            Fixture object = body == a ? b : a;
 
+            if (object.getUserData() != null && Coin.class.isAssignableFrom(object.getUserData().getClass()))
+                ((Coin) object.getUserData()).onBodyHit();
+        }
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.meandi.justanotherplatformer.Helpers;
 
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.meandi.justanotherplatformer.Interactables.Hero;
 

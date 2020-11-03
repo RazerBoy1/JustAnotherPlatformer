@@ -13,6 +13,8 @@ public class Hero extends Sprite {
     private final World world;
     public Body body;
 
+    private Assets assets;
+
     private boolean moveLeft;
     private boolean moveRight;
     private boolean jump;
@@ -33,37 +35,39 @@ public class Hero extends Sprite {
 
         createAnimations();
 
+        this.assets = assets;
+
         this.world = world;
         moveLeft = false;
         moveRight = false;
         jump = false;
 
         createPlayer();
-        setBounds(0, 0, JustAnotherPlatformer.TILE_SIZE / JustAnotherPlatformer.PPT, JustAnotherPlatformer.TILE_SIZE / JustAnotherPlatformer.PPT);
+        setBounds(0, 0, 16 / JustAnotherPlatformer.PPT, 16 / JustAnotherPlatformer.PPT);
     }
 
     public void createAnimations() {
         Array<TextureRegion> frames = new Array<>();
 
-        heroIdle = createAnimation(frames, 36, 40);
-        heroDeath = createAnimation(frames, 0, 8);
-        heroRun = createAnimation(frames, 18, 24);
-        heroJump = createAnimation(frames, 53, 56);
-        heroDoubleJump = createAnimation(frames, 47, 50);
-        heroFall = createAnimation(frames, 50, 54);
-        heroPush = createAnimation(frames, 16, 22);
-        heroAttack = createAnimation(frames, 8, 10);
-        heroHit = createAnimation(frames, 44, 47);
+        heroIdle = createAnimation(frames, 36, 40, 0.1f);
+        heroDeath = createAnimation(frames, 0, 8, 0.1f);
+        heroRun = createAnimation(frames, 18, 24, 0.075f);
+        heroJump = createAnimation(frames, 53, 56, 0.1f);
+        heroDoubleJump = createAnimation(frames, 47, 50, 0.1f);
+        heroFall = createAnimation(frames, 50, 54, 0.1f);
+        heroPush = createAnimation(frames, 16, 22, 0.1f);
+        heroAttack = createAnimation(frames, 8, 10, 0.1f);
+        heroHit = createAnimation(frames, 44, 47, 0.1f);
     }
 
-    private Animation<TextureRegion> createAnimation(Array<TextureRegion> frames, int startFrame, int endFrame) {
+    private Animation<TextureRegion> createAnimation(Array<TextureRegion> frames, int startFrame, int endFrame, float frameDuration) {
         if (frames.notEmpty())
             frames.clear();
 
         for (int i = startFrame; i < endFrame; i++)
-            frames.add(new TextureRegion(getTexture(), i * JustAnotherPlatformer.TILE_SIZE, 0, JustAnotherPlatformer.TILE_SIZE, JustAnotherPlatformer.TILE_SIZE));
+            frames.add(new TextureRegion(getTexture(), i * JustAnotherPlatformer.FRAME_SIZE, 0, JustAnotherPlatformer.FRAME_SIZE, JustAnotherPlatformer.FRAME_SIZE));
 
-        return new Animation<>(0.1f, frames);
+        return new Animation<>(frameDuration, frames);
     }
 
     public void updateSpritePosition(float delta) {
@@ -138,8 +142,10 @@ public class Hero extends Sprite {
             body.applyLinearImpulse(new Vector2(-0.1f, 0), body.getWorldCenter(), true);
 
         if (jump) {
-            if (body.getLinearVelocity().y == 0)
+            if (body.getLinearVelocity().y == 0) {
+                assets.manager.get(Assets.JUMP).play();
                 body.applyLinearImpulse(new Vector2(0, 2.5f), body.getWorldCenter(), true);
+            }
             else
                 jump = false;
         }

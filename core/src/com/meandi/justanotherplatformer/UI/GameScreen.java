@@ -2,6 +2,7 @@ package com.meandi.justanotherplatformer.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -17,7 +18,7 @@ import com.meandi.justanotherplatformer.Helpers.Assets;
 import com.meandi.justanotherplatformer.Helpers.MyInputProcessor;
 import com.meandi.justanotherplatformer.Helpers.WorldBuilder;
 import com.meandi.justanotherplatformer.Helpers.WorldContactListener;
-import com.meandi.justanotherplatformer.Interactables.Hero;
+import com.meandi.justanotherplatformer.Interactables.*;
 
 public class GameScreen implements Screen {
     private final JustAnotherPlatformer jap;
@@ -37,6 +38,8 @@ public class GameScreen implements Screen {
 
     private final Hero hero;
 
+    private final Music music;
+
     public GameScreen(JustAnotherPlatformer jap) {
         this.jap = jap;
         cam = new OrthographicCamera();
@@ -54,13 +57,18 @@ public class GameScreen implements Screen {
 
         world = new World(new Vector2(0, JustAnotherPlatformer.GRAVITY), true);
         boxDebugger = new Box2DDebugRenderer();
-        new WorldBuilder(world, map);
+
+        new WorldBuilder(world, map, hud, assets);
 
         hero = new Hero(world, assets);
 
         Gdx.input.setInputProcessor(new MyInputProcessor(hero));
 
         world.setContactListener(new WorldContactListener());
+
+        music = assets.manager.get(Assets.MUSIC);
+        music.setLooping(true);
+        music.play();
     }
 
     @Override
@@ -90,6 +98,9 @@ public class GameScreen implements Screen {
 
         world.step(1 / 60f, 6, 6);
         hero.updateSpritePosition(delta);
+
+        hud.update(delta);
+
         cam.position.x = hero.body.getPosition().x;
 
         cam.update();
