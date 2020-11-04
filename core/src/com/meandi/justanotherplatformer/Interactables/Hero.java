@@ -8,12 +8,13 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.meandi.justanotherplatformer.Helpers.Assets;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
+import com.meandi.justanotherplatformer.UI.GameScreen;
 
 public class Hero extends Sprite {
     private final World world;
     public Body body;
 
-    private Assets assets;
+    private final Assets assets;
 
     private boolean moveLeft;
     private boolean moveRight;
@@ -26,8 +27,8 @@ public class Hero extends Sprite {
     private boolean runningRight;
     private float stateTimer;
 
-    public Hero(World world, Assets assets) {
-        super(assets.manager.get(Assets.HERO_ATLAS).findRegion("herochar_idle_anim_strip"));
+    public Hero(GameScreen screen) {
+        super(screen.getAssets().manager.get(Assets.HERO_ATLAS).findRegion("herochar_idle_anim_strip"));
         currentState = State.IDLING;
         previousState = State.IDLING;
         stateTimer = 0;
@@ -35,9 +36,9 @@ public class Hero extends Sprite {
 
         createAnimations();
 
-        this.assets = assets;
+        this.assets = screen.getAssets();
+        this.world = screen.getWorld();
 
-        this.world = world;
         moveLeft = false;
         moveRight = false;
         jump = false;
@@ -177,9 +178,13 @@ public class Hero extends Sprite {
         circleShape.setRadius(6 / JustAnotherPlatformer.PPT);
         fixDef.shape = circleShape;
         fixDef.filter.categoryBits = JustAnotherPlatformer.HERO_BIT;
-        fixDef.filter.maskBits = JustAnotherPlatformer.DEFAULT_BIT | JustAnotherPlatformer.COIN_BIT | JustAnotherPlatformer.DOOR_BIT | JustAnotherPlatformer.MOSS_BIT;
+        fixDef.filter.maskBits = JustAnotherPlatformer.DEFAULT_BIT |
+                JustAnotherPlatformer.COIN_BIT |
+                JustAnotherPlatformer.DOOR_BIT |
+                JustAnotherPlatformer.MOSS_BIT |
+                JustAnotherPlatformer.ENEMY_BIT;
 
-        body.createFixture(fixDef).setUserData("body");
+        body.createFixture(fixDef).setUserData("player_body");
 
         EdgeShape head = new EdgeShape();
         head.set(new Vector2(-3 / JustAnotherPlatformer.PPT, 6.5f / JustAnotherPlatformer.PPT), new Vector2(3 / JustAnotherPlatformer.PPT, 6.5f / JustAnotherPlatformer.PPT));

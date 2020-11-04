@@ -37,8 +37,7 @@ public class GameScreen implements Screen {
     private final Box2DDebugRenderer boxDebugger;
 
     private final Hero hero;
-
-    private final Music music;
+    private final Slime slime;
 
     public GameScreen(JustAnotherPlatformer jap) {
         this.jap = jap;
@@ -58,15 +57,16 @@ public class GameScreen implements Screen {
         world = new World(new Vector2(0, JustAnotherPlatformer.GRAVITY), true);
         boxDebugger = new Box2DDebugRenderer();
 
-        new WorldBuilder(world, map, hud, assets);
+        new WorldBuilder(this, hud);
 
-        hero = new Hero(world, assets);
+        hero = new Hero(this);
+        slime = new Slime(this, 32 / JustAnotherPlatformer.PPT, 32 / JustAnotherPlatformer.PPT);
 
         Gdx.input.setInputProcessor(new MyInputProcessor(hero));
 
         world.setContactListener(new WorldContactListener());
 
-        music = assets.manager.get(Assets.MUSIC);
+        Music music = assets.manager.get(Assets.MUSIC);
         music.setLooping(true);
         music.play();
     }
@@ -87,6 +87,7 @@ public class GameScreen implements Screen {
         jap.batch.setProjectionMatrix(cam.combined);
         jap.batch.begin();
         hero.draw(jap.batch);
+        slime.draw(jap.batch);
         jap.batch.end();
 
         jap.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -98,6 +99,7 @@ public class GameScreen implements Screen {
 
         world.step(1 / 60f, 6, 6);
         hero.updateSpritePosition(delta);
+        slime.update(delta);
 
         hud.update(delta);
 
@@ -110,6 +112,18 @@ public class GameScreen implements Screen {
     public void clearScreen() {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public TiledMap getMap() {
+        return map;
+    }
+
+    public Assets getAssets() {
+        return assets;
     }
 
     @Override

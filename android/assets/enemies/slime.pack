@@ -1,0 +1,33 @@
+
+slime.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+slime-die
+  rotate: false
+  xy: 0, 0
+  size: 128, 32
+  orig: 128, 32
+  offset: 0, 0
+  index: -1
+slime-hurt
+  rotate: false
+  xy: 128, 0
+  size: 128, 32
+  orig: 128, 32
+  offset: 0, 0
+  index: -1
+slime-idle
+  rotate: false
+  xy: 256, 0
+  size: 128, 32
+  orig: 128, 32
+  offset: 0, 0
+  index: -1
+slime-walk
+  rotate: false
+  xy: 384, 0
+  size: 128, 32
+  orig: 128, 32
+  offset: 0, 0
+  index: -1

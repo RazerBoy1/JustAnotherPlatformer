@@ -23,10 +23,11 @@ public class JustAnotherPlatformer extends Game {
 
     public static final short DEFAULT_BIT = 1;
     public static final short HERO_BIT = 2;
-    public static final short COIN_BIT = 4;
-    public static final short MOSS_BIT = 8;
-    public static final short DOOR_BIT = 16;
-    public static final short REMOVED_BIT = 32;
+    public static final short ENEMY_BIT = 4;
+    public static final short COIN_BIT = 8;
+    public static final short MOSS_BIT = 16;
+    public static final short DOOR_BIT = 32;
+    public static final short REMOVED_BIT = 64;
 
     public SpriteBatch batch;
 

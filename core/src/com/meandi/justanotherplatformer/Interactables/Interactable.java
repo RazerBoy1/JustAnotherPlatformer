@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.physics.box2d.*;
 import com.meandi.justanotherplatformer.Helpers.Assets;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
+import com.meandi.justanotherplatformer.UI.GameScreen;
 import com.meandi.justanotherplatformer.UI.Hud;
 
 public abstract class Interactable {
@@ -17,9 +18,9 @@ public abstract class Interactable {
     protected Hud hud;
     protected Assets assets;
 
-    public Interactable(World world, TiledMap map, Body body, Fixture fixture, Hud hud, Assets assets) {
-        this.world = world;
-        this.map = map;
+    public Interactable(GameScreen screen, Body body, Fixture fixture, Assets assets, Hud hud) {
+        this.world = screen.getWorld();
+        this.map = screen.getMap();
 
         this.body = body;
         this.fixture = fixture;

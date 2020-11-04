@@ -19,8 +19,8 @@ public class WorldContactListener implements ContactListener {
                 ((Moss) object.getUserData()).onHeadHit();
         }
 
-        if (a.getUserData() == "body" || b.getUserData() == "body") {
-            Fixture body = a.getUserData() == "body" ? a : b;
+        if (a.getUserData() == "player_body" || b.getUserData() == "player_body") {
+            Fixture body = a.getUserData() == "player_body" ? a : b;
             Fixture object = body == a ? b : a;
 
             if (object.getUserData() != null && Coin.class.isAssignableFrom(object.getUserData().getClass()))
