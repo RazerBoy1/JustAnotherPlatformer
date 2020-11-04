@@ -127,6 +127,10 @@ public class GameScreen implements Screen {
         return assets;
     }
 
+    public Hud getHud() {
+        return hud;
+    }
+
     @Override
     public void resize(int width, int height) {
         port.update(width, height);

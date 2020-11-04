@@ -1,6 +1,5 @@
 package com.meandi.justanotherplatformer.Helpers;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -68,13 +67,13 @@ public class WorldBuilder {
 
         switch (layerId) {
             case JustAnotherPlatformer.COIN_LAYER:
-                new Coin(screen, body, fixture, assets, hud);
+                new Coin(screen, body, fixture);
                 break;
             case JustAnotherPlatformer.DOOR_LAYER:
-                new Door(screen, body, fixture, assets, hud);
+                new Door(screen, body, fixture);
                 break;
             case JustAnotherPlatformer.MOSS_LAYER:
-                new Moss(screen, body, fixture, assets, hud);
+                new Moss(screen, body, fixture);
                 break;
         }
     }

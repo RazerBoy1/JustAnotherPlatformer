@@ -10,8 +10,8 @@ import com.meandi.justanotherplatformer.UI.GameScreen;
 import com.meandi.justanotherplatformer.UI.Hud;
 
 public class Moss extends Interactable {
-    public Moss(GameScreen screen, Body body, Fixture fixture, Assets assets, Hud hud) {
-        super(screen, body, fixture, assets, hud);
+    public Moss(GameScreen screen, Body body, Fixture fixture) {
+        super(screen, body, fixture);
 
         fixture.setUserData(this);
 

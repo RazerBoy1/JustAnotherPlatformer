@@ -10,8 +10,8 @@ import com.meandi.justanotherplatformer.UI.Hud;
 public class Coin extends Interactable {
     private final int COIN = 295;
 
-    public Coin(GameScreen screen, Body body, Fixture fixture, Assets assets, Hud hud) {
-        super(screen, body, fixture, assets, hud);
+    public Coin(GameScreen screen, Body body, Fixture fixture) {
+        super(screen, body, fixture);
 
         fixture.setUserData(this);
 

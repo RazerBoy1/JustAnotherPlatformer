@@ -18,16 +18,14 @@ public abstract class Interactable {
     protected Hud hud;
     protected Assets assets;
 
-    public Interactable(GameScreen screen, Body body, Fixture fixture, Assets assets, Hud hud) {
-        this.world = screen.getWorld();
-        this.map = screen.getMap();
+    public Interactable(GameScreen screen, Body body, Fixture fixture) {
+        world = screen.getWorld();
+        map = screen.getMap();
+        assets = screen.getAssets();
+        hud = screen.getHud();
 
         this.body = body;
         this.fixture = fixture;
-
-        this.hud = hud;
-
-        this.assets = assets;
     }
 
     public void setCategoryFilter(short filterBit) {
