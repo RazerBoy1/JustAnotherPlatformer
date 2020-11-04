@@ -12,7 +12,6 @@ public class JustAnotherPlatformer extends Game {
 
     public static final float PPT = 150;
     public static final float TILE_SIZE = 8;
-    public static final int FRAME_SIZE = 16;
 
     public static final int GROUND_LAYER = 0;
     public static final int COIN_LAYER = 1;

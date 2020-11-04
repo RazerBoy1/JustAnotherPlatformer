@@ -3,31 +3,31 @@ slime.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-slime-die
+slime_walk_anim_strip
   rotate: false
-  xy: 0, 0
-  size: 128, 32
-  orig: 128, 32
+  xy: 0, 8
+  size: 240, 24
+  orig: 240, 24
   offset: 0, 0
-  index: -1
-slime-hurt
+  index: 18
+slime_death_anim_strip
   rotate: false
-  xy: 128, 0
-  size: 128, 32
-  orig: 128, 32
+  xy: 240, 16
+  size: 96, 16
+  orig: 96, 16
   offset: 0, 0
-  index: -1
-slime-idle
+  index: 6
+slime_idle_anim_strip
   rotate: false
-  xy: 256, 0
-  size: 128, 32
-  orig: 128, 32
+  xy: 240, 0
+  size: 80, 16
+  orig: 80, 16
   offset: 0, 0
-  index: -1
-slime-walk
+  index: 5
+slime_hit_anim_strip
   rotate: false
-  xy: 384, 0
-  size: 128, 32
-  orig: 128, 32
+  xy: 320, 0
+  size: 48, 16
+  orig: 48, 16
   offset: 0, 0
-  index: -1
+  index: 3

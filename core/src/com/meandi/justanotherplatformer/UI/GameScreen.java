@@ -14,11 +14,12 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.meandi.justanotherplatformer.*;
+import com.meandi.justanotherplatformer.Characters.Hero;
+import com.meandi.justanotherplatformer.Characters.Slime;
 import com.meandi.justanotherplatformer.Helpers.Assets;
 import com.meandi.justanotherplatformer.Helpers.MyInputProcessor;
 import com.meandi.justanotherplatformer.Helpers.WorldBuilder;
 import com.meandi.justanotherplatformer.Helpers.WorldContactListener;
-import com.meandi.justanotherplatformer.Interactables.*;
 
 public class GameScreen implements Screen {
     private final JustAnotherPlatformer jap;
@@ -36,8 +37,8 @@ public class GameScreen implements Screen {
     private final World world;
     private final Box2DDebugRenderer boxDebugger;
 
-    private final Hero hero;
-    private final Slime slime;
+    private final com.meandi.justanotherplatformer.Characters.Hero hero;
+    private final com.meandi.justanotherplatformer.Characters.Slime slime;
 
     public GameScreen(JustAnotherPlatformer jap) {
         this.jap = jap;
@@ -59,8 +60,8 @@ public class GameScreen implements Screen {
 
         new WorldBuilder(this, hud);
 
-        hero = new Hero(this);
-        slime = new Slime(this, 32 / JustAnotherPlatformer.PPT, 32 / JustAnotherPlatformer.PPT);
+        hero = new Hero(this, assets.manager.get(Assets.HERO_ATLAS).findRegion("herochar_idle_anim_strip"));
+        slime = new Slime(this, assets.manager.get(Assets.SLIME_ATLAS).findRegion("slime_idle_anim_strip"));
 
         Gdx.input.setInputProcessor(new MyInputProcessor(hero));
 
@@ -99,7 +100,7 @@ public class GameScreen implements Screen {
 
         world.step(1 / 60f, 6, 6);
         hero.updateSpritePosition(delta);
-        slime.update(delta);
+        slime.updateSpritePosition(delta);
 
         hud.update(delta);
 

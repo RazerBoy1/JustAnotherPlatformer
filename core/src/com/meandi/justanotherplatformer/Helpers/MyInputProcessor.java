@@ -1,7 +1,7 @@
 package com.meandi.justanotherplatformer.Helpers;
 
 import com.badlogic.gdx.InputProcessor;
-import com.meandi.justanotherplatformer.Interactables.Hero;
+import com.meandi.justanotherplatformer.Characters.Hero;
 
 public class MyInputProcessor implements InputProcessor {
     Hero hero;
