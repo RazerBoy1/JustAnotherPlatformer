@@ -16,10 +16,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.meandi.justanotherplatformer.*;
 import com.meandi.justanotherplatformer.Characters.Hero;
 import com.meandi.justanotherplatformer.Characters.Slime;
-import com.meandi.justanotherplatformer.Helpers.Assets;
-import com.meandi.justanotherplatformer.Helpers.MyInputProcessor;
-import com.meandi.justanotherplatformer.Helpers.WorldBuilder;
-import com.meandi.justanotherplatformer.Helpers.WorldContactListener;
+import com.meandi.justanotherplatformer.Utils.Assets;
+import com.meandi.justanotherplatformer.Utils.MyInputProcessor;
+import com.meandi.justanotherplatformer.Utils.WorldBuilder;
+import com.meandi.justanotherplatformer.Utils.WorldContactListener;
 
 public class GameScreen implements Screen {
     private final JustAnotherPlatformer jap;

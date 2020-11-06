@@ -2,7 +2,7 @@ package com.meandi.justanotherplatformer.Interactables;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.meandi.justanotherplatformer.Helpers.Assets;
+import com.meandi.justanotherplatformer.Utils.Assets;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.UI.GameScreen;
 

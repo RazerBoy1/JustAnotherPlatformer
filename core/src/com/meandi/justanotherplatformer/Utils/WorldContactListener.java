@@ -1,4 +1,4 @@
-package com.meandi.justanotherplatformer.Helpers;
+package com.meandi.justanotherplatformer.Utils;
 
 import com.badlogic.gdx.physics.box2d.*;
 import com.meandi.justanotherplatformer.Characters.Slime;

@@ -4,7 +4,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.physics.box2d.*;
-import com.meandi.justanotherplatformer.Helpers.Assets;
+import com.meandi.justanotherplatformer.Utils.Assets;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.UI.GameScreen;
 import com.meandi.justanotherplatformer.UI.Hud;

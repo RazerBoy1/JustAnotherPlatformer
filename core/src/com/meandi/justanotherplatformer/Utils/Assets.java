@@ -1,4 +1,4 @@
-package com.meandi.justanotherplatformer.Helpers;
+package com.meandi.justanotherplatformer.Utils;
 
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;

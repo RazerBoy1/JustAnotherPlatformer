@@ -1,4 +1,4 @@
-package com.meandi.justanotherplatformer.Helpers;
+package com.meandi.justanotherplatformer.Utils;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.*;
