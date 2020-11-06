@@ -10,21 +10,16 @@ import com.meandi.justanotherplatformer.Interactables.Door;
 import com.meandi.justanotherplatformer.Interactables.Moss;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.UI.GameScreen;
-import com.meandi.justanotherplatformer.UI.Hud;
 
 public class WorldBuilder {
     private final GameScreen screen;
     private final World world;
     private final TiledMap map;
-    private final Assets assets;
-    private final Hud hud;
 
-    public WorldBuilder(GameScreen screen, Hud hud) {
+    public WorldBuilder(GameScreen screen) {
         this.screen = screen;
-        this.world = screen.getWorld();
-        this.map = screen.getMap();
-        this.assets = screen.getAssets();
-        this.hud = hud;
+        world = screen.getWorld();
+        map = screen.getMap();
 
         for (int layerId : JustAnotherPlatformer.WORLD_LAYERS)
             iterateObjects(layerId);
@@ -42,28 +37,17 @@ public class WorldBuilder {
                     break;
                 case JustAnotherPlatformer.GROUND_LAYER:
                 default:
-                    createNonInteractables(object);
+                    createBodyAndFixture(object, false);
                     break;
             }
         }
     }
 
     private void createInteractables(MapObject object, int layerId, boolean isSensor) {
-        BodyDef bd = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fixDef = new FixtureDef();
+        Object[] bodyAndFixture = createBodyAndFixture(object, isSensor);
 
-        Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-
-        bd.type = BodyDef.BodyType.StaticBody;
-        bd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / JustAnotherPlatformer.PPT, (rectangle.getY() + rectangle.getHeight() / 2) / JustAnotherPlatformer.PPT);
-
-        Body body = world.createBody(bd);
-
-        shape.setAsBox(rectangle.getWidth() / 2 / JustAnotherPlatformer.PPT, rectangle.getHeight() / 2 / JustAnotherPlatformer.PPT);
-        fixDef.shape = shape;
-        fixDef.isSensor = isSensor;
-        Fixture fixture = body.createFixture(fixDef);
+        Body body = (Body) bodyAndFixture[0];
+        Fixture fixture = (Fixture) bodyAndFixture[1];
 
         switch (layerId) {
             case JustAnotherPlatformer.COIN_LAYER:
@@ -78,7 +62,7 @@ public class WorldBuilder {
         }
     }
 
-    private void createNonInteractables(MapObject object) {
+    private Object[] createBodyAndFixture(MapObject object, boolean isSensor) {
         BodyDef bd = new BodyDef();
         PolygonShape shape = new PolygonShape();
         FixtureDef fixDef = new FixtureDef();
@@ -88,10 +72,13 @@ public class WorldBuilder {
         bd.type = BodyDef.BodyType.StaticBody;
         bd.position.set((rectangle.getX() + rectangle.getWidth() / 2) / JustAnotherPlatformer.PPT, (rectangle.getY() + rectangle.getHeight() / 2) / JustAnotherPlatformer.PPT);
 
-        Body body = world.createBody(bd);
-
         shape.setAsBox(rectangle.getWidth() / 2 / JustAnotherPlatformer.PPT, rectangle.getHeight() / 2 / JustAnotherPlatformer.PPT);
         fixDef.shape = shape;
-        body.createFixture(fixDef);
+        fixDef.isSensor = isSensor;
+
+        Body body = world.createBody(bd);
+        Fixture fixture = body.createFixture(fixDef);
+
+        return new Object[]{body, fixture};
     }
 }

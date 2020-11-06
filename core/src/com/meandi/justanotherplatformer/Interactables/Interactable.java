@@ -30,8 +30,8 @@ public abstract class Interactable {
 
     public void setCategoryFilter(short filterBit) {
         Filter filter = new Filter();
-        filter.categoryBits = filterBit;
 
+        filter.categoryBits = filterBit;
         fixture.setFilterData(filter);
     }
 
@@ -39,8 +39,8 @@ public abstract class Interactable {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(JustAnotherPlatformer.GRAPHICS_LAYER);
 
         return layer.getCell(
-            (int) (body.getPosition().x * JustAnotherPlatformer.PPT / JustAnotherPlatformer.TILE_SIZE),
-            (int) (body.getPosition().y * JustAnotherPlatformer.PPT / JustAnotherPlatformer.TILE_SIZE)
+                (int) (body.getPosition().x * JustAnotherPlatformer.PPT / 8),
+                (int) (body.getPosition().y * JustAnotherPlatformer.PPT / 8)
         );
     }
 }

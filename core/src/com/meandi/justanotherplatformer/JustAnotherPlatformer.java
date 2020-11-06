@@ -11,7 +11,6 @@ public class JustAnotherPlatformer extends Game {
     public static final float GRAVITY = -10;
 
     public static final float PPT = 150;
-    public static final float TILE_SIZE = 8;
 
     public static final int GROUND_LAYER = 0;
     public static final int COIN_LAYER = 1;
@@ -22,11 +21,14 @@ public class JustAnotherPlatformer extends Game {
 
     public static final short DEFAULT_BIT = 1;
     public static final short HERO_BIT = 2;
-    public static final short ENEMY_BIT = 4;
-    public static final short COIN_BIT = 8;
-    public static final short MOSS_BIT = 16;
-    public static final short DOOR_BIT = 32;
-    public static final short REMOVED_BIT = 64;
+    public static final short HERO_HEAD_BIT = 4;
+    public static final short ENEMY_BIT = 8;
+    public static final short ENEMY_HEAD_BIT = 16;
+    public static final short COIN_BIT = 32;
+    public static final short MOSS_BIT = 64;
+    public static final short DOOR_BIT = 128;
+    public static final short OBJECT_BIT = 256;
+    public static final short REMOVED_BIT = 512;
 
     public SpriteBatch batch;
 

@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.meandi.justanotherplatformer.Helpers.Assets;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.UI.GameScreen;
-import com.meandi.justanotherplatformer.UI.Hud;
 
 public class Coin extends Interactable {
     private final int COIN = 295;

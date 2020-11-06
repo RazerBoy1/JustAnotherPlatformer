@@ -16,36 +16,30 @@ public class Hero extends Character {
     private boolean moveRight;
     private boolean jump;
 
-    private enum State {IDLING, DYING, RUNNING, JUMPING, DOUBLE_JUMPING, FALLING, PUSHING, ATTACKING, HIT}
-
-    private State currentState, previousState;
     private Animation<TextureRegion> heroIdle, heroDeath, heroRun, heroJump, heroDoubleJump, heroFall, heroPush, heroAttack, heroHit;
     private boolean runningRight;
 
     public Hero(GameScreen screen, TextureRegion region) {
         super(screen, region);
 
-        currentState = State.IDLING;
-        previousState = State.IDLING;
+        currentState = previousState = State.IDLING;
         runningRight = true;
 
         createAnimations();
 
         assets = screen.getAssets();
 
-        moveLeft = false;
-        moveRight = false;
-        jump = false;
+        moveLeft = moveRight = jump = false;
     }
 
     @Override
-    public void createCharacter() {
+    protected void createCharacter() {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixDef = new FixtureDef();
         CircleShape circleShape = new CircleShape();
 
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(170 / JustAnotherPlatformer.PPT, 90 / JustAnotherPlatformer.PPT);
+        bodyDef.position.set(250 / JustAnotherPlatformer.PPT, 90 / JustAnotherPlatformer.PPT);
         body = world.createBody(bodyDef);
 
         circleShape.setRadius(6 / JustAnotherPlatformer.PPT);
@@ -55,20 +49,23 @@ public class Hero extends Character {
                 JustAnotherPlatformer.COIN_BIT |
                 JustAnotherPlatformer.DOOR_BIT |
                 JustAnotherPlatformer.MOSS_BIT |
-                JustAnotherPlatformer.ENEMY_BIT;
+                JustAnotherPlatformer.OBJECT_BIT |
+                JustAnotherPlatformer.ENEMY_BIT |
+                JustAnotherPlatformer.ENEMY_HEAD_BIT;
 
-        body.createFixture(fixDef).setUserData("player_body");
+        body.createFixture(fixDef).setUserData(this);
 
         EdgeShape head = new EdgeShape();
         head.set(new Vector2(-3 / JustAnotherPlatformer.PPT, 6.5f / JustAnotherPlatformer.PPT), new Vector2(3 / JustAnotherPlatformer.PPT, 6.5f / JustAnotherPlatformer.PPT));
         fixDef.shape = head;
         fixDef.isSensor = true;
+        fixDef.filter.categoryBits = JustAnotherPlatformer.HERO_HEAD_BIT;
 
-        body.createFixture(fixDef).setUserData("head");
+        body.createFixture(fixDef).setUserData(this);
     }
 
     @Override
-    public void createAnimations() {
+    protected void createAnimations() {
         Array<TextureRegion> frames = new Array<>();
 
         heroIdle = createAnimation(frames, 0, 16, 16, 36, 40, 0.1f);
@@ -85,41 +82,44 @@ public class Hero extends Character {
     @Override
     public void updateSpritePosition(float delta) {
         setPosition((0.35f / JustAnotherPlatformer.PPT) + body.getPosition().x - getWidth() / 2, (2 / JustAnotherPlatformer.PPT) + body.getPosition().y - getHeight() / 2);
-        setRegion(getFrame(delta));
+        setRegion(getFrame());
+
+        updateState(delta);
     }
 
-    public TextureRegion getFrame(float delta) {
+    @Override
+    protected TextureRegion getFrame() {
         TextureRegion region;
 
         currentState = getState();
         switch (currentState) {
             case RUNNING:
-                region = heroRun.getKeyFrame(stateTimer, true);
+                region = heroRun.getKeyFrame(stateTime, true);
                 break;
             case DYING:
-                region = heroDeath.getKeyFrame(stateTimer);
+                region = heroDeath.getKeyFrame(stateTime);
                 break;
             case JUMPING:
-                region = heroJump.getKeyFrame(stateTimer);
+                region = heroJump.getKeyFrame(stateTime);
                 break;
             case DOUBLE_JUMPING:
-                region = heroDoubleJump.getKeyFrame(stateTimer);
+                region = heroDoubleJump.getKeyFrame(stateTime);
                 break;
             case FALLING:
-                region = heroFall.getKeyFrame(stateTimer);
+                region = heroFall.getKeyFrame(stateTime);
                 break;
             case PUSHING:
-                region = heroPush.getKeyFrame(stateTimer);
+                region = heroPush.getKeyFrame(stateTime);
                 break;
             case ATTACKING:
-                region = heroAttack.getKeyFrame(stateTimer);
+                region = heroAttack.getKeyFrame(stateTime);
                 break;
             case HIT:
-                region = heroHit.getKeyFrame(stateTimer);
+                region = heroHit.getKeyFrame(stateTime);
                 break;
             case IDLING:
             default:
-                region = heroIdle.getKeyFrame(stateTimer, true);
+                region = heroIdle.getKeyFrame(stateTime, true);
                 break;
         }
 
@@ -131,13 +131,10 @@ public class Hero extends Character {
             runningRight = true;
         }
 
-        stateTimer = currentState == previousState ? stateTimer + delta : 0;
-        previousState = currentState;
-
         return region;
     }
 
-    public State getState() {
+    protected State getState() {
         if (body.getLinearVelocity().y > 0)
             return State.JUMPING;
         else if (body.getLinearVelocity().y < 0)
@@ -158,8 +155,7 @@ public class Hero extends Character {
             if (body.getLinearVelocity().y == 0) {
                 assets.manager.get(Assets.JUMP).play();
                 body.applyLinearImpulse(new Vector2(0, 2.5f), body.getWorldCenter(), true);
-            }
-            else
+            } else
                 jump = false;
         }
     }

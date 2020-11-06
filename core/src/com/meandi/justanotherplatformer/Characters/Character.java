@@ -14,32 +14,31 @@ public abstract class Character extends Sprite {
     protected final World world;
     public Body body;
 
-    protected float stateTimer;
+    protected float stateTime;
+    protected State currentState, previousState;
+
+    protected boolean setToDestroy;
+    protected boolean destroyed;
+
+    protected enum State {IDLING, DYING, RUNNING, JUMPING, DOUBLE_JUMPING, FALLING, PUSHING, ATTACKING, HIT}
 
     public Character(GameScreen screen, TextureRegion region) {
         this.screen = screen;
         world = screen.getWorld();
 
-        stateTimer = 0;
+        stateTime = 0;
+        setToDestroy = false;
+        destroyed = false;
 
         setSprite(region);
         createCharacter();
         setBounds(0, 0, 16 / JustAnotherPlatformer.PPT, 16 / JustAnotherPlatformer.PPT);
     }
 
-    /*public Character(GameScreen screen, TextureRegion region, float x, float y) {
-        this.screen = screen;
-        world = screen.getWorld();
-
-        setSprite(region);
-        createCharacter();
-        setPosition(x, y);
-        setBounds(0, 0, 16 / JustAnotherPlatformer.PPT, 16 / JustAnotherPlatformer.PPT);
-    }*/
-
-    protected abstract void updateSpritePosition(float delta);
     protected abstract void createCharacter();
     protected abstract void createAnimations();
+    protected abstract void updateSpritePosition(float delta);
+    protected abstract TextureRegion getFrame();
 
     protected void setSprite(TextureRegion region) {
         setRegion(region);
@@ -56,5 +55,10 @@ public abstract class Character extends Sprite {
             frames.add(new TextureRegion(getTexture(), i * frameWidth, startY, frameWidth, frameHeight));
 
         return new Animation<>(frameDuration, frames);
+    }
+
+    protected void updateState(float delta) {
+        stateTime = currentState == previousState ? stateTime + delta : 0;
+        previousState = currentState;
     }
 }

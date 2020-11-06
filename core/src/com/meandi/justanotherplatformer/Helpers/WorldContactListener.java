@@ -1,30 +1,46 @@
 package com.meandi.justanotherplatformer.Helpers;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.meandi.justanotherplatformer.Characters.Slime;
 import com.meandi.justanotherplatformer.Interactables.Coin;
 import com.meandi.justanotherplatformer.Interactables.Moss;
+import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 
 public class WorldContactListener implements ContactListener {
-
     @Override
     public void beginContact(Contact contact) {
         Fixture a = contact.getFixtureA();
         Fixture b = contact.getFixtureB();
 
-        if (a.getUserData() == "head" || b.getUserData() == "head") {
-            Fixture head = a.getUserData() == "head" ? a : b;
-            Fixture object = head == a ? b : a;
+        int collisionDefinition = a.getFilterData().categoryBits | b.getFilterData().categoryBits;
 
-            if (object.getUserData() != null && Moss.class.isAssignableFrom(object.getUserData().getClass()))
-                ((Moss) object.getUserData()).onHeadHit();
-        }
-
-        if (a.getUserData() == "player_body" || b.getUserData() == "player_body") {
-            Fixture body = a.getUserData() == "player_body" ? a : b;
-            Fixture object = body == a ? b : a;
-
-            if (object.getUserData() != null && Coin.class.isAssignableFrom(object.getUserData().getClass()))
-                ((Coin) object.getUserData()).onBodyHit();
+        switch (collisionDefinition) {
+            case JustAnotherPlatformer.HERO_HEAD_BIT | JustAnotherPlatformer.MOSS_BIT:
+                if (a.getFilterData().categoryBits == JustAnotherPlatformer.MOSS_BIT)
+                    ((Moss) a.getUserData()).onHeadHit();
+                else
+                    ((Moss) b.getUserData()).onHeadHit();
+                break;
+            case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.COIN_BIT:
+                if (a.getFilterData().categoryBits == JustAnotherPlatformer.COIN_BIT)
+                    ((Coin) a.getUserData()).onBodyHit();
+                else
+                    ((Coin) b.getUserData()).onBodyHit();
+                break;
+            case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.ENEMY_HEAD_BIT:
+                if (a.getFilterData().categoryBits == JustAnotherPlatformer.ENEMY_HEAD_BIT)
+                    ((Slime) a.getUserData()).hitOnHead();
+                else
+                    ((Slime) b.getUserData()).hitOnHead();
+                break;
+            case JustAnotherPlatformer.ENEMY_BIT | JustAnotherPlatformer.OBJECT_BIT:
+                if (a.getFilterData().categoryBits == JustAnotherPlatformer.ENEMY_BIT)
+                    ((Slime) a.getUserData()).reverseVelocity(true, false);
+                else
+                    ((Slime) b.getUserData()).reverseVelocity(true, false);
+                break;
+            default:
+                break;
         }
     }
 

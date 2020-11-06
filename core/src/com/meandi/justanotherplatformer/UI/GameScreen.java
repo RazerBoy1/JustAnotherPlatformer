@@ -49,8 +49,8 @@ public class GameScreen implements Screen {
         assets.load();
 
         hud = new Hud(jap.batch, assets);
-        map = new TmxMapLoader().load("world/levels/test_level.tmx");
 
+        map = new TmxMapLoader().load("world/levels/test_level.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / JustAnotherPlatformer.PPT);
 
         cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
@@ -58,7 +58,7 @@ public class GameScreen implements Screen {
         world = new World(new Vector2(0, JustAnotherPlatformer.GRAVITY), true);
         boxDebugger = new Box2DDebugRenderer();
 
-        new WorldBuilder(this, hud);
+        new WorldBuilder(this);
 
         hero = new Hero(this, assets.manager.get(Assets.HERO_ATLAS).findRegion("herochar_idle_anim_strip"));
         slime = new Slime(this, assets.manager.get(Assets.SLIME_ATLAS).findRegion("slime_idle_anim_strip"));

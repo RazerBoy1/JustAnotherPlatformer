@@ -11,6 +11,6 @@ public class Door extends Interactable {
 
         fixture.setUserData(this);
 
-        setCategoryFilter(JustAnotherPlatformer.DOOR_BIT);
+        setCategoryFilter(JustAnotherPlatformer.OBJECT_BIT);
     }
 }

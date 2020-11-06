@@ -1,5 +1,6 @@
 package com.meandi.justanotherplatformer.Helpers;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.meandi.justanotherplatformer.Characters.Hero;
 
@@ -11,14 +12,14 @@ public class MyInputProcessor implements InputProcessor {
     }
 
     public boolean keyDown(int keycode) {
-        //System.out.println("------------------------------------------------");
-        //System.out.println("LEFT: " + Keys.LEFT);
-        //System.out.println("RIGHT: " + Keys.RIGHT);
-        //System.out.println("UP: " + Keys.UP);
-        //System.out.println("DOWN: " + Keys.DOWN);
-        //System.out.println("------------------------------------------------");
-        //System.out.println();
-        //System.out.println("------------------------------------------------");
+        System.out.println("------------------------------------------------");
+        System.out.println("LEFT: " + Input.Keys.LEFT);
+        System.out.println("RIGHT: " + Input.Keys.RIGHT);
+        System.out.println("UP: " + Input.Keys.UP);
+        System.out.println("DOWN: " + Input.Keys.DOWN);
+        System.out.println("------------------------------------------------");
+        System.out.println();
+        System.out.println("------------------------------------------------");
 
         switch (keycode) {
             case 19:
