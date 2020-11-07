@@ -18,8 +18,8 @@ public class Slime extends Character {
     private Vector2 velocity;
     private Animation<TextureRegion> slimeIdle, slimeRun, slimeHit, slimeDeath;
 
-    public Slime(GameScreen screen, TextureRegion region) {
-        super(screen, region);
+    public Slime(GameScreen screen, TextureRegion region, float x, float y) {
+        super(screen, region, x, y);
         hud = screen.getHud();
         velocity = new Vector2(0.25f, 0);
 
@@ -35,7 +35,7 @@ public class Slime extends Character {
         CircleShape circleShape = new CircleShape();
 
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(330 / JustAnotherPlatformer.PPT, 30 / JustAnotherPlatformer.PPT);
+        bodyDef.position.set(getX(), getY());
         body = world.createBody(bodyDef);
 
         circleShape.setRadius(4.5f / JustAnotherPlatformer.PPT);

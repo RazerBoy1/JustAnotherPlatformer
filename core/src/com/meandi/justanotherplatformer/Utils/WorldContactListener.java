@@ -39,6 +39,10 @@ public class WorldContactListener implements ContactListener {
                 else
                     ((Slime) b.getUserData()).reverseVelocity(true, false);
                 break;
+            case JustAnotherPlatformer.ENEMY_BIT:
+                ((Slime) a.getUserData()).reverseVelocity(true, false);
+                ((Slime) b.getUserData()).reverseVelocity(true, false);
+                break;
             default:
                 break;
         }

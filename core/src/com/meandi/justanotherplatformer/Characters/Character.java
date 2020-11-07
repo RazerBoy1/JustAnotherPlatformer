@@ -35,6 +35,22 @@ public abstract class Character extends Sprite {
         setBounds(0, 0, 16 / JustAnotherPlatformer.PPT, 16 / JustAnotherPlatformer.PPT);
     }
 
+    public Character(GameScreen screen, TextureRegion region, float x, float y) {
+        this.screen = screen;
+        world = screen.getWorld();
+
+        stateTime = 0;
+        setToDestroy = false;
+        destroyed = false;
+
+        setPosition(x, y);
+        setSprite(region);
+        createCharacter();
+        setBounds(0, 0, 16 / JustAnotherPlatformer.PPT, 16 / JustAnotherPlatformer.PPT);
+
+        body.setActive(false);
+    }
+
     protected abstract void createCharacter();
     protected abstract void createAnimations();
     protected abstract void updateSpritePosition(float delta);

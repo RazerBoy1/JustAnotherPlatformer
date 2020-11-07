@@ -5,6 +5,8 @@ import com.badlogic.gdx.maps.objects.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
+import com.meandi.justanotherplatformer.Characters.Slime;
 import com.meandi.justanotherplatformer.Interactables.Coin;
 import com.meandi.justanotherplatformer.Interactables.Door;
 import com.meandi.justanotherplatformer.Interactables.Moss;
@@ -15,11 +17,17 @@ public class WorldBuilder {
     private final GameScreen screen;
     private final World world;
     private final TiledMap map;
+    private final Assets assets;
+
+    private Array<Slime> slimes;
 
     public WorldBuilder(GameScreen screen) {
         this.screen = screen;
         world = screen.getWorld();
         map = screen.getMap();
+        assets = screen.getAssets();
+
+        slimes = new Array<>();
 
         for (int layerId : JustAnotherPlatformer.WORLD_LAYERS)
             iterateObjects(layerId);
@@ -28,6 +36,11 @@ public class WorldBuilder {
     private void iterateObjects(int layerId) {
         for (MapObject object : map.getLayers().get(layerId).getObjects()) {
             switch (layerId) {
+                case JustAnotherPlatformer.SLIME_LAYER:
+                    Rectangle rect = ((RectangleMapObject) object).getRectangle();
+                    slimes.add(new Slime(screen, assets.manager.get(Assets.SLIME_ATLAS).findRegion("slime_idle_anim_strip"),
+                            rect.getX() / JustAnotherPlatformer.PPT, rect.getY() / JustAnotherPlatformer.PPT));
+                    break;
                 case JustAnotherPlatformer.COIN_LAYER:
                     createInteractables(object, layerId, true);
                     break;
@@ -41,6 +54,12 @@ public class WorldBuilder {
                     break;
             }
         }
+    }
+
+    private void createEnemies(MapObject object) {
+        Rectangle rect = ((RectangleMapObject) object).getRectangle();
+        slimes.add(new Slime(screen, assets.manager.get(Assets.SLIME_ATLAS).findRegion("slime_idle_anim_strip"),
+                rect.getX() / JustAnotherPlatformer.PPT, rect.getY() / JustAnotherPlatformer.PPT));
     }
 
     private void createInteractables(MapObject object, int layerId, boolean isSensor) {
@@ -80,5 +99,9 @@ public class WorldBuilder {
         Fixture fixture = body.createFixture(fixDef);
 
         return new Object[]{body, fixture};
+    }
+
+    public Array.ArrayIterator<Slime> getSlimes() {
+        return new Array.ArrayIterator<>(slimes);
     }
 }

@@ -37,8 +37,9 @@ public class GameScreen implements Screen {
     private final World world;
     private final Box2DDebugRenderer boxDebugger;
 
-    private final com.meandi.justanotherplatformer.Characters.Hero hero;
-    private final com.meandi.justanotherplatformer.Characters.Slime slime;
+    private final WorldBuilder worldBuilder;
+
+    private final Hero hero;
 
     public GameScreen(JustAnotherPlatformer jap) {
         this.jap = jap;
@@ -58,10 +59,9 @@ public class GameScreen implements Screen {
         world = new World(new Vector2(0, JustAnotherPlatformer.GRAVITY), true);
         boxDebugger = new Box2DDebugRenderer();
 
-        new WorldBuilder(this);
+        worldBuilder = new WorldBuilder(this);
 
         hero = new Hero(this, assets.manager.get(Assets.HERO_ATLAS).findRegion("herochar_idle_anim_strip"));
-        slime = new Slime(this, assets.manager.get(Assets.SLIME_ATLAS).findRegion("slime_idle_anim_strip"));
 
         Gdx.input.setInputProcessor(new MyInputProcessor(hero));
 
@@ -87,8 +87,11 @@ public class GameScreen implements Screen {
 
         jap.batch.setProjectionMatrix(cam.combined);
         jap.batch.begin();
+
         hero.draw(jap.batch);
-        slime.draw(jap.batch);
+        for (Slime slime : worldBuilder.getSlimes())
+            slime.draw(jap.batch);
+
         jap.batch.end();
 
         jap.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -99,8 +102,13 @@ public class GameScreen implements Screen {
         hero.updateMotion();
 
         world.step(1 / 60f, 6, 6);
+
         hero.updateSpritePosition(delta);
-        slime.updateSpritePosition(delta);
+        for (Slime slime : worldBuilder.getSlimes()) {
+            slime.updateSpritePosition(delta);
+            if (slime.getX() < hero.getX() + 208 / JustAnotherPlatformer.PPT)
+                slime.body.setActive(true);
+        }
 
         hud.update(delta);
 
