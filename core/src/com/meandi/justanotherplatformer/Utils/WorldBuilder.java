@@ -29,24 +29,24 @@ public class WorldBuilder {
 
         slimes = new Array<>();
 
-        for (int layerId : JustAnotherPlatformer.WORLD_LAYERS)
-            iterateObjects(layerId);
+        for (String layerName : JustAnotherPlatformer.WORLD_LAYERS)
+            iterateObjects(layerName);
     }
 
-    private void iterateObjects(int layerId) {
-        for (MapObject object : map.getLayers().get(layerId).getObjects()) {
-            switch (layerId) {
+    private void iterateObjects(String layerName) {
+        for (MapObject object : map.getLayers().get(layerName).getObjects()) {
+            switch (layerName) {
                 case JustAnotherPlatformer.SLIME_LAYER:
                     Rectangle rect = ((RectangleMapObject) object).getRectangle();
                     slimes.add(new Slime(screen, assets.manager.get(Assets.SLIME_ATLAS).findRegion("slime_idle_anim_strip"),
                             rect.getX() / JustAnotherPlatformer.PPT, rect.getY() / JustAnotherPlatformer.PPT));
                     break;
                 case JustAnotherPlatformer.COIN_LAYER:
-                    createInteractables(object, layerId, true);
+                    createInteractables(object, layerName, true);
                     break;
                 case JustAnotherPlatformer.DOOR_LAYER:
                 case JustAnotherPlatformer.MOSS_LAYER:
-                    createInteractables(object, layerId, false);
+                    createInteractables(object, layerName, false);
                     break;
                 case JustAnotherPlatformer.GROUND_LAYER:
                 default:
@@ -62,13 +62,13 @@ public class WorldBuilder {
                 rect.getX() / JustAnotherPlatformer.PPT, rect.getY() / JustAnotherPlatformer.PPT));
     }
 
-    private void createInteractables(MapObject object, int layerId, boolean isSensor) {
+    private void createInteractables(MapObject object, String layerName, boolean isSensor) {
         Object[] bodyAndFixture = createBodyAndFixture(object, isSensor);
 
         Body body = (Body) bodyAndFixture[0];
         Fixture fixture = (Fixture) bodyAndFixture[1];
 
-        switch (layerId) {
+        switch (layerName) {
             case JustAnotherPlatformer.COIN_LAYER:
                 new Coin(screen, body, fixture);
                 break;

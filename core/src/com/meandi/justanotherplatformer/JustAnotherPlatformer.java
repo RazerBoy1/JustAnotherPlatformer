@@ -12,13 +12,15 @@ public class JustAnotherPlatformer extends Game {
 
     public static final float PPT = 150;
 
-    public static final int GROUND_LAYER = 0;
-    public static final int COIN_LAYER = 1;
-    public static final int DOOR_LAYER = 2;
-    public static final int MOSS_LAYER = 3;
-    public static final int SLIME_LAYER = 4;
-    public static final int GRAPHICS_LAYER = 6;
-    public static final int[] WORLD_LAYERS = {GROUND_LAYER, COIN_LAYER, DOOR_LAYER, MOSS_LAYER, SLIME_LAYER};
+    public static final String GRAPHICS_LAYER = "graphics_ground";
+    public static final String SKY_LAYER = "sky";
+    public static final String SLIME_LAYER = "slimes";
+    public static final String MOSS_LAYER = "moss";
+    public static final String DOOR_LAYER = "doors";
+    public static final String COIN_LAYER = "coins";
+    public static final String GROUND_LAYER = "ground";
+
+    public static final String[] WORLD_LAYERS = {GRAPHICS_LAYER, SLIME_LAYER, MOSS_LAYER, DOOR_LAYER, COIN_LAYER, GROUND_LAYER};
 
     public static final short DEFAULT_BIT = 1;
     public static final short HERO_BIT = 2;
