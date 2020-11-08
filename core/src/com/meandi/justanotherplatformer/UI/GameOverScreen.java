@@ -15,15 +15,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 
 public class GameOverScreen implements Screen {
-    private final Viewport port;
+    private final JustAnotherPlatformer jap;
     private final Stage stage;
 
-    private final Game jap;
-
-    public GameOverScreen(Game jap) {
+    public GameOverScreen(JustAnotherPlatformer jap) {
         this.jap = jap;
-        port = new StretchViewport(JustAnotherPlatformer.WIDTH / JustAnotherPlatformer.PPT, JustAnotherPlatformer.HEIGHT / JustAnotherPlatformer.PPT, new OrthographicCamera());
-        stage = new Stage(port, ((JustAnotherPlatformer) this.jap).batch);
+        Viewport port = new StretchViewport(JustAnotherPlatformer.WIDTH, JustAnotherPlatformer.HEIGHT, new OrthographicCamera());
+        stage = new Stage(port, this.jap.batch);
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
 
@@ -49,7 +47,7 @@ public class GameOverScreen implements Screen {
     @Override
     public void render(float delta) {
         if (Gdx.input.justTouched()) {
-            jap.setScreen(new GameScreen((JustAnotherPlatformer) jap));
+            jap.setScreen(new GameScreen(jap));
             dispose();
         }
 

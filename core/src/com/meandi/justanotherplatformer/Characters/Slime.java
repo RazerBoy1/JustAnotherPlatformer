@@ -14,8 +14,8 @@ import com.meandi.justanotherplatformer.UI.GameScreen;
 import com.meandi.justanotherplatformer.UI.Hud;
 
 public class Slime extends Character {
-    private Hud hud;
-    private Vector2 velocity;
+    private final Hud hud;
+    private final Vector2 velocity;
     private Animation<TextureRegion> slimeIdle, slimeRun, slimeHit, slimeDeath;
 
     public Slime(GameScreen screen, TextureRegion region, float x, float y) {

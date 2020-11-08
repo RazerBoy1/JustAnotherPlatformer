@@ -15,7 +15,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.meandi.justanotherplatformer.*;
-import com.meandi.justanotherplatformer.Characters.Character;
 import com.meandi.justanotherplatformer.Characters.Hero;
 import com.meandi.justanotherplatformer.Characters.Slime;
 import com.meandi.justanotherplatformer.Items.HealthPotion;
@@ -75,9 +74,7 @@ public class GameScreen implements Screen {
 
         world.setContactListener(new WorldContactListener());
 
-        Music music = assets.manager.get(Assets.MUSIC);
-        music.setLooping(true);
-        music.play();
+        assets.playMusic();
 
         items = new Array<>();
         itemsToSpawn = new Array<>();
@@ -148,6 +145,7 @@ public class GameScreen implements Screen {
         return (hero.isDead() && hero.getStateTimer() > 2);
     }
 
+    // TODO: Move spawnItem & spawnItems to the Item class
     public void spawnItem(ItemDefinition itemDef) {
         itemsToSpawn.add(itemDef);
     }

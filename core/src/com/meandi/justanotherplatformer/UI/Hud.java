@@ -33,7 +33,6 @@ public class Hud implements Disposable {
     public Hud(SpriteBatch sb, Assets assets) {
         stage = new Stage(new StretchViewport(JustAnotherPlatformer.WIDTH, JustAnotherPlatformer.HEIGHT), sb);
 
-
         worldTimer = 0;
         score = 0;
         hearthCount = 3;
@@ -49,6 +48,7 @@ public class Hud implements Disposable {
         t1 = new Table();
         t1.top().left();
         t1.setFillParent(true);
+        t1.debugAll();
 
         t1.add(heartImage1).padTop(3).padLeft(5);
         t1.add(heartImage2).padTop(3).padLeft(5);
@@ -89,10 +89,10 @@ public class Hud implements Disposable {
     public void addHearth() {
         switch (hearthCount) {
             case 1:
-                t1.add(heartImage2).padTop(3).padLeft(5);
+                t1.addActorAt(1, heartImage2);
                 break;
             case 2:
-                t1.add(heartImage3).padTop(3).padLeft(5);
+                t1.addActorAt(2, heartImage3);
                 break;
         }
 
@@ -102,13 +102,13 @@ public class Hud implements Disposable {
     public void removeHearth() {
         switch (hearthCount) {
             case 1:
-                t1.removeActor(heartImage1);
+                t1.removeActorAt(0, true);
                 break;
             case 2:
-                t1.removeActor(heartImage2);
+                t1.removeActorAt(1, true);
                 break;
             case 3:
-                t1.removeActor(heartImage3);
+                t1.removeActorAt(2, true);
                 break;
         }
 

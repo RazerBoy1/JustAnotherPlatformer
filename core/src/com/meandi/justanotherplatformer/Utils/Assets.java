@@ -48,6 +48,12 @@ public class Assets implements Disposable {
         manager.finishLoading();
     }
 
+    public void playMusic() {
+        Music music = manager.get(Assets.MUSIC);
+        music.setLooping(true);
+        music.play();
+    }
+
     @Override
     public void dispose() {
         manager.dispose();

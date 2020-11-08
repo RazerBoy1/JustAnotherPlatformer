@@ -45,9 +45,10 @@ public class HealthPotion extends Item {
 
     @Override
     public void useItem(Hero hero) {
-        if (hud.getHearthCount() != 3)
+        if (hud.getHearthCount() != 3) {
             destroy();
             hud.addHearth();
+        }
     }
 
     public void update(float delta) {
