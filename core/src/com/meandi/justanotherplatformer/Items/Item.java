@@ -2,9 +2,9 @@ package com.meandi.justanotherplatformer.Items;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.meandi.justanotherplatformer.Characters.Hero;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.UI.GameScreen;
 
@@ -12,8 +12,6 @@ public abstract class Item extends Sprite {
     protected GameScreen screen;
     protected World world;
     protected Body body;
-
-    protected Vector2 velocity;
 
     protected boolean setToDestroy;
     protected boolean destroyed;
@@ -24,6 +22,7 @@ public abstract class Item extends Sprite {
 
         setToDestroy = destroyed = false;
 
+        setScale(JustAnotherPlatformer.ITEM_SCALE);
         setPosition(x, y);
         setBounds(getX(), getY(), 16 / JustAnotherPlatformer.PPT, 16 / JustAnotherPlatformer.PPT);
 
@@ -31,9 +30,9 @@ public abstract class Item extends Sprite {
     }
 
     protected abstract void defineItem();
-    protected abstract void useItem();
+    public abstract void useItem(Hero hero);
 
-    public void updateSpritePosition(float delta) {
+    public void update(float delta) {
         if (setToDestroy && !destroyed) {
             world.destroyBody(body);
             destroyed = true;

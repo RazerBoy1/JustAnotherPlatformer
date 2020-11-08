@@ -5,16 +5,19 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+import com.meandi.justanotherplatformer.UI.Hud;
 import com.meandi.justanotherplatformer.Utils.Assets;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.UI.GameScreen;
 
 public class Hero extends Character {
     private final Assets assets;
+    private final Hud hud;
 
     private boolean moveLeft;
     private boolean moveRight;
     private boolean jump;
+    private boolean heroDied;
 
     private Animation<TextureRegion> heroIdle, heroDeath, heroRun, heroJump, heroDoubleJump, heroFall, heroPush, heroAttack, heroHit;
     private boolean runningRight;
@@ -28,6 +31,7 @@ public class Hero extends Character {
         createAnimations();
 
         assets = screen.getAssets();
+        hud = screen.getHud();
 
         moveLeft = moveRight = jump = false;
     }
@@ -39,16 +43,17 @@ public class Hero extends Character {
         CircleShape circleShape = new CircleShape();
 
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(250 / JustAnotherPlatformer.PPT, 90 / JustAnotherPlatformer.PPT);
+        bodyDef.position.set(560 / JustAnotherPlatformer.PPT, 90 / JustAnotherPlatformer.PPT);
         body = world.createBody(bodyDef);
 
-        circleShape.setRadius(6 / JustAnotherPlatformer.PPT);
+        circleShape.setRadius(5.5f / JustAnotherPlatformer.PPT);
         fixDef.shape = circleShape;
         fixDef.filter.categoryBits = JustAnotherPlatformer.HERO_BIT;
         fixDef.filter.maskBits = JustAnotherPlatformer.DEFAULT_BIT |
                 JustAnotherPlatformer.COIN_BIT |
                 JustAnotherPlatformer.DOOR_BIT |
                 JustAnotherPlatformer.MOSS_BIT |
+                JustAnotherPlatformer.ITEM_BIT |
                 JustAnotherPlatformer.OBJECT_BIT |
                 JustAnotherPlatformer.ENEMY_BIT |
                 JustAnotherPlatformer.ENEMY_HEAD_BIT;
@@ -135,7 +140,9 @@ public class Hero extends Character {
     }
 
     protected State getState() {
-        if (body.getLinearVelocity().y > 0)
+        if (heroDied)
+            return State.DYING;
+        else if (body.getLinearVelocity().y > 0)
             return State.JUMPING;
         else if (body.getLinearVelocity().y < 0)
             return State.FALLING;
@@ -158,6 +165,31 @@ public class Hero extends Character {
             } else
                 jump = false;
         }
+    }
+
+    public void hit() {
+        hud.removeHearth();
+        // TODO: Add hit sound
+
+        if (hud.getHearthCount() == 0) {
+            assets.manager.get(Assets.MUSIC).stop();
+            heroDied = true;
+            // TODO: Add death sound
+
+            /*Filter filter = new Filter();
+            filter.maskBits = JustAnotherPlatformer.DEAD_BIT;
+
+            for (Fixture fixture : new Array.ArrayIterator<>(body.getFixtureList()))
+                fixture.setFilterData(filter);*/
+        }
+    }
+
+    public boolean isDead() {
+        return heroDied;
+    }
+
+    public float getStateTimer() {
+        return stateTime;
     }
 
     public void setLeftMove(boolean t) {

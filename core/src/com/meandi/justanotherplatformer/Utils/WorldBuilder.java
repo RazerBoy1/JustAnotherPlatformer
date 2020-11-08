@@ -19,7 +19,7 @@ public class WorldBuilder {
     private final TiledMap map;
     private final Assets assets;
 
-    private Array<Slime> slimes;
+    private final Array<Slime> slimes;
 
     public WorldBuilder(GameScreen screen) {
         this.screen = screen;
@@ -37,9 +37,7 @@ public class WorldBuilder {
         for (MapObject object : map.getLayers().get(layerName).getObjects()) {
             switch (layerName) {
                 case JustAnotherPlatformer.SLIME_LAYER:
-                    Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                    slimes.add(new Slime(screen, assets.manager.get(Assets.SLIME_ATLAS).findRegion("slime_idle_anim_strip"),
-                            rect.getX() / JustAnotherPlatformer.PPT, rect.getY() / JustAnotherPlatformer.PPT));
+                    createEnemies(object);
                     break;
                 case JustAnotherPlatformer.COIN_LAYER:
                     createInteractables(object, layerName, true);
@@ -70,13 +68,13 @@ public class WorldBuilder {
 
         switch (layerName) {
             case JustAnotherPlatformer.COIN_LAYER:
-                new Coin(screen, body, fixture);
+                new Coin(screen, body, fixture, object);
                 break;
             case JustAnotherPlatformer.DOOR_LAYER:
-                new Door(screen, body, fixture);
+                new Door(screen, body, fixture, object);
                 break;
             case JustAnotherPlatformer.MOSS_LAYER:
-                new Moss(screen, body, fixture);
+                new Moss(screen, body, fixture, object);
                 break;
         }
     }

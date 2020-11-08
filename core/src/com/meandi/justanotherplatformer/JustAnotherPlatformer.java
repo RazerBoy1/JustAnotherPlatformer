@@ -9,8 +9,8 @@ public class JustAnotherPlatformer extends Game {
     public static final int HEIGHT = 152;
 
     public static final float GRAVITY = -10;
-
     public static final float PPT = 150;
+    public static final float ITEM_SCALE = 0.5f;
 
     public static final String GRAPHICS_LAYER = "graphics_ground";
     public static final String SKY_LAYER = "sky";
@@ -30,8 +30,9 @@ public class JustAnotherPlatformer extends Game {
     public static final short COIN_BIT = 32;
     public static final short MOSS_BIT = 64;
     public static final short DOOR_BIT = 128;
-    public static final short OBJECT_BIT = 256;
-    public static final short REMOVED_BIT = 512;
+    public static final short ITEM_BIT = 256;
+    public static final short OBJECT_BIT = 512;
+    public static final short REMOVED_BIT = 1024;
 
     public SpriteBatch batch;
 

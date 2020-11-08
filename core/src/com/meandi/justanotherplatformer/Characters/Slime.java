@@ -45,6 +45,7 @@ public class Slime extends Character {
                 JustAnotherPlatformer.COIN_BIT |
                 JustAnotherPlatformer.DOOR_BIT |
                 JustAnotherPlatformer.MOSS_BIT |
+                JustAnotherPlatformer.ITEM_BIT |
                 JustAnotherPlatformer.OBJECT_BIT |
                 JustAnotherPlatformer.ENEMY_BIT |
                 JustAnotherPlatformer.HERO_BIT;

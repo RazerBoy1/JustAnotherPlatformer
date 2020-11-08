@@ -25,20 +25,28 @@ public class Hud implements Disposable {
     Label countdownLabel;
     Label scoreLabel;
 
+    Image heartImage1, heartImage2, heartImage3;
+    int hearthCount;
+
+    Table t1;
+
     public Hud(SpriteBatch sb, Assets assets) {
         stage = new Stage(new StretchViewport(JustAnotherPlatformer.WIDTH, JustAnotherPlatformer.HEIGHT), sb);
 
+
         worldTimer = 0;
         score = 0;
-        countdownLabel = new Label(String.format(Locale.ENGLISH, "%d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.format(Locale.ENGLISH, "%d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        hearthCount = 3;
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+        countdownLabel = new Label(String.format(Locale.ENGLISH, "%d", worldTimer), font);
+        scoreLabel = new Label(String.format(Locale.ENGLISH, "%d", score), font);
 
         Texture hearth = assets.manager.get(Assets.HEARTS);
-        Image heartImage1 = new Image(hearth);
-        Image heartImage2 = new Image(hearth);
-        Image heartImage3 = new Image(hearth);
+        heartImage1 = new Image(hearth);
+        heartImage2 = new Image(hearth);
+        heartImage3 = new Image(hearth);
 
-        Table t1 = new Table();
+        t1 = new Table();
         t1.top().left();
         t1.setFillParent(true);
 
@@ -76,6 +84,39 @@ public class Hud implements Disposable {
     public void addScore(int value) {
         score += value;
         scoreLabel.setText(String.format(Locale.ENGLISH, "%d", score));
+    }
+
+    public void addHearth() {
+        switch (hearthCount) {
+            case 1:
+                t1.add(heartImage2).padTop(3).padLeft(5);
+                break;
+            case 2:
+                t1.add(heartImage3).padTop(3).padLeft(5);
+                break;
+        }
+
+        hearthCount++;
+    }
+
+    public void removeHearth() {
+        switch (hearthCount) {
+            case 1:
+                t1.removeActor(heartImage1);
+                break;
+            case 2:
+                t1.removeActor(heartImage2);
+                break;
+            case 3:
+                t1.removeActor(heartImage3);
+                break;
+        }
+
+        hearthCount--;
+    }
+
+    public int getHearthCount() {
+        return hearthCount;
     }
 
     @Override

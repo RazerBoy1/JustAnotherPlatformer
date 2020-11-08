@@ -1,5 +1,6 @@
 package com.meandi.justanotherplatformer.Interactables;
 
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.meandi.justanotherplatformer.Utils.Assets;
@@ -9,8 +10,8 @@ import com.meandi.justanotherplatformer.UI.GameScreen;
 public class Coin extends Interactable {
     private final int COIN = 295;
 
-    public Coin(GameScreen screen, Body body, Fixture fixture) {
-        super(screen, body, fixture);
+    public Coin(GameScreen screen, Body body, Fixture fixture, MapObject object) {
+        super(screen, body, fixture, object);
 
         fixture.setUserData(this);
 

@@ -14,6 +14,9 @@ public class Assets implements Disposable {
     private static final String HEARTS_PATH = "world/hearts.png";
     public static final AssetDescriptor<Texture> HEARTS = new AssetDescriptor<>(HEARTS_PATH, Texture.class);
 
+    private static final String HEALTH_POTION_PATH = "items/health_potion.png";
+    public static final AssetDescriptor<Texture> HEALTH_POTION = new AssetDescriptor<>(HEALTH_POTION_PATH, Texture.class);
+
     private static final String HERO_ATLAS_PATH = "hero/hero.pack";
     public static final AssetDescriptor<TextureAtlas> HERO_ATLAS = new AssetDescriptor<>(HERO_ATLAS_PATH, TextureAtlas.class);
 
@@ -35,6 +38,7 @@ public class Assets implements Disposable {
 
     public void load() {
         manager.load(HEARTS);
+        manager.load(HEALTH_POTION);
         manager.load(HERO_ATLAS);
         manager.load(SLIME_ATLAS);
         manager.load(MUSIC);

@@ -2,6 +2,7 @@ package com.meandi.justanotherplatformer.Utils;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.meandi.justanotherplatformer.Characters.Character;
 import com.meandi.justanotherplatformer.Characters.Hero;
 
 public class MyInputProcessor implements InputProcessor {
@@ -21,26 +22,27 @@ public class MyInputProcessor implements InputProcessor {
         System.out.println();
         System.out.println("------------------------------------------------");*/
 
-        switch (keycode) {
-            case 19:
-                hero.setLeftMove(true);
-                //System.out.println("LEFT: " + 19);
-                break;
-            case 20:
-                hero.setRightMove(true);
-                //System.out.println("RIGHT: " + 20);
-                break;
-            case 21:
-                //System.out.println("DOWN: " + 21);
-                break;
-            case 22:
-                hero.setJump(true);
-                //System.out.println("UP: " + 22);
-                break;
-            default:
-                //System.out.println("KEYCODE - KEYDOWN: " + keycode);
-                break;
-        }
+        if (!hero.isDead())
+            switch (keycode) {
+                case 19:
+                    hero.setLeftMove(true);
+                    //System.out.println("LEFT: " + 19);
+                    break;
+                case 20:
+                    hero.setRightMove(true);
+                    //System.out.println("RIGHT: " + 20);
+                    break;
+                case 21:
+                    //System.out.println("DOWN: " + 21);
+                    break;
+                case 22:
+                    hero.setJump(true);
+                    //System.out.println("UP: " + 22);
+                    break;
+                default:
+                    //System.out.println("KEYCODE - KEYDOWN: " + keycode);
+                    break;
+            }
         //System.out.println("------------------------------------------------");
 
         return false;

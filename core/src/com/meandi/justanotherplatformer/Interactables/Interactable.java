@@ -1,5 +1,6 @@
 package com.meandi.justanotherplatformer.Interactables;
 
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -17,12 +18,14 @@ public abstract class Interactable {
     protected Fixture fixture;
     protected Hud hud;
     protected Assets assets;
+    protected MapObject object;
 
-    public Interactable(GameScreen screen, Body body, Fixture fixture) {
+    public Interactable(GameScreen screen, Body body, Fixture fixture, MapObject object) {
         world = screen.getWorld();
         map = screen.getMap();
         assets = screen.getAssets();
         hud = screen.getHud();
+        this.object = object;
 
         this.body = body;
         this.fixture = fixture;

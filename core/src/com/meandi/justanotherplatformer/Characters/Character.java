@@ -15,12 +15,13 @@ public abstract class Character extends Sprite {
     public Body body;
 
     protected float stateTime;
-    protected State currentState, previousState;
+    public State currentState;
+    protected State previousState;
 
     protected boolean setToDestroy;
     protected boolean destroyed;
 
-    protected enum State {IDLING, DYING, RUNNING, JUMPING, DOUBLE_JUMPING, FALLING, PUSHING, ATTACKING, HIT}
+    public enum State {IDLING, DYING, RUNNING, JUMPING, DOUBLE_JUMPING, FALLING, PUSHING, ATTACKING, HIT}
 
     public Character(GameScreen screen, TextureRegion region) {
         this.screen = screen;
