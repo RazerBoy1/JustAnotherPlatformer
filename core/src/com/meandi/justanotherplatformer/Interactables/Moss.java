@@ -38,7 +38,5 @@ public class Moss extends Interactable {
             screen.spawnItem(new ItemDefinition(new Vector2(body.getPosition().x, body.getPosition().y + 16 / JustAnotherPlatformer.PPT), HealthPotion.class));
 
         getCell().setTile(null);
-
-        hud.addScore(100);
     }
 }

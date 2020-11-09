@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="260" height="20" tilewidth="8" tileheight="8" infinite="0" nextlayerid="19" nextobjectid="297">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="260" height="20" tilewidth="8" tileheight="8" infinite="0" nextlayerid="19" nextobjectid="315">
  <tileset firstgid="1" source="world_tileset.tsx"/>
  <objectgroup id="12" name="ground">
   <object id="120" x="0" y="128" width="2080" height="8"/>
@@ -114,6 +114,71 @@
     <property name="Bouncy" value=""/>
    </properties>
   </object>
+  <object id="297" x="808" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
+  <object id="298" x="816" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
+  <object id="299" x="824" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
+  <object id="300" x="832" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
+  <object id="301" x="840" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
+  <object id="303" x="872" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
+  <object id="304" x="880" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
+  <object id="305" x="888" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
+  <object id="306" x="920" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
+  <object id="307" x="928" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
+  <object id="308" x="936" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
+  <object id="310" x="944" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
+  <object id="311" x="952" y="104" width="8" height="8">
+   <properties>
+    <property name="Bouncy" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="17" name="slimes">
   <object id="254" x="312" y="120" width="8" height="8"/>
@@ -128,7 +193,7 @@
  </layer>
  <layer id="1" name="graphics_ground" width="260" height="20" opacity="0.69">
   <data encoding="base64" compression="zlib">
-   eJzt2TEKwCAQAEHzEGsfGvJvm6Q8xIgkBzOwhZy2IlgKAAAAAACPOhkAAAAAsKYdc2uAP/K/AABkNHqfRPO35yCDc/N+IA/3AXznkqQ7AACASAcLTY2t
+   eJzt2TEKgDAMQNF4EOceVLy3Szt2SIto4D34QyFzCDQCAAAAAIDhTAYAAAAA7GlH7g3wR/4XAICKsjfMSlDN9fI8UId9AN+5JakHAAAw8wBmjo8m
   </data>
  </layer>
 </map>

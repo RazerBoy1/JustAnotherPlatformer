@@ -148,5 +148,7 @@ public class Slime extends Character {
     public void hitOnHead() {
         assets.manager.get(Assets.BUMP_ENEMY_ON_HEAD).play();
         setToDestroy = true;
+
+        hud.addScore(50);
     }
 }

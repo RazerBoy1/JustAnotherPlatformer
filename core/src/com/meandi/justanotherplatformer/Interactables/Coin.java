@@ -8,8 +8,6 @@ import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.UI.GameScreen;
 
 public class Coin extends Interactable {
-    private final int COIN = 295;
-
     public Coin(GameScreen screen, Body body, Fixture fixture, MapObject object) {
         super(screen, body, fixture, object);
 
@@ -19,14 +17,11 @@ public class Coin extends Interactable {
     }
 
     public void onBodyHit() {
-        if (getCell().getTile().getId() == COIN) {
-            assets.manager.get(Assets.COIN).play();
+        assets.manager.get(Assets.COIN).play();
 
-            setCategoryFilter(JustAnotherPlatformer.REMOVED_BIT);
+        setCategoryFilter(JustAnotherPlatformer.REMOVED_BIT);
+        getCell().setTile(null);
 
-            getCell().setTile(null);
-
-            hud.addScore(100);
-        }
+        hud.addScore(100);
     }
 }

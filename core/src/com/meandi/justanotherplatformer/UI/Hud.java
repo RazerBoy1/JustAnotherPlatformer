@@ -115,6 +115,25 @@ public class Hud implements Disposable {
         hearthCount--;
     }
 
+    public void removeAllHearths() {
+        switch (hearthCount) {
+            case 1:
+                t1.removeActorAt(0, true);
+                break;
+            case 2:
+                t1.removeActorAt(1, true);
+                t1.removeActorAt(0, true);
+                break;
+            case 3:
+                t1.removeActorAt(2, true);
+                t1.removeActorAt(1, true);
+                t1.removeActorAt(0, true);
+                break;
+        }
+
+        hearthCount = 0;
+    }
+
     public int getHearthCount() {
         return hearthCount;
     }

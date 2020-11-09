@@ -160,6 +160,17 @@ public class Hero extends Character {
     }
 
     public void updateMotion() {
+        if (body.getPosition().y < -10 / JustAnotherPlatformer.PPT && !heroDied) {
+            assets.manager.get(Assets.MUSIC).stop();
+            assets.manager.get(Assets.DEATH).play();
+
+            hud.removeAllHearths();
+            heroDied = true;
+        }
+
+        if (body.getLinearVelocity().y > 2f)
+            body.setLinearVelocity(new Vector2(body.getLinearVelocity().x, 2f));
+
         if (moveRight && body.getLinearVelocity().x <= 1)
             body.applyLinearImpulse(new Vector2(0.1f, 0), body.getWorldCenter(), true);
         if (moveLeft && body.getLinearVelocity().x >= -1)

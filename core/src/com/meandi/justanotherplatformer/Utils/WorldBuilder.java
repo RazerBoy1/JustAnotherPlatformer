@@ -43,7 +43,7 @@ public class WorldBuilder {
                     break;
                 case JustAnotherPlatformer.MOSS_LAYER:
                     if (object.getProperties().containsKey("Bouncy"))
-                        createInteractables(object, layerName, 1.5f, false);
+                        createInteractables(object, layerName, 2f, false);
                     else
                         createInteractables(object, layerName, 0f, false);
                     break;
