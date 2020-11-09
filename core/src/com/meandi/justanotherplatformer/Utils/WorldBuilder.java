@@ -39,10 +39,13 @@ public class WorldBuilder {
                     createEnemies(object);
                     break;
                 case JustAnotherPlatformer.COIN_LAYER:
-                    createInteractables(object, layerName, true);
+                    createInteractables(object, layerName, 0f, true);
                     break;
                 case JustAnotherPlatformer.MOSS_LAYER:
-                    createInteractables(object, layerName, false);
+                    if (object.getProperties().containsKey("Bouncy"))
+                        createInteractables(object, layerName, 1.5f, false);
+                    else
+                        createInteractables(object, layerName, 0f, false);
                     break;
                 case JustAnotherPlatformer.GROUND_LAYER:
                 default:
@@ -58,11 +61,12 @@ public class WorldBuilder {
                 rect.getX() / JustAnotherPlatformer.PPT, rect.getY() / JustAnotherPlatformer.PPT));
     }
 
-    private void createInteractables(MapObject object, String layerName, boolean isSensor) {
+    private void createInteractables(MapObject object, String layerName, float restitution, boolean isSensor) {
         Object[] bodyAndFixture = createBodyAndFixture(object, isSensor);
 
         Body body = (Body) bodyAndFixture[0];
         Fixture fixture = (Fixture) bodyAndFixture[1];
+        fixture.setRestitution(restitution);
 
         switch (layerName) {
             case JustAnotherPlatformer.COIN_LAYER:

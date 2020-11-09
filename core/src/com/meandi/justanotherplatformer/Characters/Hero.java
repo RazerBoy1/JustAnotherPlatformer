@@ -66,6 +66,14 @@ public class Hero extends Character {
         fixDef.filter.categoryBits = JustAnotherPlatformer.HERO_HEAD_BIT;
 
         body.createFixture(fixDef).setUserData(this);
+
+        EdgeShape feet = new EdgeShape();
+        feet.set(new Vector2(3 / JustAnotherPlatformer.PPT, -6.5f / JustAnotherPlatformer.PPT), new Vector2(-3 / JustAnotherPlatformer.PPT, -6.5f / JustAnotherPlatformer.PPT));
+        fixDef.shape = feet;
+        fixDef.isSensor = true;
+        fixDef.filter.categoryBits = JustAnotherPlatformer.HERO_FEET_BIT;
+
+        body.createFixture(fixDef).setUserData(this);
     }
 
     @Override

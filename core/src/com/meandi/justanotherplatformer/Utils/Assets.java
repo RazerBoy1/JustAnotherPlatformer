@@ -53,6 +53,9 @@ public class Assets implements Disposable {
     private static final String BUMP_ENEMY_ON_HEAD_PATH = "audio/bump_enemy_on_head.mp3";
     public static final AssetDescriptor<Sound> BUMP_ENEMY_ON_HEAD = new AssetDescriptor<>(BUMP_ENEMY_ON_HEAD_PATH, Sound.class);
 
+    private static final String BLOCK_BREAK_PATH = "audio/block_break.wav";
+    public static final AssetDescriptor<Sound> BLOCK_BREAK = new AssetDescriptor<>(BLOCK_BREAK_PATH, Sound.class);
+
     private static final String DEATH_PATH = "audio/death.wav";
     public static final AssetDescriptor<Sound> DEATH = new AssetDescriptor<>(DEATH_PATH, Sound.class);
 
@@ -78,6 +81,7 @@ public class Assets implements Disposable {
         manager.load(BUMP_WITH_ENEMY);
         manager.load(BUMP_HERO_HEAD);
         manager.load(BUMP_ENEMY_ON_HEAD);
+        manager.load(BLOCK_BREAK);
         manager.load(DEATH);
         manager.load(HEALTH_POTION_SOUND);
 

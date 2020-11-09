@@ -22,6 +22,14 @@ public class Moss extends Interactable {
         setCategoryFilter(JustAnotherPlatformer.MOSS_BIT);
     }
 
+    public void onFeetHit() {
+        if (object.getProperties().containsKey("Bouncy")) {
+            assets.manager.get(Assets.BLOCK_BREAK).play();
+            setCategoryFilter(JustAnotherPlatformer.REMOVED_BIT);
+            getCell().setTile(null);
+        }
+    }
+
     public void onHeadHit() {
         assets.manager.get(Assets.BUMP_HERO_HEAD).play();
         setCategoryFilter(JustAnotherPlatformer.REMOVED_BIT);

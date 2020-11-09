@@ -35,6 +35,12 @@ public class WorldContactListener implements ContactListener {
                 else
                     ((Slime) b.getUserData()).hitOnHead();
                 break;
+            case JustAnotherPlatformer.HERO_FEET_BIT | JustAnotherPlatformer.MOSS_BIT:
+                if (a.getFilterData().categoryBits == JustAnotherPlatformer.MOSS_BIT)
+                    ((Moss) a.getUserData()).onFeetHit();
+                else
+                    ((Moss) b.getUserData()).onFeetHit();
+                break;
             case JustAnotherPlatformer.ENEMY_BIT | JustAnotherPlatformer.OBJECT_BIT:
                 if (a.getFilterData().categoryBits == JustAnotherPlatformer.ENEMY_BIT)
                     ((Slime) a.getUserData()).reverseVelocity(true, false);
