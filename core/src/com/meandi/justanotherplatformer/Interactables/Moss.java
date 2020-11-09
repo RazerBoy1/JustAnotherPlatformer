@@ -8,6 +8,7 @@ import com.meandi.justanotherplatformer.Items.HealthPotion;
 import com.meandi.justanotherplatformer.Items.ItemDefinition;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.UI.GameScreen;
+import com.meandi.justanotherplatformer.Utils.Assets;
 
 public class Moss extends Interactable {
     GameScreen screen;
@@ -22,7 +23,7 @@ public class Moss extends Interactable {
     }
 
     public void onHeadHit() {
-        // TODO: Add hero hits his head on moss sound
+        assets.manager.get(Assets.BUMP_HERO_HEAD).play();
         setCategoryFilter(JustAnotherPlatformer.REMOVED_BIT);
 
         if (object.getProperties().containsKey("HealthPotion"))

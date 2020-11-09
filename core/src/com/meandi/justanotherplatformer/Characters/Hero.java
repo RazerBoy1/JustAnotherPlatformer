@@ -51,7 +51,6 @@ public class Hero extends Character {
         fixDef.filter.categoryBits = JustAnotherPlatformer.HERO_BIT;
         fixDef.filter.maskBits = JustAnotherPlatformer.DEFAULT_BIT |
                 JustAnotherPlatformer.COIN_BIT |
-                JustAnotherPlatformer.DOOR_BIT |
                 JustAnotherPlatformer.MOSS_BIT |
                 JustAnotherPlatformer.ITEM_BIT |
                 JustAnotherPlatformer.OBJECT_BIT |
@@ -168,19 +167,14 @@ public class Hero extends Character {
     }
 
     public void hit() {
+        assets.manager.get(Assets.BUMP_WITH_ENEMY).play();
         hud.removeHearth();
-        // TODO: Add hit sound
 
         if (hud.getHearthCount() == 0) {
             assets.manager.get(Assets.MUSIC).stop();
+            assets.manager.get(Assets.DEATH).play();
+
             heroDied = true;
-            // TODO: Add death sound
-
-            /*Filter filter = new Filter();
-            filter.maskBits = JustAnotherPlatformer.DEAD_BIT;
-
-            for (Fixture fixture : new Array.ArrayIterator<>(body.getFixtureList()))
-                fixture.setFilterData(filter);*/
         }
     }
 

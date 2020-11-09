@@ -1,8 +1,6 @@
 package com.meandi.justanotherplatformer.Utils;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.meandi.justanotherplatformer.Characters.Character;
 import com.meandi.justanotherplatformer.Characters.Hero;
 
 public class MyInputProcessor implements InputProcessor {
@@ -13,37 +11,18 @@ public class MyInputProcessor implements InputProcessor {
     }
 
     public boolean keyDown(int keycode) {
-        /*System.out.println("------------------------------------------------");
-        System.out.println("LEFT: " + Input.Keys.LEFT);
-        System.out.println("RIGHT: " + Input.Keys.RIGHT);
-        System.out.println("UP: " + Input.Keys.UP);
-        System.out.println("DOWN: " + Input.Keys.DOWN);
-        System.out.println("------------------------------------------------");
-        System.out.println();
-        System.out.println("------------------------------------------------");*/
-
         if (!hero.isDead())
             switch (keycode) {
                 case 19:
                     hero.setLeftMove(true);
-                    //System.out.println("LEFT: " + 19);
                     break;
                 case 20:
                     hero.setRightMove(true);
-                    //System.out.println("RIGHT: " + 20);
-                    break;
-                case 21:
-                    //System.out.println("DOWN: " + 21);
                     break;
                 case 22:
                     hero.setJump(true);
-                    //System.out.println("UP: " + 22);
-                    break;
-                default:
-                    //System.out.println("KEYCODE - KEYDOWN: " + keycode);
                     break;
             }
-        //System.out.println("------------------------------------------------");
 
         return false;
     }
@@ -52,26 +31,11 @@ public class MyInputProcessor implements InputProcessor {
         switch (keycode) {
             case 19:
                 hero.setLeftMove(false);
-                //System.out.println("LEFT: " + 19);
                 break;
             case 20:
                 hero.setRightMove(false);
-                //System.out.println("RIGHT: " + 20);
-                break;
-            case 21:
-                //System.out.println("DOWN: " + 21);
-                break;
-            case 22:
-                //System.out.println("UP: " + 22);
-                break;
-            default:
-                //System.out.println("KEYCODE - KEYDOWN: " + keycode);
                 break;
         }
-
-        //System.out.println("************************************************");
-        //System.out.println("KEYCODE - KEYUP: " + keycode);
-        //System.out.println("************************************************");
 
         return false;
     }

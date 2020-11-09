@@ -8,7 +8,6 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.meandi.justanotherplatformer.Characters.Slime;
 import com.meandi.justanotherplatformer.Interactables.Coin;
-import com.meandi.justanotherplatformer.Interactables.Door;
 import com.meandi.justanotherplatformer.Interactables.Moss;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.UI.GameScreen;
@@ -42,7 +41,6 @@ public class WorldBuilder {
                 case JustAnotherPlatformer.COIN_LAYER:
                     createInteractables(object, layerName, true);
                     break;
-                case JustAnotherPlatformer.DOOR_LAYER:
                 case JustAnotherPlatformer.MOSS_LAYER:
                     createInteractables(object, layerName, false);
                     break;
@@ -69,9 +67,6 @@ public class WorldBuilder {
         switch (layerName) {
             case JustAnotherPlatformer.COIN_LAYER:
                 new Coin(screen, body, fixture, object);
-                break;
-            case JustAnotherPlatformer.DOOR_LAYER:
-                new Door(screen, body, fixture, object);
                 break;
             case JustAnotherPlatformer.MOSS_LAYER:
                 new Moss(screen, body, fixture, object);

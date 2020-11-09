@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="260" height="20" tilewidth="8" tileheight="8" infinite="0" nextlayerid="18" nextobjectid="282">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="260" height="20" tilewidth="8" tileheight="8" infinite="0" nextlayerid="19" nextobjectid="283">
  <tileset firstgid="1" source="world_tileset.tsx"/>
  <objectgroup id="12" name="ground">
   <object id="120" x="0" y="128" width="2080" height="8"/>
@@ -8,10 +8,6 @@
   <object id="184" x="81.9922" y="81.9844" width="4.01563" height="4.00781"/>
   <object id="187" x="114.003" y="82.0035" width="4.00001" height="4"/>
   <object id="188" x="145.99" y="81.9911" width="4.00001" height="4"/>
- </objectgroup>
- <objectgroup id="14" name="doors">
-  <object id="151" x="288" y="112" width="8" height="16"/>
-  <object id="152" x="384" y="112" width="8" height="16"/>
  </objectgroup>
  <objectgroup id="13" name="moss">
   <object id="161" x="456" y="88" width="8" height="8"/>
@@ -72,7 +68,7 @@
  </layer>
  <layer id="1" name="graphics_ground" width="260" height="20" opacity="0.69">
   <data encoding="base64" compression="zlib">
-   eJzt2SEOwCAQRUF6EHRPiuccnBJTJOKnhjYzyRMka9cspQAAAAAAsNQwAAAAAOCd+8reACfyvwAAAP/QwztEOg98xwj3O50H9pokPQEAAOxMdCWMvQ==
+   eJzt2TsKACEMQEH3INYeVLy3jZYWsogfZuAVgdRpEgIAAAAAAF2cDAAAAAD4J31zM8CJ/BcAAOANefE+cA/3APYpktQCAAAYqbcCjFE=
   </data>
  </layer>
 </map>

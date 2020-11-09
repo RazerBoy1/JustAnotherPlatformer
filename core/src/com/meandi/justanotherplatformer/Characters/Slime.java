@@ -12,15 +12,18 @@ import com.badlogic.gdx.utils.Array;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.UI.GameScreen;
 import com.meandi.justanotherplatformer.UI.Hud;
+import com.meandi.justanotherplatformer.Utils.Assets;
 
 public class Slime extends Character {
     private final Hud hud;
+    private final Assets assets;
     private final Vector2 velocity;
     private Animation<TextureRegion> slimeIdle, slimeRun, slimeHit, slimeDeath;
 
     public Slime(GameScreen screen, TextureRegion region, float x, float y) {
         super(screen, region, x, y);
         hud = screen.getHud();
+        assets = screen.getAssets();
         velocity = new Vector2(0.25f, 0);
 
         currentState = previousState = State.RUNNING;
@@ -43,7 +46,6 @@ public class Slime extends Character {
         fixDef.filter.categoryBits = JustAnotherPlatformer.ENEMY_BIT;
         fixDef.filter.maskBits = JustAnotherPlatformer.DEFAULT_BIT |
                 JustAnotherPlatformer.COIN_BIT |
-                JustAnotherPlatformer.DOOR_BIT |
                 JustAnotherPlatformer.MOSS_BIT |
                 JustAnotherPlatformer.ITEM_BIT |
                 JustAnotherPlatformer.OBJECT_BIT |
@@ -144,6 +146,7 @@ public class Slime extends Character {
     }
 
     public void hitOnHead() {
+        assets.manager.get(Assets.BUMP_ENEMY_ON_HEAD).play();
         setToDestroy = true;
     }
 }

@@ -1,7 +1,6 @@
 package com.meandi.justanotherplatformer.UI;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -48,6 +47,8 @@ public class GameScreen implements Screen {
     private final Array<Item> items;
     private final Array<ItemDefinition> itemsToSpawn;
 
+    private final GamePad gamePad;
+
     public GameScreen(JustAnotherPlatformer jap) {
         this.jap = jap;
         cam = new OrthographicCamera();
@@ -64,20 +65,39 @@ public class GameScreen implements Screen {
         cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
 
         world = new World(new Vector2(0, JustAnotherPlatformer.GRAVITY), true);
+        world.setContactListener(new WorldContactListener());
         boxDebugger = new Box2DDebugRenderer();
 
         worldBuilder = new WorldBuilder(this);
 
         hero = new Hero(this, assets.manager.get(Assets.HERO_ATLAS).findRegion("herochar_idle_anim_strip"));
 
-        Gdx.input.setInputProcessor(new MyInputProcessor(hero));
-
-        world.setContactListener(new WorldContactListener());
-
         assets.playMusic();
 
         items = new Array<>();
         itemsToSpawn = new Array<>();
+
+        gamePad = new GamePad(this);
+
+        handleUserInput();
+    }
+
+    private void handleUserInput() {
+        InputMultiplexer multiplexer = new InputMultiplexer();
+
+        /*
+        if (Gdx.app.getType() == Application.ApplicationType.Android)
+            multiplexer.addProcessor(gamePad.getStage());
+        else if (Gdx.app.getType() == Application.ApplicationType.Desktop)
+            multiplexer.addProcessor(new MyInputProcessor(hero));
+        */
+
+        if (Gdx.app.getType() == Application.ApplicationType.Android)
+            multiplexer.addProcessor(gamePad.getStage());
+
+        multiplexer.addProcessor(new MyInputProcessor(hero));
+
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override
@@ -92,6 +112,8 @@ public class GameScreen implements Screen {
 
         renderer.render();
         boxDebugger.render(world, cam.combined);
+
+        gamePad.draw();
 
         jap.batch.setProjectionMatrix(cam.combined);
         jap.batch.begin();
@@ -181,9 +203,14 @@ public class GameScreen implements Screen {
         return hud;
     }
 
+    public Hero getHero() {
+        return hero;
+    }
+
     @Override
     public void resize(int width, int height) {
         port.update(width, height);
+        gamePad.resized(width, height);
     }
 
     @Override
@@ -209,5 +236,6 @@ public class GameScreen implements Screen {
         boxDebugger.dispose();
         hud.dispose();
         assets.dispose();
+        gamePad.dispose();
     }
 }

@@ -30,7 +30,6 @@ public class WorldContactListener implements ContactListener {
                     ((Coin) b.getUserData()).onBodyHit();
                 break;
             case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.ENEMY_HEAD_BIT:
-                // TODO: Add enemy hit on head sound
                 if (a.getFilterData().categoryBits == JustAnotherPlatformer.ENEMY_HEAD_BIT)
                     ((Slime) a.getUserData()).hitOnHead();
                 else
@@ -47,7 +46,6 @@ public class WorldContactListener implements ContactListener {
                 ((Slime) b.getUserData()).reverseVelocity(true, false);
                 break;
             case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.ITEM_BIT:
-                // TODO: Add Health potion pick up sound
                 if (a.getFilterData().categoryBits == JustAnotherPlatformer.ITEM_BIT)
                     ((HealthPotion) a.getUserData()).useItem((Hero) b.getUserData());
                 else

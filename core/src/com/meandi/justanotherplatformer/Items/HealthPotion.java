@@ -11,10 +11,12 @@ import com.meandi.justanotherplatformer.Utils.Assets;
 
 public class HealthPotion extends Item {
     Hud hud;
+    Assets assets;
 
     public HealthPotion(GameScreen screen, float x, float y) {
         super(screen, x, y);
         hud = screen.getHud();
+        assets = screen.getAssets();
 
         setRegion(screen.getAssets().manager.get(Assets.HEALTH_POTION));
     }
@@ -34,7 +36,6 @@ public class HealthPotion extends Item {
         fixDef.filter.categoryBits = JustAnotherPlatformer.ITEM_BIT;
         fixDef.filter.maskBits = JustAnotherPlatformer.DEFAULT_BIT |
                 JustAnotherPlatformer.MOSS_BIT |
-                JustAnotherPlatformer.DOOR_BIT |
                 JustAnotherPlatformer.ITEM_BIT |
                 JustAnotherPlatformer.OBJECT_BIT |
                 JustAnotherPlatformer.HERO_BIT |
@@ -46,6 +47,9 @@ public class HealthPotion extends Item {
     @Override
     public void useItem(Hero hero) {
         if (hud.getHearthCount() != 3) {
+            assets.manager.get(Assets.HEALTH_POTION_SOUND).stop();
+            assets.manager.get(Assets.HEALTH_POTION_SOUND).play();
+
             destroy();
             hud.addHearth();
         }
