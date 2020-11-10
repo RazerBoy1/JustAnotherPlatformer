@@ -1,9 +1,6 @@
 package com.meandi.justanotherplatformer.UI;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -12,24 +9,20 @@ import com.badlogic.gdx.physics.box2d.*;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.meandi.justanotherplatformer.*;
 import com.meandi.justanotherplatformer.Characters.Hero;
 import com.meandi.justanotherplatformer.Characters.Slime;
 import com.meandi.justanotherplatformer.Items.HealthPotion;
 import com.meandi.justanotherplatformer.Items.Item;
 import com.meandi.justanotherplatformer.Items.ItemDefinition;
+import com.meandi.justanotherplatformer.Overlay.GamePad;
+import com.meandi.justanotherplatformer.Overlay.Hud;
 import com.meandi.justanotherplatformer.Utils.Assets;
 import com.meandi.justanotherplatformer.Utils.MyInputProcessor;
 import com.meandi.justanotherplatformer.Utils.WorldBuilder;
 import com.meandi.justanotherplatformer.Utils.WorldContactListener;
 
-public class GameScreen implements Screen {
-    private final JustAnotherPlatformer jap;
-
-    private final OrthographicCamera cam;
-    private final Viewport port;
-
+public class GameScreen extends GeneralScreen {
     private final Assets assets;
 
     private final Hud hud;
@@ -50,8 +43,7 @@ public class GameScreen implements Screen {
     private final GamePad gamePad;
 
     public GameScreen(JustAnotherPlatformer jap) {
-        this.jap = jap;
-        cam = new OrthographicCamera();
+        super(jap);
         port = new StretchViewport(JustAnotherPlatformer.WIDTH / JustAnotherPlatformer.PPT, JustAnotherPlatformer.HEIGHT / JustAnotherPlatformer.PPT, cam);
 
         assets = new Assets();
@@ -98,11 +90,6 @@ public class GameScreen implements Screen {
         multiplexer.addProcessor(new MyInputProcessor(hero));
 
         Gdx.input.setInputProcessor(multiplexer);
-    }
-
-    @Override
-    public void show() {
-
     }
 
     @Override
@@ -167,7 +154,6 @@ public class GameScreen implements Screen {
         return (hero.isDead() && hero.getStateTimer() > 2);
     }
 
-    // TODO: Move spawnItem & spawnItems to the Item class
     public void spawnItem(ItemDefinition itemDef) {
         itemsToSpawn.add(itemDef);
     }
@@ -180,11 +166,6 @@ public class GameScreen implements Screen {
             if (itemDef.type == HealthPotion.class)
                 items.add(new HealthPotion(this, itemDef.position.x, itemDef.position.y));
         }
-    }
-
-    private void clearScreen() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
     public World getWorld() {
@@ -214,28 +195,13 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
     public void dispose() {
         map.dispose();
         renderer.dispose();
         world.dispose();
         boxDebugger.dispose();
-        hud.dispose();
         assets.dispose();
+        hud.dispose();
         gamePad.dispose();
     }
 }

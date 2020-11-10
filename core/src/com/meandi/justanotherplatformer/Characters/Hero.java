@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.meandi.justanotherplatformer.UI.Hud;
+import com.meandi.justanotherplatformer.Overlay.Hud;
 import com.meandi.justanotherplatformer.Utils.Assets;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.UI.GameScreen;
@@ -168,8 +168,8 @@ public class Hero extends Character {
             heroDied = true;
         }
 
-        if (body.getLinearVelocity().y > 2f)
-            body.setLinearVelocity(new Vector2(body.getLinearVelocity().x, 2f));
+        if (body.getLinearVelocity().y > 2.75f)
+            body.setLinearVelocity(new Vector2(body.getLinearVelocity().x, 2.75f));
 
         if (moveRight && body.getLinearVelocity().x <= 1)
             body.applyLinearImpulse(new Vector2(0.1f, 0), body.getWorldCenter(), true);

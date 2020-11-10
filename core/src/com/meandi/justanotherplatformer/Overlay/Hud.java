@@ -1,4 +1,4 @@
-package com.meandi.justanotherplatformer.UI;
+package com.meandi.justanotherplatformer.Overlay;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;

@@ -1,26 +1,18 @@
 package com.meandi.justanotherplatformer.UI;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 
-public class GameOverScreen implements Screen {
-    private final JustAnotherPlatformer jap;
+public class GameOverScreen extends GeneralScreen {
     private final Stage stage;
 
     public GameOverScreen(JustAnotherPlatformer jap) {
-        this.jap = jap;
-        Viewport port = new StretchViewport(JustAnotherPlatformer.WIDTH, JustAnotherPlatformer.HEIGHT, new OrthographicCamera());
+        super(jap);
         stage = new Stage(port, this.jap.batch);
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
@@ -30,18 +22,10 @@ public class GameOverScreen implements Screen {
         t.setFillParent(true);
 
         Label gameOverLabel = new Label("GAME OVER", font);
-        Label playAgain = new Label("Play again", font);
 
         t.add(gameOverLabel).expandX();
-        t.row();
-        t.add(playAgain).expandX().padTop(20);
 
         stage.addActor(t);
-    }
-
-    @Override
-    public void show() {
-
     }
 
     @Override
@@ -55,34 +39,8 @@ public class GameOverScreen implements Screen {
         stage.draw();
     }
 
-    private void clearScreen() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
     @Override
     public void dispose() {
-        stage.dispose()
-        ;
+        stage.dispose();
     }
 }

@@ -1,7 +1,5 @@
-package com.meandi.justanotherplatformer.UI;
+package com.meandi.justanotherplatformer.Overlay;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -13,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.meandi.justanotherplatformer.Characters.Hero;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
+import com.meandi.justanotherplatformer.UI.GameScreen;
 import com.meandi.justanotherplatformer.Utils.Assets;
 
 public class GamePad implements Disposable {
@@ -123,6 +122,8 @@ public class GamePad implements Disposable {
 
     public void resized(int width, int height) {
         port.update(width, height);
+        cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
+        cam.update();
     }
 
     public Stage getStage() {

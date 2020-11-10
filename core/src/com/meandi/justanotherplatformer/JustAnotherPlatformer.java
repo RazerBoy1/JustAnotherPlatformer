@@ -2,7 +2,7 @@ package com.meandi.justanotherplatformer;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.meandi.justanotherplatformer.UI.GameScreen;
+import com.meandi.justanotherplatformer.UI.MenuScreen;
 
 public class JustAnotherPlatformer extends Game {
     public static final int WIDTH = 301;
@@ -37,7 +37,7 @@ public class JustAnotherPlatformer extends Game {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        setScreen(new GameScreen(this));
+        setScreen(new MenuScreen(this));
     }
 
     @Override
