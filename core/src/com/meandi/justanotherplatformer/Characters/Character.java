@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
-import com.meandi.justanotherplatformer.UI.GameScreen;
+import com.meandi.justanotherplatformer.Screens.GameScreen;
 
 public abstract class Character extends Sprite {
     protected final GameScreen screen;

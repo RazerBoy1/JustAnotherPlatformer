@@ -1,5 +1,6 @@
-package com.meandi.justanotherplatformer.Overlay;
+package com.meandi.justanotherplatformer.Overlays;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -7,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -19,11 +21,12 @@ public class Hud implements Disposable {
     public Stage stage;
 
     private float timeCount;
-    private Integer worldTimer;
-    private Integer score;
+    private int worldTimer;
+    private int score;
 
-    Label countdownLabel;
-    Label scoreLabel;
+    private Skin skin;
+    private final Label countdownLabel;
+    private final Label scoreLabel;
 
     Image heartImage1, heartImage2, heartImage3;
     int hearthCount;
@@ -32,13 +35,14 @@ public class Hud implements Disposable {
 
     public Hud(SpriteBatch sb, Assets assets) {
         stage = new Stage(new StretchViewport(JustAnotherPlatformer.WIDTH, JustAnotherPlatformer.HEIGHT), sb);
+        skin = new Skin(Gdx.files.internal("menu/craftacular-ui.json"));
+        skin.getFont("font").getData().setScale(0.5f);
 
         worldTimer = 0;
         score = 0;
         hearthCount = 3;
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-        countdownLabel = new Label(String.format(Locale.ENGLISH, "%d", worldTimer), font);
-        scoreLabel = new Label(String.format(Locale.ENGLISH, "%d", score), font);
+        countdownLabel = new Label(String.format(Locale.ENGLISH, "%d", worldTimer), skin);
+        scoreLabel = new Label(String.format(Locale.ENGLISH, "%d", score), skin);
 
         Texture hearth = assets.manager.get(Assets.HEARTS);
         heartImage1 = new Image(hearth);
@@ -136,6 +140,12 @@ public class Hud implements Disposable {
 
     public int getHearthCount() {
         return hearthCount;
+    }
+
+    public int getScore() { return score; }
+
+    public int getWorldTimer() {
+        return worldTimer;
     }
 
     @Override

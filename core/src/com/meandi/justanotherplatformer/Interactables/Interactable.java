@@ -7,8 +7,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.physics.box2d.*;
 import com.meandi.justanotherplatformer.Utils.Assets;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
-import com.meandi.justanotherplatformer.UI.GameScreen;
-import com.meandi.justanotherplatformer.Overlay.Hud;
+import com.meandi.justanotherplatformer.Screens.GameScreen;
+import com.meandi.justanotherplatformer.Overlays.Hud;
 
 public abstract class Interactable {
     protected World world;

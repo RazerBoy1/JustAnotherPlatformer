@@ -29,17 +29,29 @@ public class WorldContactListener implements ContactListener {
                 else
                     ((Moss) b.getUserData()).onFeetHit();
                 break;
+            case JustAnotherPlatformer.HERO_FEET_BIT | JustAnotherPlatformer.ENEMY_HEAD_BIT:
+                if (a.getFilterData().categoryBits == JustAnotherPlatformer.ENEMY_HEAD_BIT)
+                    ((Slime) a.getUserData()).hitOnHead();
+                else
+                    ((Slime) b.getUserData()).hitOnHead();
+                break;
+            case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.ENEMY_BIT:
+                if (a.getFilterData().categoryBits == JustAnotherPlatformer.HERO_BIT)
+                    ((Hero) a.getUserData()).hit();
+                else
+                    ((Hero) b.getUserData()).hit();
+                break;
             case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.COIN_BIT:
                 if (a.getFilterData().categoryBits == JustAnotherPlatformer.COIN_BIT)
                     ((Coin) a.getUserData()).onBodyHit();
                 else
                     ((Coin) b.getUserData()).onBodyHit();
                 break;
-            case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.ENEMY_HEAD_BIT:
-                if (a.getFilterData().categoryBits == JustAnotherPlatformer.ENEMY_HEAD_BIT)
-                    ((Slime) a.getUserData()).hitOnHead();
+            case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.ITEM_BIT:
+                if (a.getFilterData().categoryBits == JustAnotherPlatformer.ITEM_BIT)
+                    ((HealthPotion) a.getUserData()).useItem((Hero) b.getUserData());
                 else
-                    ((Slime) b.getUserData()).hitOnHead();
+                    ((HealthPotion) b.getUserData()).useItem((Hero) a.getUserData());
                 break;
             case JustAnotherPlatformer.ENEMY_BIT | JustAnotherPlatformer.OBJECT_BIT:
                 if (a.getFilterData().categoryBits == JustAnotherPlatformer.ENEMY_BIT)
@@ -50,18 +62,6 @@ public class WorldContactListener implements ContactListener {
             case JustAnotherPlatformer.ENEMY_BIT:
                 ((Slime) a.getUserData()).reverseVelocity(true, false);
                 ((Slime) b.getUserData()).reverseVelocity(true, false);
-                break;
-            case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.ITEM_BIT:
-                if (a.getFilterData().categoryBits == JustAnotherPlatformer.ITEM_BIT)
-                    ((HealthPotion) a.getUserData()).useItem((Hero) b.getUserData());
-                else
-                    ((HealthPotion) b.getUserData()).useItem((Hero) a.getUserData());
-                break;
-            case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.ENEMY_BIT:
-                if (a.getFilterData().categoryBits == JustAnotherPlatformer.HERO_BIT)
-                    ((Hero) a.getUserData()).hit();
-                else
-                    ((Hero) b.getUserData()).hit();
                 break;
         }
     }

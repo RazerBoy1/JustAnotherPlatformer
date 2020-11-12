@@ -5,8 +5,8 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.meandi.justanotherplatformer.Characters.Hero;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
-import com.meandi.justanotherplatformer.UI.GameScreen;
-import com.meandi.justanotherplatformer.Overlay.Hud;
+import com.meandi.justanotherplatformer.Screens.GameScreen;
+import com.meandi.justanotherplatformer.Overlays.Hud;
 import com.meandi.justanotherplatformer.Utils.Assets;
 
 public class HealthPotion extends Item {

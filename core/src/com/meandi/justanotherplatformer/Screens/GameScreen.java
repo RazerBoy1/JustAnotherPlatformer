@@ -1,4 +1,4 @@
-package com.meandi.justanotherplatformer.UI;
+package com.meandi.justanotherplatformer.Screens;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -15,16 +15,14 @@ import com.meandi.justanotherplatformer.Characters.Slime;
 import com.meandi.justanotherplatformer.Items.HealthPotion;
 import com.meandi.justanotherplatformer.Items.Item;
 import com.meandi.justanotherplatformer.Items.ItemDefinition;
-import com.meandi.justanotherplatformer.Overlay.GamePad;
-import com.meandi.justanotherplatformer.Overlay.Hud;
+import com.meandi.justanotherplatformer.Overlays.GamePad;
+import com.meandi.justanotherplatformer.Overlays.Hud;
 import com.meandi.justanotherplatformer.Utils.Assets;
 import com.meandi.justanotherplatformer.Utils.MyInputProcessor;
 import com.meandi.justanotherplatformer.Utils.WorldBuilder;
 import com.meandi.justanotherplatformer.Utils.WorldContactListener;
 
 public class GameScreen extends GeneralScreen {
-    private final Assets assets;
-
     private final Hud hud;
 
     private final TiledMap map;
@@ -46,10 +44,7 @@ public class GameScreen extends GeneralScreen {
         super(jap);
         port = new StretchViewport(JustAnotherPlatformer.WIDTH / JustAnotherPlatformer.PPT, JustAnotherPlatformer.HEIGHT / JustAnotherPlatformer.PPT, cam);
 
-        assets = new Assets();
-        assets.load();
-
-        hud = new Hud(jap.batch, assets);
+        hud = new Hud(jap.spriteBatch, assets);
 
         map = new TmxMapLoader().load("world/levels/test_level.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / JustAnotherPlatformer.PPT);
@@ -77,6 +72,7 @@ public class GameScreen extends GeneralScreen {
     private void handleUserInput() {
         InputMultiplexer multiplexer = new InputMultiplexer();
 
+        // TODO: Uncomment this for production and comment the if statement below the commented one
         /*
         if (Gdx.app.getType() == Application.ApplicationType.Android)
             multiplexer.addProcessor(gamePad.getStage());
@@ -102,24 +98,24 @@ public class GameScreen extends GeneralScreen {
 
         gamePad.draw();
 
-        jap.batch.setProjectionMatrix(cam.combined);
-        jap.batch.begin();
+        jap.spriteBatch.setProjectionMatrix(cam.combined);
+        jap.spriteBatch.begin();
 
-        hero.draw(jap.batch);
+        hero.draw(jap.spriteBatch);
 
         for (Slime slime : worldBuilder.getSlimes())
-            slime.draw(jap.batch);
+            slime.draw(jap.spriteBatch);
 
         for (Item item : new Array.ArrayIterator<>(items))
-            item.draw(jap.batch);
+            item.draw(jap.spriteBatch);
 
-        jap.batch.end();
+        jap.spriteBatch.end();
 
-        jap.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        jap.spriteBatch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
         if (gameOver()) {
-            jap.setScreen(new GameOverScreen(jap));
+            jap.setScreen(new GameOverScreen(jap, hud));
             dispose();
         }
     }
@@ -174,10 +170,6 @@ public class GameScreen extends GeneralScreen {
 
     public TiledMap getMap() {
         return map;
-    }
-
-    public Assets getAssets() {
-        return assets;
     }
 
     public Hud getHud() {

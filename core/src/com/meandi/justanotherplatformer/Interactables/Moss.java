@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.meandi.justanotherplatformer.Items.HealthPotion;
 import com.meandi.justanotherplatformer.Items.ItemDefinition;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
-import com.meandi.justanotherplatformer.UI.GameScreen;
+import com.meandi.justanotherplatformer.Screens.GameScreen;
 import com.meandi.justanotherplatformer.Utils.Assets;
 
 public class Moss extends Interactable {

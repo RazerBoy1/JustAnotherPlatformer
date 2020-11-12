@@ -10,7 +10,7 @@ import com.meandi.justanotherplatformer.Characters.Slime;
 import com.meandi.justanotherplatformer.Interactables.Coin;
 import com.meandi.justanotherplatformer.Interactables.Moss;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
-import com.meandi.justanotherplatformer.UI.GameScreen;
+import com.meandi.justanotherplatformer.Screens.GameScreen;
 
 public class WorldBuilder {
     private final GameScreen screen;

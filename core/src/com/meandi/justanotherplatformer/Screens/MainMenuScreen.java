@@ -1,4 +1,4 @@
-package com.meandi.justanotherplatformer.UI;
+package com.meandi.justanotherplatformer.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -9,14 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 
-public class MenuScreen extends GeneralScreen {
+public class MainMenuScreen extends GeneralScreen {
     private final Stage stage;
     private final Skin skin;
 
-    public MenuScreen(final JustAnotherPlatformer jap) {
+    public MainMenuScreen(final JustAnotherPlatformer jap) {
         super(jap);
-        stage = new Stage(port, this.jap.batch);
-
+        stage = new Stage(port, this.jap.spriteBatch);
         skin = new Skin(Gdx.files.internal("menu/craftacular-ui.json"));
 
         TextButton playButton = new TextButton("Play", skin);

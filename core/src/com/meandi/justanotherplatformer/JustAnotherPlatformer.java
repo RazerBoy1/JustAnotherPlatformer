@@ -2,9 +2,14 @@ package com.meandi.justanotherplatformer;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.meandi.justanotherplatformer.UI.MenuScreen;
+import com.meandi.justanotherplatformer.Screens.GameOverScreen;
+import com.meandi.justanotherplatformer.Screens.GameScreen;
+import com.meandi.justanotherplatformer.Screens.InputHighScoreScreen;
+import com.meandi.justanotherplatformer.Screens.MainMenuScreen;
 
 public class JustAnotherPlatformer extends Game {
+    public SpriteBatch spriteBatch;
+
     public static final int WIDTH = 301;
     public static final int HEIGHT = 152;
 
@@ -32,12 +37,10 @@ public class JustAnotherPlatformer extends Game {
     public static final short OBJECT_BIT = 512;
     public static final short REMOVED_BIT = 1024;
 
-    public SpriteBatch batch;
-
     @Override
     public void create() {
-        batch = new SpriteBatch();
-        setScreen(new MenuScreen(this));
+        spriteBatch = new SpriteBatch();
+        setScreen(new MainMenuScreen(this));
     }
 
     @Override
@@ -47,6 +50,6 @@ public class JustAnotherPlatformer extends Game {
 
     @Override
     public void dispose() {
-        batch.dispose();
+        spriteBatch.dispose();
     }
 }

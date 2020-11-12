@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.meandi.justanotherplatformer.Overlay.Hud;
+import com.meandi.justanotherplatformer.Overlays.Hud;
 import com.meandi.justanotherplatformer.Utils.Assets;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
-import com.meandi.justanotherplatformer.UI.GameScreen;
+import com.meandi.justanotherplatformer.Screens.GameScreen;
 
 public class Hero extends Character {
     private final Assets assets;
