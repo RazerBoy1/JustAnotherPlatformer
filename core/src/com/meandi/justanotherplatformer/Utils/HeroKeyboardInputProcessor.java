@@ -3,10 +3,10 @@ package com.meandi.justanotherplatformer.Utils;
 import com.badlogic.gdx.InputProcessor;
 import com.meandi.justanotherplatformer.Characters.Hero;
 
-public class MyInputProcessor implements InputProcessor {
+public class HeroKeyboardInputProcessor implements InputProcessor {
     Hero hero;
 
-    public MyInputProcessor(Hero hero) {
+    public HeroKeyboardInputProcessor(Hero hero) {
         this.hero = hero;
     }
 

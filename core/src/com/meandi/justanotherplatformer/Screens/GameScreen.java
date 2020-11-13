@@ -18,7 +18,7 @@ import com.meandi.justanotherplatformer.Items.ItemDefinition;
 import com.meandi.justanotherplatformer.Overlays.GamePad;
 import com.meandi.justanotherplatformer.Overlays.Hud;
 import com.meandi.justanotherplatformer.Utils.Assets;
-import com.meandi.justanotherplatformer.Utils.MyInputProcessor;
+import com.meandi.justanotherplatformer.Utils.HeroKeyboardInputProcessor;
 import com.meandi.justanotherplatformer.Utils.WorldBuilder;
 import com.meandi.justanotherplatformer.Utils.WorldContactListener;
 
@@ -80,10 +80,9 @@ public class GameScreen extends GeneralScreen {
             multiplexer.addProcessor(new MyInputProcessor(hero));
         */
 
-        if (Gdx.app.getType() == Application.ApplicationType.Android)
+        if (Gdx.app.getType() == Application.ApplicationType.Android || Gdx.app.getType() == Application.ApplicationType.iOS)
             multiplexer.addProcessor(gamePad.getStage());
-
-        multiplexer.addProcessor(new MyInputProcessor(hero));
+        multiplexer.addProcessor(new HeroKeyboardInputProcessor(hero));
 
         Gdx.input.setInputProcessor(multiplexer);
     }
