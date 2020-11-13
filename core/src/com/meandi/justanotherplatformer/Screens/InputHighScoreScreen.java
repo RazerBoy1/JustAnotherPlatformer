@@ -26,8 +26,8 @@ public class InputHighScoreScreen extends GeneralScreen {
         super(jap);
         stage = new Stage();
 
-        skin10f = new Skin(Gdx.files.internal("menu/craftacular-ui.json"));
-        skin2f = new Skin(Gdx.files.internal("menu/craftacular-ui.json"));
+        skin10f = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
+        skin2f = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
         skin10f.getFont("font").getData().setScale(10f);
         skin2f.getFont("font").getData().setScale(2f);
 
@@ -310,8 +310,9 @@ public class InputHighScoreScreen extends GeneralScreen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 highScoresController.addHighScore(textField.getText(), score);
-                storage.save(highScoresController.getHighScoreEntries());
+                storage.save(highScoresController.getHighScores());
                 jap.setScreen(new MainMenuScreen(jap));
+                dispose();
 
                 return true;
             }
@@ -383,11 +384,6 @@ public class InputHighScoreScreen extends GeneralScreen {
 
     @Override
     public void render(float delta) {
-        /*if (Gdx.input.justTouched()) {
-            jap.setScreen(new MenuScreen(jap));
-            dispose();
-        }*/
-
         clearScreen();
         stage.draw();
     }

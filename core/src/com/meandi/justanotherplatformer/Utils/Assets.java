@@ -62,6 +62,9 @@ public class Assets implements Disposable {
     private static final String HEALTH_POTION_SOUND_PATH = "audio/health_potion.wav";
     public static final AssetDescriptor<Sound> HEALTH_POTION_SOUND = new AssetDescriptor<>(HEALTH_POTION_SOUND_PATH, Sound.class);
 
+    private static final String LEVEL_COMPLETE_PATH = "audio/level_complete.wav";
+    public static final AssetDescriptor<Sound> LEVEL_COMPLETE = new AssetDescriptor<>(LEVEL_COMPLETE_PATH, Sound.class);
+
     public Assets() {
         manager = new AssetManager();
     }
@@ -84,6 +87,7 @@ public class Assets implements Disposable {
         manager.load(BLOCK_BREAK);
         manager.load(DEATH);
         manager.load(HEALTH_POTION_SOUND);
+        manager.load(LEVEL_COMPLETE);
 
         manager.finishLoading();
     }

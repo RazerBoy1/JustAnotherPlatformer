@@ -47,6 +47,12 @@ public class WorldContactListener implements ContactListener {
                 else
                     ((Coin) b.getUserData()).onBodyHit();
                 break;
+            case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.END_BIT:
+                if (a.getFilterData().categoryBits == JustAnotherPlatformer.HERO_BIT)
+                    ((Hero) a.getUserData()).onEndHit();
+                else
+                    ((Hero) b.getUserData()).onEndHit();
+                break;
             case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.ITEM_BIT:
                 if (a.getFilterData().categoryBits == JustAnotherPlatformer.ITEM_BIT)
                     ((HealthPotion) a.getUserData()).useItem((Hero) b.getUserData());

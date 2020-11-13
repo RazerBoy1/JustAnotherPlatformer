@@ -1,18 +1,15 @@
 package com.meandi.justanotherplatformer.Screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.Utils.HighScoresController;
-import com.meandi.justanotherplatformer.Utils.HighScoreEntry;
+import com.meandi.justanotherplatformer.Utils.HighScore;
 import com.meandi.justanotherplatformer.Utils.Storage;
 
 import java.util.Locale;
@@ -21,21 +18,21 @@ public class HighScoresScreen extends GeneralScreen {
     private final Stage stage;
     private final Skin skin;
 
-    private final HighScoreEntry[] highScoreEntries;
+    private final HighScore[] highScores;
     private final Storage storage;
     private final HighScoresController highScoresController;
 
     public HighScoresScreen(final JustAnotherPlatformer jap) {
         super(jap);
         stage = new Stage(port, this.jap.spriteBatch);
-        skin = new Skin(Gdx.files.internal("menu/craftacular-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
         skin.getFont("font").getData().setScale(0.5f);
 
         storage = new Storage();
         storage.load();
 
         highScoresController = storage.getHighScoresController();
-        highScoreEntries = highScoresController.getHighScoreEntries();
+        highScores = highScoresController.getHighScores();
 
         TextButton backButton = new TextButton("Back", skin);
         backButton.getLabel().setFontScale(0.25f);
@@ -43,6 +40,8 @@ public class HighScoresScreen extends GeneralScreen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 jap.setScreen(new MainMenuScreen(jap));
+                dispose();
+
                 return true;
             }
         });
@@ -57,8 +56,8 @@ public class HighScoresScreen extends GeneralScreen {
         t2.center().left();
         t2.setFillParent(true);
 
-        for (int i = 0; i < highScoreEntries.length - 1; i++) {
-            t2.add(String.format(Locale.ENGLISH, "%2d. %-3s", i + 1, highScoreEntries[i].getName())).height(15).width(100).padLeft(75);
+        for (int i = 0; i < highScores.length - 1; i++) {
+            t2.add(String.format(Locale.ENGLISH, "%2d. %-3s", i + 1, highScores[i].getName())).height(15).width(100).padLeft(75);
             t2.row();
         }
 
@@ -66,11 +65,10 @@ public class HighScoresScreen extends GeneralScreen {
         t3.center().right();
         t3.setFillParent(true);
 
-        for (int i = 0; i < highScoreEntries.length - 1; i++) {
-            t3.add(String.format(Locale.ENGLISH, "%10s", highScoreEntries[i].getScore())).height(15).width(110);
+        for (int i = 0; i < highScores.length - 1; i++) {
+            t3.add(String.format(Locale.ENGLISH, "%10s", highScores[i].getScore())).height(15).width(110);
             t3.row();
         }
-
 
         stage.addActor(t1);
         stage.addActor(t2);
@@ -88,5 +86,6 @@ public class HighScoresScreen extends GeneralScreen {
     @Override
     public void dispose() {
         stage.dispose();
+        skin.dispose();
     }
 }

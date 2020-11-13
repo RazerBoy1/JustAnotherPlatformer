@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.meandi.justanotherplatformer.Characters.Slime;
 import com.meandi.justanotherplatformer.Interactables.Coin;
+import com.meandi.justanotherplatformer.Interactables.End;
 import com.meandi.justanotherplatformer.Interactables.Moss;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.Screens.GameScreen;
@@ -33,26 +34,26 @@ public class WorldBuilder {
     }
 
     private void iterateObjects(String layerName) {
-        for (MapObject object : map.getLayers().get(layerName).getObjects()) {
+        for (MapObject object : map.getLayers().get(layerName).getObjects())
             switch (layerName) {
-                case JustAnotherPlatformer.SLIME_LAYER:
-                    createEnemies(object);
-                    break;
-                case JustAnotherPlatformer.COIN_LAYER:
-                    createInteractables(object, layerName, 0f, true);
-                    break;
                 case JustAnotherPlatformer.MOSS_LAYER:
                     if (object.getProperties().containsKey("Bouncy"))
                         createInteractables(object, layerName, 2f, false);
                     else
                         createInteractables(object, layerName, 0f, false);
                     break;
+                case JustAnotherPlatformer.SLIME_LAYER:
+                    createEnemies(object);
+                    break;
+                case JustAnotherPlatformer.COIN_LAYER:
+                case JustAnotherPlatformer.END_LAYER:
+                    createInteractables(object, layerName, 0f, true);
+                    break;
                 case JustAnotherPlatformer.GROUND_LAYER:
                 default:
-                    createBodyAndFixture(object, false);
+                    createInteractables(object, layerName, 0f, false);
                     break;
             }
-        }
     }
 
     private void createEnemies(MapObject object) {
@@ -62,23 +63,6 @@ public class WorldBuilder {
     }
 
     private void createInteractables(MapObject object, String layerName, float restitution, boolean isSensor) {
-        Object[] bodyAndFixture = createBodyAndFixture(object, isSensor);
-
-        Body body = (Body) bodyAndFixture[0];
-        Fixture fixture = (Fixture) bodyAndFixture[1];
-        fixture.setRestitution(restitution);
-
-        switch (layerName) {
-            case JustAnotherPlatformer.COIN_LAYER:
-                new Coin(screen, body, fixture, object);
-                break;
-            case JustAnotherPlatformer.MOSS_LAYER:
-                new Moss(screen, body, fixture, object);
-                break;
-        }
-    }
-
-    private Object[] createBodyAndFixture(MapObject object, boolean isSensor) {
         BodyDef bd = new BodyDef();
         PolygonShape shape = new PolygonShape();
         FixtureDef fixDef = new FixtureDef();
@@ -90,12 +74,23 @@ public class WorldBuilder {
 
         shape.setAsBox(rectangle.getWidth() / 2 / JustAnotherPlatformer.PPT, rectangle.getHeight() / 2 / JustAnotherPlatformer.PPT);
         fixDef.shape = shape;
+        fixDef.restitution = restitution;
         fixDef.isSensor = isSensor;
 
         Body body = world.createBody(bd);
         Fixture fixture = body.createFixture(fixDef);
 
-        return new Object[]{body, fixture};
+        switch (layerName) {
+            case JustAnotherPlatformer.COIN_LAYER:
+                new Coin(screen, body, fixture, object);
+                break;
+            case JustAnotherPlatformer.MOSS_LAYER:
+                new Moss(screen, body, fixture, object);
+                break;
+            case JustAnotherPlatformer.END_LAYER:
+                new End(screen, body, fixture, object);
+                break;
+        }
     }
 
     public Array.ArrayIterator<Slime> getSlimes() {

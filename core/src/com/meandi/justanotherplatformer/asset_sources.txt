@@ -17,3 +17,5 @@ https://freesound.org/people/Raclure/sounds/483602/
 https://freesound.org/people/JuanFG/sounds/471745/
 
 https://github.com/czyzby/gdx-skins
+
+https://freesound.org/people/LittleRobotSoundFactory/sounds/270331/

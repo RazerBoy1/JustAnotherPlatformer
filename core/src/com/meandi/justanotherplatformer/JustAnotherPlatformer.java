@@ -2,9 +2,6 @@ package com.meandi.justanotherplatformer;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.meandi.justanotherplatformer.Screens.GameOverScreen;
-import com.meandi.justanotherplatformer.Screens.GameScreen;
-import com.meandi.justanotherplatformer.Screens.InputHighScoreScreen;
 import com.meandi.justanotherplatformer.Screens.MainMenuScreen;
 
 public class JustAnotherPlatformer extends Game {
@@ -22,8 +19,9 @@ public class JustAnotherPlatformer extends Game {
     public static final String MOSS_LAYER = "moss";
     public static final String COIN_LAYER = "coins";
     public static final String GROUND_LAYER = "ground";
+    public static final String END_LAYER = "end";
 
-    public static final String[] WORLD_LAYERS = {GRAPHICS_LAYER, SLIME_LAYER, MOSS_LAYER, COIN_LAYER, GROUND_LAYER};
+    public static final String[] WORLD_LAYERS = {GRAPHICS_LAYER, SLIME_LAYER, MOSS_LAYER, COIN_LAYER, GROUND_LAYER, END_LAYER};
 
     public static final short DEFAULT_BIT = 1;
     public static final short HERO_BIT = 2;
@@ -36,6 +34,7 @@ public class JustAnotherPlatformer extends Game {
     public static final short ITEM_BIT = 256;
     public static final short OBJECT_BIT = 512;
     public static final short REMOVED_BIT = 1024;
+    public static final short END_BIT = 2048;
 
     @Override
     public void create() {

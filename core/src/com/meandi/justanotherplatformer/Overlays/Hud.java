@@ -1,9 +1,7 @@
 package com.meandi.justanotherplatformer.Overlays;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -35,7 +33,7 @@ public class Hud implements Disposable {
 
     public Hud(SpriteBatch sb, Assets assets) {
         stage = new Stage(new StretchViewport(JustAnotherPlatformer.WIDTH, JustAnotherPlatformer.HEIGHT), sb);
-        skin = new Skin(Gdx.files.internal("menu/craftacular-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
         skin.getFont("font").getData().setScale(0.5f);
 
         worldTimer = 0;

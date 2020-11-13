@@ -2,12 +2,12 @@ package com.meandi.justanotherplatformer.Utils;
 
 import java.util.*;
 
-public class HighScoreEntry implements Comparable<HighScoreEntry> {
+public class HighScore implements Comparable<HighScore> {
     private String entry;
     private String name;
     private int score;
 
-    public HighScoreEntry(String name, int score) {
+    public HighScore(String name, int score) {
         this.name = name;
         this.score = score;
 
@@ -38,15 +38,15 @@ public class HighScoreEntry implements Comparable<HighScoreEntry> {
         this.name = name;
     }
 
-    public static Comparator<HighScoreEntry> scoreComparator = new Comparator<HighScoreEntry>() {
+    public static Comparator<HighScore> scoreComparator = new Comparator<HighScore>() {
         @Override
-        public int compare(HighScoreEntry o1, HighScoreEntry o2) {
+        public int compare(HighScore o1, HighScore o2) {
             return o1.compareTo(o2);
         }
     };
 
     @Override
-    public int compareTo(HighScoreEntry entry) {
+    public int compareTo(HighScore entry) {
         return entry.getScore() - this.score;
     }
 }

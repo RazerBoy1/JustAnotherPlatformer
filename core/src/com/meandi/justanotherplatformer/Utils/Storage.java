@@ -13,15 +13,15 @@ public class Storage {
         highScoresController = new HighScoresController();
     }
 
-    public void save(HighScoreEntry[] highScoreEntries) {
-        for (int i = 0; i < highScoreEntries.length; i++)
-            prefs.putString(Integer.toString(i), highScoreEntries[i].getEntry());
+    public void save(HighScore[] highScores) {
+        for (int i = 0; i < highScores.length; i++)
+            prefs.putString(Integer.toString(i), highScores[i].getEntry());
 
         prefs.flush();
     }
 
     public void load() {
-        for (int i = 0; i < highScoresController.getHighScoreEntries().length; i++) {
+        for (int i = 0; i < highScoresController.getHighScores().length; i++) {
             String preferenceName = Integer.toString(i);
             String entry = prefs.getString(preferenceName);
 

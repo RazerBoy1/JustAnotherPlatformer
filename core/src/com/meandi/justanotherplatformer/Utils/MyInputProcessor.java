@@ -11,7 +11,7 @@ public class MyInputProcessor implements InputProcessor {
     }
 
     public boolean keyDown(int keycode) {
-        if (!hero.isDead())
+        if (hero.isAllowedToMove())
             switch (keycode) {
                 case 19:
                     hero.setLeftMove(true);

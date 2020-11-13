@@ -1,39 +1,36 @@
 package com.meandi.justanotherplatformer.Utils;
 
-import java.io.Serializable;
 import java.util.Arrays;
 
-public class HighScoresController implements Serializable {
+public class HighScoresController {
     private final int scoresCount;
-    private final HighScoreEntry[] highScoreEntries;
+    private final HighScore[] highScores;
 
     public HighScoresController() {
         scoresCount = 11;
-        highScoreEntries = new HighScoreEntry[scoresCount];
+        highScores = new HighScore[scoresCount];
 
         init();
     }
 
     private void init() {
         for (int i = 0; i < scoresCount; i++)
-            highScoreEntries[i] = new HighScoreEntry("---" , 0);
+            highScores[i] = new HighScore("---" , 0);
     }
 
     public boolean isHighScore(int score) {
-        return score > highScoreEntries[scoresCount - 1].getScore();
+        return score > highScores[scoresCount - 1].getScore();
     }
 
     public void addHighScore(String name, int newScore) {
-        highScoreEntries[scoresCount - 1].setScore(newScore);
-        highScoreEntries[scoresCount - 1].setName(name);
-        highScoreEntries[scoresCount - 1].setEntry(name + " - " + newScore);
+        highScores[scoresCount - 1].setScore(newScore);
+        highScores[scoresCount - 1].setName(name);
+        highScores[scoresCount - 1].setEntry(name + " - " + newScore);
 
-        Arrays.sort(highScoreEntries, HighScoreEntry.scoreComparator);
-
-
+        Arrays.sort(highScores, HighScore.scoreComparator);
     }
 
-    public HighScoreEntry[] getHighScoreEntries() {
-        return highScoreEntries;
+    public HighScore[] getHighScores() {
+        return highScores;
     }
 }

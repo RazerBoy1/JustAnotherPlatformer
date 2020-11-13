@@ -115,9 +115,20 @@ public class GameScreen extends GeneralScreen {
         hud.stage.draw();
 
         if (gameOver()) {
-            jap.setScreen(new GameOverScreen(jap, hud));
+            jap.setScreen(new GameFinishedScreen(jap, hud, false));
+            dispose();
+        } else if (levelCompleted()) {
+            jap.setScreen(new GameFinishedScreen(jap, hud, true));
             dispose();
         }
+    }
+
+    private boolean gameOver() {
+        return (hero.isDead() && hero.getStateTimer() > 2);
+    }
+
+    private boolean levelCompleted() {
+        return (hero.hasCompletedLevel() && hero.getStateTimer() > 1.5f);
     }
 
     public void update(float delta) {
@@ -139,19 +150,11 @@ public class GameScreen extends GeneralScreen {
 
         hud.update(delta);
 
-        if (!hero.isDead())
+        if (hero.isAllowedToMove())
             cam.position.x = hero.body.getPosition().x;
 
         cam.update();
         renderer.setView(cam);
-    }
-
-    private boolean gameOver() {
-        return (hero.isDead() && hero.getStateTimer() > 2);
-    }
-
-    public void spawnItem(ItemDefinition itemDef) {
-        itemsToSpawn.add(itemDef);
     }
 
     private void spawnItems() {
@@ -162,6 +165,10 @@ public class GameScreen extends GeneralScreen {
             if (itemDef.type == HealthPotion.class)
                 items.add(new HealthPotion(this, itemDef.position.x, itemDef.position.y));
         }
+    }
+
+    public void spawnItem(ItemDefinition itemDef) {
+        itemsToSpawn.add(itemDef);
     }
 
     public World getWorld() {

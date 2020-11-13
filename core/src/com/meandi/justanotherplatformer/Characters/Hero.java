@@ -18,6 +18,7 @@ public class Hero extends Character {
     private boolean moveRight;
     private boolean jump;
     private boolean heroDied;
+    private boolean heroCompletedLevel;
 
     private Animation<TextureRegion> heroIdle, heroDeath, heroRun, heroJump, heroDoubleJump, heroFall, heroPush, heroAttack, heroHit;
     private boolean runningRight;
@@ -33,7 +34,7 @@ public class Hero extends Character {
         assets = screen.getAssets();
         hud = screen.getHud();
 
-        moveLeft = moveRight = jump = false;
+        moveLeft = moveRight = jump = heroCompletedLevel = false;
     }
 
     @Override
@@ -55,7 +56,8 @@ public class Hero extends Character {
                 JustAnotherPlatformer.ITEM_BIT |
                 JustAnotherPlatformer.OBJECT_BIT |
                 JustAnotherPlatformer.ENEMY_BIT |
-                JustAnotherPlatformer.ENEMY_HEAD_BIT;
+                JustAnotherPlatformer.ENEMY_HEAD_BIT |
+                JustAnotherPlatformer.END_BIT;
 
         body.createFixture(fixDef).setUserData(this);
 
@@ -68,7 +70,7 @@ public class Hero extends Character {
         body.createFixture(fixDef).setUserData(this);
 
         EdgeShape feet = new EdgeShape();
-        feet.set(new Vector2(3 / JustAnotherPlatformer.PPT, -6.5f / JustAnotherPlatformer.PPT), new Vector2(-3 / JustAnotherPlatformer.PPT, -6.5f / JustAnotherPlatformer.PPT));
+        feet.set(new Vector2(3 / JustAnotherPlatformer.PPT, -6.75f / JustAnotherPlatformer.PPT), new Vector2(-3 / JustAnotherPlatformer.PPT, -6.75f / JustAnotherPlatformer.PPT));
         fixDef.shape = feet;
         fixDef.isSensor = true;
         fixDef.filter.categoryBits = JustAnotherPlatformer.HERO_FEET_BIT;
@@ -197,8 +199,22 @@ public class Hero extends Character {
         }
     }
 
+    public void onEndHit() {
+        heroCompletedLevel = true;
+        hud.addScore(hud.getHearthCount() * hud.getScore() + 1000);
+        assets.manager.get(Assets.LEVEL_COMPLETE).play();
+    }
+
     public boolean isDead() {
         return heroDied;
+    }
+
+    public boolean hasCompletedLevel() {
+        return heroCompletedLevel;
+    }
+
+    public boolean isAllowedToMove() {
+        return !isDead() && !hasCompletedLevel();
     }
 
     public float getStateTimer() {

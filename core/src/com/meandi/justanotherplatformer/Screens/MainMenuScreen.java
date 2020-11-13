@@ -16,7 +16,7 @@ public class MainMenuScreen extends GeneralScreen {
     public MainMenuScreen(final JustAnotherPlatformer jap) {
         super(jap);
         stage = new Stage(port, this.jap.spriteBatch);
-        skin = new Skin(Gdx.files.internal("menu/craftacular-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
 
         TextButton playButton = new TextButton("Play", skin);
         TextButton highScoresButton = new TextButton("High scores", skin);
@@ -30,6 +30,8 @@ public class MainMenuScreen extends GeneralScreen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 jap.setScreen(new GameScreen(jap));
+                dispose();
+
                 return true;
             }
         });
@@ -38,6 +40,8 @@ public class MainMenuScreen extends GeneralScreen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 jap.setScreen(new HighScoresScreen(jap));
+                dispose();
+
                 return true;
             }
         });
