@@ -29,7 +29,7 @@ public class GameScreen extends GeneralScreen {
     private final OrthogonalTiledMapRenderer renderer;
 
     private final World world;
-    private final Box2DDebugRenderer boxDebugger;
+    //private final Box2DDebugRenderer boxDebugger;
 
     private final WorldBuilder worldBuilder;
 
@@ -46,14 +46,14 @@ public class GameScreen extends GeneralScreen {
 
         hud = new Hud(jap.spriteBatch, assets);
 
-        map = new TmxMapLoader().load("world/levels/test_level.tmx");
+        map = new TmxMapLoader().load("world/levels/level1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / JustAnotherPlatformer.PPT);
 
         cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
 
         world = new World(new Vector2(0, JustAnotherPlatformer.GRAVITY), true);
         world.setContactListener(new WorldContactListener());
-        boxDebugger = new Box2DDebugRenderer();
+        //boxDebugger = new Box2DDebugRenderer();
 
         worldBuilder = new WorldBuilder(this);
 
@@ -93,7 +93,7 @@ public class GameScreen extends GeneralScreen {
         clearScreen();
 
         renderer.render();
-        boxDebugger.render(world, cam.combined);
+        //boxDebugger.render(world, cam.combined);
 
         gamePad.draw();
 
@@ -197,7 +197,7 @@ public class GameScreen extends GeneralScreen {
         map.dispose();
         renderer.dispose();
         world.dispose();
-        boxDebugger.dispose();
+        //boxDebugger.dispose();
         assets.dispose();
         hud.dispose();
         gamePad.dispose();

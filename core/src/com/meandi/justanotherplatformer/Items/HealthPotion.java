@@ -31,7 +31,7 @@ public class HealthPotion extends Item {
         bodyDef.position.set(getX(), getY());
         body = world.createBody(bodyDef);
 
-        circleShape.setRadius(3f / JustAnotherPlatformer.PPT);
+        circleShape.setRadius(2.65f / JustAnotherPlatformer.PPT);
         fixDef.shape = circleShape;
         fixDef.filter.categoryBits = JustAnotherPlatformer.ITEM_BIT;
         fixDef.filter.maskBits = JustAnotherPlatformer.DEFAULT_BIT |

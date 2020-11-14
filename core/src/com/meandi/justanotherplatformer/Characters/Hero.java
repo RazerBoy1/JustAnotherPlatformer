@@ -44,7 +44,7 @@ public class Hero extends Character {
         CircleShape circleShape = new CircleShape();
 
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(560 / JustAnotherPlatformer.PPT, 90 / JustAnotherPlatformer.PPT);
+        bodyDef.position.set(90 / JustAnotherPlatformer.PPT, 90 / JustAnotherPlatformer.PPT);
         body = world.createBody(bodyDef);
 
         circleShape.setRadius(5.5f / JustAnotherPlatformer.PPT);
