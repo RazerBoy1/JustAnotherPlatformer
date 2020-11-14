@@ -89,9 +89,6 @@ public class GamePad implements Disposable {
         Table t1 = new Table();
         Table t2 = new Table();
 
-        t1.debugAll();
-        t2.debugAll();
-
         t1.left().bottom();
         t2.right().bottom();
 

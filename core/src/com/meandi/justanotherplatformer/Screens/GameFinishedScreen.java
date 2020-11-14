@@ -14,14 +14,12 @@ import java.util.Locale;
 public class GameFinishedScreen extends GeneralScreen {
     private final Stage stage;
     private final Skin skin;
-    private final int score;
-    private final int worldTimer;
+    private final int finalScore;
 
     public GameFinishedScreen(final JustAnotherPlatformer jap, Hud hud, boolean isCompleted) {
         super(jap);
         stage = new Stage(port, this.jap.spriteBatch);
-        this.score = hud.getScore();
-        this.worldTimer = hud.getWorldTimer();
+        finalScore = Math.max(hud.getScore() - (hud.getWorldTimer() * 5), 0);
 
         skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
         skin.getFont("font").getData().setScale(0.5f);
@@ -31,7 +29,7 @@ public class GameFinishedScreen extends GeneralScreen {
         t.setFillParent(true);
 
         Label finishLabel;
-        Label scoreLabel = new Label(String.format(Locale.ENGLISH, "SCORE: %d", score), skin);
+        Label scoreLabel = new Label(String.format(Locale.ENGLISH, "SCORE: %d", finalScore), skin);
 
         if (isCompleted)
             finishLabel = new Label("LEVEL COMPLETED", skin);
@@ -51,8 +49,8 @@ public class GameFinishedScreen extends GeneralScreen {
         storage.load();
 
         if (Gdx.input.justTouched()) {
-            if (storage.getHighScoresController().isHighScore(score))
-                jap.setScreen(new InputHighScoreScreen(jap, storage, score - (worldTimer * 5)));
+            if (storage.getHighScoresController().isHighScore(finalScore))
+                jap.setScreen(new InputHighScoreScreen(jap, storage, finalScore));
             else
                 jap.setScreen(new MainMenuScreen(jap));
 

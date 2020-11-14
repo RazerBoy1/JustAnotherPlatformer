@@ -4,19 +4,25 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Scaling;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
+import com.meandi.justanotherplatformer.Utils.Assets;
 
 public class MainMenuScreen extends GeneralScreen {
     private final Stage stage;
     private final Skin skin;
+    private final Image background;
 
     public MainMenuScreen(final JustAnotherPlatformer jap) {
         super(jap);
         stage = new Stage(port, this.jap.spriteBatch);
         skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
+        background = new Image(assets.manager.get(Assets.BACKGROUND));
+        background.setScaling(Scaling.fit);
 
         TextButton playButton = new TextButton("Play", skin);
         TextButton highScoresButton = new TextButton("High scores", skin);
@@ -54,17 +60,24 @@ public class MainMenuScreen extends GeneralScreen {
             }
         });
 
-        Table t = new Table();
-        t.center();
-        t.setFillParent(true);
+        Table t1 = new Table();
+        t1.center();
+        t1.setFillParent(true);
 
-        t.add(playButton).height(35).width(120);
-        t.row();
-        t.add(highScoresButton).height(35).width(120);
-        t.row();
-        t.add(exitButton).height(35).width(120);
+        t1.add(background);
 
-        stage.addActor(t);
+        Table t2 = new Table();
+        t2.center();
+        t2.setFillParent(true);
+
+        t2.add(playButton).height(45).width(120);
+        t2.row();
+        t2.add(highScoresButton).height(45).width(120).padTop(5);
+        t2.row();
+        t2.add(exitButton).height(45).width(120).padTop(5);
+
+        stage.addActor(t1);
+        stage.addActor(t2);
 
         Gdx.input.setInputProcessor(stage);
     }

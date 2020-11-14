@@ -32,9 +32,8 @@ public class JustAnotherPlatformer extends Game {
     public static final short COIN_BIT = 64;
     public static final short MOSS_BIT = 128;
     public static final short ITEM_BIT = 256;
-    public static final short OBJECT_BIT = 512;
-    public static final short REMOVED_BIT = 1024;
-    public static final short END_BIT = 2048;
+    public static final short REMOVED_BIT = 512;
+    public static final short END_BIT = 1024;
 
     @Override
     public void create() {

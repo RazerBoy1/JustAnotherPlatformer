@@ -59,11 +59,16 @@ public class WorldContactListener implements ContactListener {
                 else
                     ((HealthPotion) b.getUserData()).useItem((Hero) a.getUserData());
                 break;
-            case JustAnotherPlatformer.ENEMY_BIT | JustAnotherPlatformer.OBJECT_BIT:
-                if (a.getFilterData().categoryBits == JustAnotherPlatformer.ENEMY_BIT)
-                    ((Slime) a.getUserData()).reverseVelocity(true, false);
+            case JustAnotherPlatformer.ENEMY_BIT | JustAnotherPlatformer.MOSS_BIT:
+            case JustAnotherPlatformer.ENEMY_BIT | JustAnotherPlatformer.ITEM_BIT:
+            case JustAnotherPlatformer.ENEMY_BIT | JustAnotherPlatformer.DEFAULT_BIT:
+                if (a.getFilterData().categoryBits == JustAnotherPlatformer.ENEMY_BIT) {
+                    if (((Slime) a.getUserData()).body.getLinearVelocity().y == 0)
+                        ((Slime) a.getUserData()).reverseVelocity(true, false);
+                }
                 else
-                    ((Slime) b.getUserData()).reverseVelocity(true, false);
+                    if (((Slime) b.getUserData()).body.getLinearVelocity().y == 0)
+                        ((Slime) b.getUserData()).reverseVelocity(true, false);
                 break;
             case JustAnotherPlatformer.ENEMY_BIT:
                 ((Slime) a.getUserData()).reverseVelocity(true, false);

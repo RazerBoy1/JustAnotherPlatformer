@@ -37,7 +37,6 @@ public class HealthPotion extends Item {
         fixDef.filter.maskBits = JustAnotherPlatformer.DEFAULT_BIT |
                 JustAnotherPlatformer.MOSS_BIT |
                 JustAnotherPlatformer.ITEM_BIT |
-                JustAnotherPlatformer.OBJECT_BIT |
                 JustAnotherPlatformer.HERO_BIT |
                 JustAnotherPlatformer.ENEMY_BIT;
 

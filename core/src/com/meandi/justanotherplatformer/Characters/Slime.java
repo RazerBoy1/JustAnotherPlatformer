@@ -48,7 +48,6 @@ public class Slime extends Character {
                 JustAnotherPlatformer.COIN_BIT |
                 JustAnotherPlatformer.MOSS_BIT |
                 JustAnotherPlatformer.ITEM_BIT |
-                JustAnotherPlatformer.OBJECT_BIT |
                 JustAnotherPlatformer.ENEMY_BIT |
                 JustAnotherPlatformer.HERO_BIT |
                 JustAnotherPlatformer.HERO_FEET_BIT;
@@ -79,7 +78,9 @@ public class Slime extends Character {
             hud.addScore(50);
             stateTime = 0;
         } else if (!destroyed) {
-            body.setLinearVelocity(velocity);
+            if (body.getLinearVelocity().y == 0)
+                body.setLinearVelocity(velocity);
+
             setPosition(body.getPosition().x - getWidth() / 2, (3f / JustAnotherPlatformer.PPT) + body.getPosition().y - getHeight() / 2);
             setRegion(getFrame());
         }

@@ -73,16 +73,14 @@ public class GameScreen extends GeneralScreen {
         InputMultiplexer multiplexer = new InputMultiplexer();
 
         // TODO: Uncomment this for production and comment the if statement below the commented one
-        /*
-        if (Gdx.app.getType() == Application.ApplicationType.Android)
-            multiplexer.addProcessor(gamePad.getStage());
-        else if (Gdx.app.getType() == Application.ApplicationType.Desktop)
-            multiplexer.addProcessor(new MyInputProcessor(hero));
-        */
-
         if (Gdx.app.getType() == Application.ApplicationType.Android || Gdx.app.getType() == Application.ApplicationType.iOS)
             multiplexer.addProcessor(gamePad.getStage());
-        multiplexer.addProcessor(new HeroKeyboardInputProcessor(hero));
+        else if (Gdx.app.getType() == Application.ApplicationType.Desktop)
+            multiplexer.addProcessor(new HeroKeyboardInputProcessor(hero));
+
+        /*if (Gdx.app.getType() == Application.ApplicationType.Android || Gdx.app.getType() == Application.ApplicationType.iOS)
+            multiplexer.addProcessor(gamePad.getStage());
+        multiplexer.addProcessor(new HeroKeyboardInputProcessor(hero));*/
 
         Gdx.input.setInputProcessor(multiplexer);
     }

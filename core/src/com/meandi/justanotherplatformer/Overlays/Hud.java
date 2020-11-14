@@ -50,7 +50,6 @@ public class Hud implements Disposable {
         t1 = new Table();
         t1.top().left();
         t1.setFillParent(true);
-        t1.debugAll();
 
         t1.add(heartImage1).padTop(3).padLeft(5);
         t1.add(heartImage2).padTop(3).padLeft(5);
