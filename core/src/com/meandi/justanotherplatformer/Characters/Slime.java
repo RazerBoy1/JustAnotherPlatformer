@@ -24,7 +24,7 @@ public class Slime extends Character {
         super(screen, region, x, y);
         hud = screen.getHud();
         assets = screen.getAssets();
-        velocity = new Vector2(0.25f, 0);
+        velocity = new Vector2(-0.25f, 0);
 
         currentState = previousState = State.RUNNING;
 
