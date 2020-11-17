@@ -33,7 +33,7 @@ public abstract class Character extends Sprite {
 
         setSprite(region);
         createCharacter();
-        setBounds(0, 0, 16 / JustAnotherPlatformer.PPT, 16 / JustAnotherPlatformer.PPT);
+        setBounds(0, 0, 32 / JustAnotherPlatformer.PPT, 32 / JustAnotherPlatformer.PPT);
     }
 
     public Character(GameScreen screen, TextureRegion region, float x, float y) {
