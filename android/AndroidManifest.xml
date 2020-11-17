@@ -9,7 +9,7 @@
             android:appCategory="game"
             android:label="@string/app_name"
             android:theme="@style/GdxTheme"
-            android:debuggable="true" tools:ignore="HardcodedDebugMode">
+            android:debuggable="false" tools:ignore="HardcodedDebugMode">
         <activity
             android:name="com.meandi.justanotherplatformer.AndroidLauncher"
             android:label="@string/app_name" 

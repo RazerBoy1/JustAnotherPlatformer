@@ -212,7 +212,7 @@ public class Hero extends Character {
         return heroCompletedLevel;
     }
 
-    public boolean isAllowedToMove() {
+    public boolean isDone() {
         return !isDead() && !hasCompletedLevel();
     }
 

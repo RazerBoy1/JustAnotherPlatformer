@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.meandi.justanotherplatformer.Screens.GameScreen;
 import com.meandi.justanotherplatformer.Utils.Assets;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 
@@ -18,11 +19,12 @@ import java.util.Locale;
 public class Hud implements Disposable {
     public Stage stage;
 
+    private GameScreen screen;
+
     private float timeCount;
     private int worldTimer;
     private int score;
 
-    private Skin skin;
     private final Label countdownLabel;
     private final Label scoreLabel;
 
@@ -31,9 +33,12 @@ public class Hud implements Disposable {
 
     Table t1;
 
-    public Hud(SpriteBatch sb, Assets assets) {
-        stage = new Stage(new StretchViewport(JustAnotherPlatformer.WIDTH, JustAnotherPlatformer.HEIGHT), sb);
-        skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
+    public Hud(GameScreen screen) {
+        stage = new Stage(new StretchViewport(JustAnotherPlatformer.WIDTH, JustAnotherPlatformer.HEIGHT), screen.getJustAnotherPlatformer().spriteBatch);
+
+        this.screen = screen;
+
+        Skin skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
         skin.getFont("font").getData().setScale(0.5f);
 
         worldTimer = 0;
@@ -42,7 +47,7 @@ public class Hud implements Disposable {
         countdownLabel = new Label(String.format(Locale.ENGLISH, "%d", worldTimer), skin);
         scoreLabel = new Label(String.format(Locale.ENGLISH, "%d", score), skin);
 
-        Texture hearth = assets.manager.get(Assets.HEARTS);
+        Texture hearth = screen.getAssets().manager.get(Assets.HEARTS);
         heartImage1 = new Image(hearth);
         heartImage2 = new Image(hearth);
         heartImage3 = new Image(hearth);
@@ -75,7 +80,7 @@ public class Hud implements Disposable {
     public void update(float delta) {
         timeCount += delta;
 
-        if (timeCount >= 1) {
+        if (timeCount >= 1 && screen.getHero().isDone()) {
             worldTimer++;
             timeCount--;
             countdownLabel.setText(String.format(Locale.ENGLISH, "%d", worldTimer));

@@ -44,7 +44,7 @@ public class GameScreen extends GeneralScreen {
         super(jap);
         port = new StretchViewport(JustAnotherPlatformer.WIDTH / JustAnotherPlatformer.PPT, JustAnotherPlatformer.HEIGHT / JustAnotherPlatformer.PPT, cam);
 
-        hud = new Hud(jap.spriteBatch, assets);
+        hud = new Hud(this);
 
         map = new TmxMapLoader().load("world/levels/level1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / JustAnotherPlatformer.PPT);
@@ -147,7 +147,7 @@ public class GameScreen extends GeneralScreen {
 
         hud.update(delta);
 
-        if (hero.isAllowedToMove())
+        if (hero.isDone())
             cam.position.x = hero.body.getPosition().x;
 
         cam.update();
