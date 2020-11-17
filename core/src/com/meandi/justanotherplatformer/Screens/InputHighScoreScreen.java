@@ -19,8 +19,6 @@ public class InputHighScoreScreen extends GeneralScreen {
     private final Skin skin2f;
 
     private final HighScoresController highScoresController;
-    private final Storage storage;
-    private final int score;
 
     public InputHighScoreScreen(final JustAnotherPlatformer jap, final Storage storage, final int score) {
         super(jap);
@@ -31,8 +29,6 @@ public class InputHighScoreScreen extends GeneralScreen {
         skin10f.getFont("font").getData().setScale(10f);
         skin2f.getFont("font").getData().setScale(2f);
 
-        this.storage = storage;
-        this.score = score;
         this.highScoresController = storage.getHighScoresController();
 
         final TextField textField = new TextField("", skin10f);

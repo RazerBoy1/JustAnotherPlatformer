@@ -19,7 +19,7 @@ import java.util.Locale;
 public class Hud implements Disposable {
     public Stage stage;
 
-    private GameScreen screen;
+    private final GameScreen screen;
 
     private float timeCount;
     private int worldTimer;

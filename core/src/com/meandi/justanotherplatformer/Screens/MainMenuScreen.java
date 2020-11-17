@@ -15,13 +15,12 @@ import com.meandi.justanotherplatformer.Utils.Assets;
 public class MainMenuScreen extends GeneralScreen {
     private final Stage stage;
     private final Skin skin;
-    private final Image background;
 
     public MainMenuScreen(final JustAnotherPlatformer jap) {
         super(jap);
         stage = new Stage(port, this.jap.spriteBatch);
         skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
-        background = new Image(assets.manager.get(Assets.BACKGROUND));
+        Image background = new Image(assets.manager.get(Assets.BACKGROUND));
         background.setScaling(Scaling.fit);
 
         TextButton playButton = new TextButton("Play", skin);

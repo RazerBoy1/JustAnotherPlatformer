@@ -13,7 +13,6 @@ import java.util.Locale;
 
 public class GameFinishedScreen extends GeneralScreen {
     private final Stage stage;
-    private final Skin skin;
     private final int finalScore;
 
     public GameFinishedScreen(final JustAnotherPlatformer jap, Hud hud, boolean isCompleted) {
@@ -21,7 +20,7 @@ public class GameFinishedScreen extends GeneralScreen {
         stage = new Stage(port, this.jap.spriteBatch);
         finalScore = Math.max(hud.getScore() - (hud.getWorldTimer() * 5), 0);
 
-        skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
+        Skin skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
         skin.getFont("font").getData().setScale(0.5f);
 
         Table t = new Table();

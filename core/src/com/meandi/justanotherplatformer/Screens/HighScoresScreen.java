@@ -18,21 +18,17 @@ public class HighScoresScreen extends GeneralScreen {
     private final Stage stage;
     private final Skin skin;
 
-    private final HighScore[] highScores;
-    private final Storage storage;
-    private final HighScoresController highScoresController;
-
     public HighScoresScreen(final JustAnotherPlatformer jap) {
         super(jap);
         stage = new Stage(port, this.jap.spriteBatch);
         skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
         skin.getFont("font").getData().setScale(0.5f);
 
-        storage = new Storage();
+        Storage storage = new Storage();
         storage.load();
 
-        highScoresController = storage.getHighScoresController();
-        highScores = highScoresController.getHighScores();
+        HighScoresController highScoresController = storage.getHighScoresController();
+        HighScore[] highScores = highScoresController.getHighScores();
 
         TextButton backButton = new TextButton("Back", skin);
         backButton.getLabel().setFontScale(0.25f);

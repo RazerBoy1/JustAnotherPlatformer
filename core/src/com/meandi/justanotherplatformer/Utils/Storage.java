@@ -3,7 +3,6 @@ package com.meandi.justanotherplatformer.Utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
-
 public class Storage {
     private final Preferences prefs;
     private final HighScoresController highScoresController;
