@@ -171,6 +171,8 @@ public class Hero extends Character {
 
         if (body.getLinearVelocity().y > 2.75f)
             body.setLinearVelocity(new Vector2(body.getLinearVelocity().x, 2.75f));
+        if (body.getLinearVelocity().x > 2.75f)
+            body.setLinearVelocity(new Vector2(2.75f, body.getLinearVelocity().y));
 
         if (moveRight && body.getLinearVelocity().x <= 1)
             body.applyLinearImpulse(new Vector2(0.1f, 0), body.getWorldCenter(), true);
