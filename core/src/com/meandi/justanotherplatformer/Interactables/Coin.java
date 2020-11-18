@@ -22,6 +22,6 @@ public class Coin extends Interactable {
         setCategoryFilter(JustAnotherPlatformer.REMOVED_BIT);
         getCell().setTile(null);
 
-        hud.addScore(100);
+        hud.addScore(500);
     }
 }

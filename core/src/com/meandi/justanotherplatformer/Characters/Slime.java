@@ -1,7 +1,6 @@
 package com.meandi.justanotherplatformer.Characters;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -71,21 +70,14 @@ public class Slime extends Character {
 
     @Override
     public void updateSpritePosition(float delta) {
-        if (setToDestroy && !destroyed) {
-            world.destroyBody(body);
-            destroyed = true;
-            setRegion(getFrame());
-            hud.addScore(50);
-            stateTime = 0;
-        } else if (!destroyed) {
+        if (!destroyed) {
             if (body.getLinearVelocity().y == 0)
                 body.setLinearVelocity(velocity);
 
             setPosition(body.getPosition().x - getWidth() / 2, (3f / JustAnotherPlatformer.PPT) + body.getPosition().y - getHeight() / 2);
-            setRegion(getFrame());
         }
 
-        updateState(delta);
+        super.updateSpritePosition(delta);
     }
 
     @Override
@@ -128,16 +120,10 @@ public class Slime extends Character {
     protected void createAnimations() {
         Array<TextureRegion> frames = new Array<>();
 
-        slimeIdle = createAnimation(frames, 0, 16, 16, 15, 20, 0.3f);
-        slimeRun = createAnimation(frames, 8, 16, 24, 0, 15, 0.1f);
-        slimeHit = createAnimation(frames, 0, 16, 16, 20, 23, 0.7f);
-        slimeDeath = createAnimation(frames, 0, 16, 16, 15, 21, 1f);
-    }
-
-    @Override
-    public void draw(Batch batch) {
-        if (!destroyed || stateTime < 1)
-            super.draw(batch);
+        slimeIdle = createAnimation(frames, 0, 16, 15, 20, 0.3f);
+        slimeRun = createAnimation(frames, 8, 24, 0, 15, 0.1f);
+        slimeHit = createAnimation(frames, 0, 16, 20, 23, 0.7f);
+        slimeDeath = createAnimation(frames, 0, 16, 15, 21, 1f);
     }
 
     public void reverseVelocity(boolean x, boolean y) {
@@ -151,6 +137,6 @@ public class Slime extends Character {
         assets.manager.get(Assets.BUMP_ENEMY_ON_HEAD).play();
         setToDestroy = true;
 
-        hud.addScore(50);
+        hud.addScore(100);
     }
 }

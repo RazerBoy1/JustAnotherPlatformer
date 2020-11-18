@@ -81,23 +81,23 @@ public class Hero extends Character {
     protected void createAnimations() {
         Array<TextureRegion> frames = new Array<>();
 
-        heroIdle = createAnimation(frames, 0, 16, 16, 36, 40, 0.1f);
-        heroDeath = createAnimation(frames, 0, 16, 16, 0, 8, 0.1f);
-        heroRun = createAnimation(frames, 0, 16, 16, 18, 24, 0.075f);
-        heroJump = createAnimation(frames, 0, 16, 16, 53, 56, 0.1f);
-        heroDoubleJump = createAnimation(frames, 0, 16, 16, 47, 50, 0.1f);
-        heroFall = createAnimation(frames, 0, 16, 16, 50, 54, 0.1f);
-        heroPush = createAnimation(frames, 0, 16, 16, 16, 22, 0.1f);
-        heroAttack = createAnimation(frames, 0, 16, 16, 8, 10, 0.1f);
-        heroHit = createAnimation(frames, 0, 16, 16, 44, 47, 0.1f);
+        heroIdle = createAnimation(frames, 0, 16, 36, 40, 0.1f);
+        heroDeath = createAnimation(frames, 0, 16, 0, 8, 0.1f);
+        heroRun = createAnimation(frames, 0, 16, 18, 24, 0.075f);
+        heroJump = createAnimation(frames, 0, 16, 53, 56, 0.1f);
+        heroDoubleJump = createAnimation(frames, 0, 16, 47, 50, 0.1f);
+        heroFall = createAnimation(frames, 0, 16, 50, 54, 0.1f);
+        heroPush = createAnimation(frames, 0, 16, 16, 22, 0.1f);
+        heroAttack = createAnimation(frames, 0, 16, 8, 10, 0.1f);
+        heroHit = createAnimation(frames, 0, 16, 44, 47, 0.1f);
     }
 
     @Override
     public void updateSpritePosition(float delta) {
-        setPosition((0.35f / JustAnotherPlatformer.PPT) + body.getPosition().x - getWidth() / 2, (2 / JustAnotherPlatformer.PPT) + body.getPosition().y - getHeight() / 2);
-        setRegion(getFrame());
+        if (!destroyed)
+            setPosition((0.35f / JustAnotherPlatformer.PPT) + body.getPosition().x - getWidth() / 2, (2 / JustAnotherPlatformer.PPT) + body.getPosition().y - getHeight() / 2);
 
-        updateState(delta);
+        super.updateSpritePosition(delta);
     }
 
     @Override
@@ -197,6 +197,7 @@ public class Hero extends Character {
             assets.manager.get(Assets.DEATH).play();
 
             heroDied = true;
+            setToDestroy = true;
         }
     }
 
@@ -214,11 +215,11 @@ public class Hero extends Character {
         return heroCompletedLevel;
     }
 
-    public boolean isDone() {
+    public boolean isNotDone() {
         return !isDead() && !hasCompletedLevel();
     }
 
-    public float getStateTimer() {
+    public float getStateTime() {
         return stateTime;
     }
 

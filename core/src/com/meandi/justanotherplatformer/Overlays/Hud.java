@@ -2,7 +2,6 @@ package com.meandi.justanotherplatformer.Overlays;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -80,7 +79,7 @@ public class Hud implements Disposable {
     public void update(float delta) {
         timeCount += delta;
 
-        if (timeCount >= 1 && screen.getHero().isDone()) {
+        if (timeCount >= 1 && screen.getHero().isNotDone()) {
             worldTimer++;
             timeCount--;
             countdownLabel.setText(String.format(Locale.ENGLISH, "%d", worldTimer));

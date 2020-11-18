@@ -42,7 +42,7 @@ public class GamePad implements Disposable {
         imgRight.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (hero.isDone())
+                if (hero.isNotDone())
                     hero.setRightMove(true);
 
                 return true;
@@ -50,14 +50,14 @@ public class GamePad implements Disposable {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (hero.isDone())
+                if (hero.isNotDone())
                     hero.setRightMove(false);
             }
         });
         imgLeft.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (hero.isDone())
+                if (hero.isNotDone())
                     hero.setLeftMove(true);
 
                 return true;
@@ -65,14 +65,14 @@ public class GamePad implements Disposable {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (hero.isDone())
+                if (hero.isNotDone())
                     hero.setLeftMove(false);
             }
         });
         imgLeftUp.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (hero.isDone())
+                if (hero.isNotDone())
                     hero.setJump(true);
                 return true;
             }
@@ -80,7 +80,7 @@ public class GamePad implements Disposable {
         imgRightUp.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (hero.isDone())
+                if (hero.isNotDone())
                     hero.setJump(true);
                 return true;
             }

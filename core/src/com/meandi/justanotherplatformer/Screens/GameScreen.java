@@ -121,11 +121,11 @@ public class GameScreen extends GeneralScreen {
     }
 
     private boolean gameOver() {
-        return (hero.isDead() && hero.getStateTimer() > 2);
+        return (hero.isDead() && hero.getStateTime() > 2);
     }
 
     private boolean levelCompleted() {
-        return (hero.hasCompletedLevel() && hero.getStateTimer() > 1.5f);
+        return (hero.hasCompletedLevel() && hero.getStateTime() > 1.5f);
     }
 
     public void update(float delta) {
@@ -147,7 +147,7 @@ public class GameScreen extends GeneralScreen {
 
         hud.update(delta);
 
-        if (hero.isDone())
+        if (hero.isNotDone())
             cam.position.x = hero.body.getPosition().x;
 
         cam.update();

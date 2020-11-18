@@ -11,7 +11,7 @@ public class HeroKeyboardInputProcessor implements InputProcessor {
     }
 
     public boolean keyDown(int keycode) {
-        if (hero.isDone())
+        if (hero.isNotDone())
             switch (keycode) {
                 case 19:
                     hero.setLeftMove(true);
