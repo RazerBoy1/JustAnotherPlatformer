@@ -14,6 +14,8 @@ import com.meandi.justanotherplatformer.Utils.Storage;
 
 import java.util.Locale;
 
+import static com.meandi.justanotherplatformer.JustAnotherPlatformer.SKIN_PATH;
+
 public class HighScoresScreen extends GeneralScreen {
     private final Stage stage;
     private final Skin skin;
@@ -21,7 +23,7 @@ public class HighScoresScreen extends GeneralScreen {
     public HighScoresScreen(final JustAnotherPlatformer jap) {
         super(jap);
         stage = new Stage(port, this.jap.spriteBatch);
-        skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
+        skin = new Skin(Gdx.files.internal(SKIN_PATH));
         skin.getFont("font").getData().setScale(0.5f);
 
         Storage storage = new Storage();

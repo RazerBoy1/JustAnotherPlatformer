@@ -15,6 +15,8 @@ import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 
 import java.util.Locale;
 
+import static com.meandi.justanotherplatformer.JustAnotherPlatformer.SKIN_PATH;
+
 public class Hud implements Disposable {
     public Stage stage;
 
@@ -37,7 +39,7 @@ public class Hud implements Disposable {
 
         this.screen = screen;
 
-        Skin skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
+        Skin skin = new Skin(Gdx.files.internal(SKIN_PATH));
         skin.getFont("font").getData().setScale(0.5f);
 
         worldTimer = 0;

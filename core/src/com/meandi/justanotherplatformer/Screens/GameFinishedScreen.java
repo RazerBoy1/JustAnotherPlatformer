@@ -11,6 +11,8 @@ import com.meandi.justanotherplatformer.Utils.Storage;
 
 import java.util.Locale;
 
+import static com.meandi.justanotherplatformer.JustAnotherPlatformer.SKIN_PATH;
+
 public class GameFinishedScreen extends GeneralScreen {
     private final Stage stage;
     private final int finalScore;
@@ -20,7 +22,7 @@ public class GameFinishedScreen extends GeneralScreen {
         stage = new Stage(port, this.jap.spriteBatch);
         finalScore = Math.max(hud.getScore() - (hud.getWorldTimer() * 5), 0);
 
-        Skin skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
+        Skin skin = new Skin(Gdx.files.internal(SKIN_PATH));
         skin.getFont("font").getData().setScale(0.5f);
 
         Table t = new Table();

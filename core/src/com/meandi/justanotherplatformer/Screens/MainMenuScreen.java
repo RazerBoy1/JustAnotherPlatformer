@@ -12,6 +12,8 @@ import com.badlogic.gdx.utils.Scaling;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
 import com.meandi.justanotherplatformer.Utils.Assets;
 
+import static com.meandi.justanotherplatformer.JustAnotherPlatformer.SKIN_PATH;
+
 public class MainMenuScreen extends GeneralScreen {
     private final Stage stage;
     private final Skin skin;
@@ -19,7 +21,7 @@ public class MainMenuScreen extends GeneralScreen {
     public MainMenuScreen(final JustAnotherPlatformer jap) {
         super(jap);
         stage = new Stage(port, this.jap.spriteBatch);
-        skin = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
+        skin = new Skin(Gdx.files.internal(SKIN_PATH));
         Image background = new Image(assets.manager.get(Assets.BACKGROUND));
         background.setScaling(Scaling.fit);
 

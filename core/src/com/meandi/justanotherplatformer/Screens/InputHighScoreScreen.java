@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.meandi.justanotherplatformer.Utils.HighScoresController;
 import com.meandi.justanotherplatformer.Utils.Storage;
 
+import static com.meandi.justanotherplatformer.JustAnotherPlatformer.SKIN_PATH;
+
 public class InputHighScoreScreen extends GeneralScreen {
     private final Stage stage;
     private final Skin skin10f;
@@ -24,8 +26,8 @@ public class InputHighScoreScreen extends GeneralScreen {
         super(jap);
         stage = new Stage();
 
-        skin10f = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
-        skin2f = new Skin(Gdx.files.internal("skin/craftacular-ui.json"));
+        skin10f = new Skin(Gdx.files.internal(SKIN_PATH));
+        skin2f = new Skin(Gdx.files.internal(SKIN_PATH));
         skin10f.getFont("font").getData().setScale(10f);
         skin2f.getFont("font").getData().setScale(2f);
 
