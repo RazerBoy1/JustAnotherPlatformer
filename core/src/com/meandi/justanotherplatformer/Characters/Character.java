@@ -55,7 +55,6 @@ public abstract class Character extends Sprite {
 
     protected abstract void createCharacter();
     protected abstract void createAnimations();
-    //protected abstract void updateSpritePosition(float delta);
     protected abstract TextureRegion getFrame();
 
     protected void updateSpritePosition(float delta) {
