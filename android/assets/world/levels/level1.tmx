@@ -52,7 +52,7 @@
   <object id="185" x="1352" y="96" width="40" height="8"/>
   <object id="233" x="0" y="0" width="8" height="64"/>
  </objectgroup>
- <objectgroup id="12" name="end">
+ <objectgroup id="12" name="end" locked="1">
   <object id="249" x="1896" y="0" width="8" height="96"/>
  </objectgroup>
  <objectgroup id="13" name="slimes" locked="1">
