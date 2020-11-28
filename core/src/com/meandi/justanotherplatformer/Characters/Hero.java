@@ -69,7 +69,7 @@ public class Hero extends Character {
         body.createFixture(fixDef).setUserData(this);
 
         EdgeShape feet = new EdgeShape();
-        feet.set(new Vector2(2.8f / JustAnotherPlatformer.PPT, -6.85f / JustAnotherPlatformer.PPT), new Vector2(-2.8f / JustAnotherPlatformer.PPT, -6.85f / JustAnotherPlatformer.PPT));
+        feet.set(new Vector2(2.4f / JustAnotherPlatformer.PPT, -6.85f / JustAnotherPlatformer.PPT), new Vector2(-2.4f / JustAnotherPlatformer.PPT, -6.85f / JustAnotherPlatformer.PPT));
         fixDef.shape = feet;
         fixDef.isSensor = true;
         fixDef.filter.categoryBits = JustAnotherPlatformer.HERO_FEET_BIT;

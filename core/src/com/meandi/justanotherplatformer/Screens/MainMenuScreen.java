@@ -36,7 +36,7 @@ public class MainMenuScreen extends GeneralScreen {
         playButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                jap.setScreen(new GameScreen(jap));
+                jap.setScreen(new GameScreen(jap, 1, 0));
                 dispose();
 
                 return true;

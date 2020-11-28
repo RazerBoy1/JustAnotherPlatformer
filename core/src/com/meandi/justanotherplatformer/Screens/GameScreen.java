@@ -25,6 +25,8 @@ import com.meandi.justanotherplatformer.Utils.WorldContactListener;
 public class GameScreen extends GeneralScreen {
     private final Hud hud;
 
+    private final int currentLevel;
+    private final int score;
     private final TiledMap map;
     private final OrthogonalTiledMapRenderer renderer;
 
@@ -40,13 +42,16 @@ public class GameScreen extends GeneralScreen {
 
     private final GamePad gamePad;
 
-    public GameScreen(JustAnotherPlatformer jap) {
+    public GameScreen(JustAnotherPlatformer jap, int currentLevel, int score) {
         super(jap);
         port = new StretchViewport(JustAnotherPlatformer.WIDTH / JustAnotherPlatformer.PPT, JustAnotherPlatformer.HEIGHT / JustAnotherPlatformer.PPT, cam);
 
         hud = new Hud(this);
+        hud.resetWorldTimer();
 
-        map = new TmxMapLoader().load("world/levels/level1.tmx");
+        this.currentLevel = currentLevel;
+        this.score = score;
+        map = getCurrentLevel(currentLevel);
         renderer = new OrthogonalTiledMapRenderer(map, 1 / JustAnotherPlatformer.PPT);
 
         cam.position.set(port.getWorldWidth() / 2, port.getWorldHeight() / 2, 0);
@@ -67,6 +72,17 @@ public class GameScreen extends GeneralScreen {
         gamePad = new GamePad(this);
 
         handleUserInput();
+    }
+
+    private TiledMap getCurrentLevel(int currentLevel) {
+        switch (currentLevel) {
+            case 1:
+                return new TmxMapLoader().load(JustAnotherPlatformer.LEVEL1);
+            case 2:
+                return new TmxMapLoader().load(JustAnotherPlatformer.LEVEL2);
+        }
+
+        return null;
     }
 
     private void handleUserInput() {
@@ -112,10 +128,13 @@ public class GameScreen extends GeneralScreen {
         hud.stage.draw();
 
         if (gameOver()) {
-            jap.setScreen(new GameFinishedScreen(jap, hud, false));
+            jap.setScreen(new GameFinishedScreen(jap, score + hud.getScore() - (hud.getWorldTimer() * 5), false));
+            dispose();
+        } else if (gameCompleted()) {
+            jap.setScreen(new GameFinishedScreen(jap, score + hud.getScore() - (hud.getWorldTimer() * 5), true));
             dispose();
         } else if (levelCompleted()) {
-            jap.setScreen(new GameFinishedScreen(jap, hud, true));
+            jap.setScreen(new GameScreen(jap, currentLevel + 1, score + hud.getScore() - (hud.getWorldTimer() * 5)));
             dispose();
         }
     }
@@ -126,6 +145,10 @@ public class GameScreen extends GeneralScreen {
 
     private boolean levelCompleted() {
         return (hero.hasCompletedLevel() && hero.getStateTime() > 1.5f);
+    }
+
+    private boolean gameCompleted() {
+        return levelCompleted() && currentLevel == 2;
     }
 
     public void update(float delta) {

@@ -141,6 +141,10 @@ public class Hud implements Disposable {
         hearthCount = 0;
     }
 
+    public void resetWorldTimer() {
+        worldTimer = 0;
+    }
+
     public int getHearthCount() {
         return hearthCount;
     }

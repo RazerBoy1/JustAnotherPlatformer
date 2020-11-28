@@ -20,10 +20,12 @@ public class JustAnotherPlatformer extends Game {
     public static final String COIN_LAYER = "coins";
     public static final String GROUND_LAYER = "ground";
     public static final String END_LAYER = "end";
+    public static final String[] WORLD_LAYERS = {GRAPHICS_LAYER, SLIME_LAYER, MOSS_LAYER, COIN_LAYER, GROUND_LAYER, END_LAYER};
 
     public static final String SKIN_PATH = "skin/craftacular-ui.json";
 
-    public static final String[] WORLD_LAYERS = {GRAPHICS_LAYER, SLIME_LAYER, MOSS_LAYER, COIN_LAYER, GROUND_LAYER, END_LAYER};
+    public static final String LEVEL1 = "world/levels/level1.tmx";
+    public static final String LEVEL2 = "world/levels/level2.tmx";
 
     public static final short DEFAULT_BIT = 1;
     public static final short HERO_BIT = 2;

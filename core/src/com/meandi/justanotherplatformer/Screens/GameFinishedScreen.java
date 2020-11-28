@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.meandi.justanotherplatformer.JustAnotherPlatformer;
-import com.meandi.justanotherplatformer.Overlays.Hud;
 import com.meandi.justanotherplatformer.Utils.Storage;
 
 import java.util.Locale;
@@ -17,10 +16,10 @@ public class GameFinishedScreen extends GeneralScreen {
     private final Stage stage;
     private final int finalScore;
 
-    public GameFinishedScreen(final JustAnotherPlatformer jap, Hud hud, boolean isCompleted) {
+    public GameFinishedScreen(final JustAnotherPlatformer jap, int score, boolean isCompleted) {
         super(jap);
         stage = new Stage(port, this.jap.spriteBatch);
-        finalScore = Math.max(hud.getScore() - (hud.getWorldTimer() * 5), 0);
+        finalScore = Math.max(score, 0);
 
         Skin skin = new Skin(Gdx.files.internal(SKIN_PATH));
         skin.getFont("font").getData().setScale(0.5f);

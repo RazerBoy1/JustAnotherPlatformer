@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="260" height="20" tilewidth="8" tileheight="8" infinite="0" nextlayerid="14" nextobjectid="234">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="260" height="20" tilewidth="8" tileheight="8" infinite="0" nextlayerid="15" nextobjectid="250">
  <tileset firstgid="1" source="world_tileset.tsx"/>
  <objectgroup id="6" name="ground" locked="1">
   <object id="111" x="160" y="112" width="88" height="48"/>
@@ -52,8 +52,8 @@
   <object id="185" x="1352" y="96" width="40" height="8"/>
   <object id="233" x="0" y="0" width="8" height="64"/>
  </objectgroup>
- <objectgroup id="12" name="end" locked="1">
-  <object id="187" x="1904" y="0" width="8" height="160"/>
+ <objectgroup id="12" name="end">
+  <object id="249" x="1896" y="0" width="8" height="96"/>
  </objectgroup>
  <objectgroup id="13" name="slimes" locked="1">
   <object id="188" x="1024" y="128" width="8" height="8"/>

@@ -37,9 +37,9 @@ public class WorldContactListener implements ContactListener {
                 break;
             case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.ENEMY_BIT:
                 if (a.getFilterData().categoryBits == JustAnotherPlatformer.HERO_BIT)
-                    ((Hero) a.getUserData()).hit();
+                    heroAndEnemyCollision(a, b);
                 else
-                    ((Hero) b.getUserData()).hit();
+                    heroAndEnemyCollision(b, a);
                 break;
             case JustAnotherPlatformer.HERO_BIT | JustAnotherPlatformer.COIN_BIT:
                 if (a.getFilterData().categoryBits == JustAnotherPlatformer.COIN_BIT)
@@ -62,19 +62,25 @@ public class WorldContactListener implements ContactListener {
             case JustAnotherPlatformer.ENEMY_BIT | JustAnotherPlatformer.MOSS_BIT:
             case JustAnotherPlatformer.ENEMY_BIT | JustAnotherPlatformer.ITEM_BIT:
             case JustAnotherPlatformer.ENEMY_BIT | JustAnotherPlatformer.DEFAULT_BIT:
-                if (a.getFilterData().categoryBits == JustAnotherPlatformer.ENEMY_BIT) {
-                    if (((Slime) a.getUserData()).body.getLinearVelocity().y == 0)
-                        ((Slime) a.getUserData()).reverseVelocity(true, false);
-                }
-                else
-                    if (((Slime) b.getUserData()).body.getLinearVelocity().y == 0)
-                        ((Slime) b.getUserData()).reverseVelocity(true, false);
+                if (a.getFilterData().categoryBits == JustAnotherPlatformer.ENEMY_BIT && ((Slime) a.getUserData()).body.getLinearVelocity().y == 0)
+                    ((Slime) a.getUserData()).reverseVelocity(true, false);
+                else if (((Slime) b.getUserData()).body.getLinearVelocity().y == 0)
+                    ((Slime) b.getUserData()).reverseVelocity(true, false);
                 break;
             case JustAnotherPlatformer.ENEMY_BIT:
                 ((Slime) a.getUserData()).reverseVelocity(true, false);
                 ((Slime) b.getUserData()).reverseVelocity(true, false);
                 break;
         }
+    }
+
+    private void heroAndEnemyCollision(Fixture a, Fixture b) {
+        if (((Slime) b.getUserData()).body.getLinearVelocity().y == 0 &&
+                (((Hero) a.getUserData()).body.getLinearVelocity().x > 0 && ((Slime) b.getUserData()).body.getLinearVelocity().x < 0) ||
+                (((Hero) a.getUserData()).body.getLinearVelocity().x > 0 && ((Slime) b.getUserData()).body.getLinearVelocity().x < 0))
+            ((Slime) b.getUserData()).reverseVelocity(true, false);
+
+        ((Hero) a.getUserData()).hit();
     }
 
     @Override
